@@ -19,16 +19,16 @@ The ratings below are only examples. Choose the levels that honestly fit you.
 | No. | Criterion | Good | Fair | Average |
 | --- | --- | :---: | :---: | :---: |
 | 1 | AWS technical knowledge |  | ✅ |  |
-| 2 | Ability to learn | ✅ |  |  |
+| 2 | Ability to learn |  | ✅ |  |
 | 3 | Hands-on skills |  | ✅ |  |
-| 4 | Sense of responsibility | ✅ |  |  |
+| 4 | Sense of responsibility |  | ✅ |  |
 | 5 | Time management |  | ✅ |  |
-| 6 | Drive to improve | ✅ |  |  |
-| 7 | Communication |  |  | ✅ |
+| 6 | Drive to improve |  | ✅ |  |
+| 7 | Communication |  | ✅ |  |
 | 8 | Teamwork |  | ✅ |  |
 | 9 | Professional conduct | ✅ |  |  |
 | 10 | Problem solving |  | ✅ |  |
-| 11 | Participation in learning activities | ✅ |  |  |
+| 11 | Participation in learning activities |  | ✅ |  |
 | 12 | Overall |  | ✅ |  |
 
 ---
