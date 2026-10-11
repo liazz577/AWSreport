@@ -14,7 +14,7 @@ Trong workshop này, bạn sẽ dựng **StudyMate** từ đầu bằng AWS Mana
 
 Bạn chỉ phải viết hai file nhỏ: một hàm Lambda Python khoảng 40 dòng và một trang HTML. Phần còn lại là cấu hình trên console.
 
-![Kiến trúc StudyMate](/images/5-Workshop/architecture.svg?width=100pc)
+![Kiến trúc StudyMate](/images/5-Workshop/architecture-vi.svg?width=100pc)
 
 | | |
 | --- | --- |

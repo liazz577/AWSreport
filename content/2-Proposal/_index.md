@@ -38,11 +38,13 @@ StudyMate is a chat web page that helps students look up academic regulations, t
 
 ## Solution Architecture
 
-![StudyMate architecture](/images/5-Workshop/architecture.svg?width=100pc)
+![StudyMate architecture](/images/5-Workshop/architecture-en.svg?width=100pc)
 
-**Question flow:** The student opens the web page (Amazon S3) → sends a question to Amazon API Gateway → AWS Lambda calls the Amazon Bedrock Knowledge Base → the Knowledge Base retrieves relevant passages from Amazon S3 Vectors → Amazon Nova Lite writes the answer → the result returns to the browser.
+**Question flow (1–6):** (1) The student loads the static web page from Amazon S3 → (2) the page sends the question to Amazon API Gateway (`POST /ask`) → (3) API Gateway invokes AWS Lambda → (4) Lambda calls the `retrieve_and_generate` API of the Amazon Bedrock Knowledge Base → (5a) the Knowledge Base uses Titan Text Embeddings V2 to turn the question into a vector, (5b) then finds the 5 nearest chunks in Amazon S3 Vectors → (6) Amazon Nova Lite writes the answer with sources. The result returns through Lambda and API Gateway to the browser.
 
-**Ingestion flow:** PDFs in Amazon S3 → the Knowledge Base splits them into chunks → Titan Text Embeddings V2 turns each chunk into a vector → vectors are stored in Amazon S3 Vectors.
+**Ingestion flow (A–D):** (A) The administrator uploads PDFs to a private S3 bucket → (B) on Sync, the Knowledge Base reads and chunks them → (C) Titan Text Embeddings V2 turns each chunk into a vector → (D) the vectors are stored in Amazon S3 Vectors.
+
+**Monitoring and security:** Lambda writes logs to Amazon CloudWatch. Two IAM roles (one for Lambda, one for the Knowledge Base) grant only the permissions each needs.
 
 ## AWS Services Used
 

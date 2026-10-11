@@ -14,7 +14,7 @@ In this workshop you build **StudyMate** from scratch in the AWS Management Cons
 
 You only write two small files: a ~40-line Python Lambda function and one HTML page. Everything else is console configuration.
 
-![StudyMate architecture](/images/5-Workshop/architecture.svg?width=100pc)
+![StudyMate architecture](/images/5-Workshop/architecture-en.svg?width=100pc)
 
 | | |
 | --- | --- |

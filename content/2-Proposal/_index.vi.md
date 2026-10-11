@@ -38,11 +38,13 @@ StudyMate là một trang web chat giúp sinh viên tra cứu quy chế đào t�
 
 ## Kiến trúc giải pháp
 
-![Kiến trúc StudyMate](/images/5-Workshop/architecture.svg?width=100pc)
+![Kiến trúc StudyMate](/images/5-Workshop/architecture-vi.svg?width=100pc)
 
-**Luồng hỏi đáp:** Sinh viên mở trang web (Amazon S3) → gửi câu hỏi tới Amazon API Gateway → AWS Lambda gọi Amazon Bedrock Knowledge Base → Knowledge Base tìm đoạn tài liệu liên quan trong Amazon S3 Vectors → mô hình Amazon Nova Lite viết câu trả lời → kết quả trả về trình duyệt.
+**Luồng hỏi đáp (1–6):** (1) Sinh viên mở trang web tĩnh trên Amazon S3 → (2) trang web gửi câu hỏi tới Amazon API Gateway (`POST /ask`) → (3) API Gateway gọi AWS Lambda → (4) Lambda gọi API `retrieve_and_generate` của Amazon Bedrock Knowledge Base → (5a) Knowledge Base dùng Titan Text Embeddings V2 đổi câu hỏi thành vector, (5b) rồi tìm 5 đoạn tài liệu gần nghĩa nhất trong Amazon S3 Vectors → (6) Amazon Nova Lite viết câu trả lời kèm nguồn. Kết quả đi ngược lại qua Lambda và API Gateway về trình duyệt.
 
-**Luồng nạp tài liệu:** File PDF trong Amazon S3 → Knowledge Base chia nhỏ tài liệu → Titan Text Embeddings V2 chuyển mỗi đoạn thành vector → lưu vào Amazon S3 Vectors.
+**Luồng nạp tài liệu (A–D):** (A) Quản trị viên tải file PDF lên bucket S3 riêng tư → (B) khi Sync, Knowledge Base đọc và chia nhỏ tài liệu → (C) Titan Text Embeddings V2 chuyển mỗi đoạn thành vector → (D) vector được lưu vào Amazon S3 Vectors.
+
+**Giám sát và bảo mật:** Lambda ghi log vào Amazon CloudWatch. Hai IAM role (cho Lambda và cho Knowledge Base) chỉ cấp đúng quyền cần dùng.
 
 ## Các dịch vụ AWS sử dụng
 
