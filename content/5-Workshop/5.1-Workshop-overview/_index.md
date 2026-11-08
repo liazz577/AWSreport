@@ -6,45 +6,37 @@ chapter: false
 pre: " <b> 5.1. </b> "
 ---
 
-## How StudyMate works
+## How SnapThumb works
 
-Think of StudyMate as **a help desk at the university library**. Each AWS service plays one role:
+The system has two Lambda functions with different jobs:
 
-| Library role | AWS service | What it does |
+| Component | AWS service | What it does |
 | --- | --- | --- |
-| The desk where students ask | **Amazon S3** (static website) | Serves the chat web page |
-| The intake window | **Amazon API Gateway** | Gives the page an HTTPS address to send questions to |
-| The desk clerk | **AWS Lambda** | Receives the question, asks the librarian, returns the answer |
-| The librarian | **Amazon Bedrock Knowledge Base** | Finds the right pages in the documents |
-| The writer | **Amazon Nova Lite** | Reads those pages and writes a short answer |
-| The bookshelf | **Amazon S3** (private bucket) | Stores the source PDFs |
-| The card catalogue | **Amazon S3 Vectors** | Stores the "meaning" of each passage so it can be found quickly |
+| Web page | **Amazon S3** (static website) | Drag-and-drop upload and a gallery of thumbnails |
+| Front door | **Amazon API Gateway** | HTTPS endpoints the page calls |
+| API Lambda | **AWS Lambda** | Validates files, signs time-limited upload and view links, lists and deletes images |
+| Image storage | **Amazon S3** (private bucket) | Originals under `uploads/`, thumbnails under `thumbnails/` |
+| Thumbnail Lambda | **AWS Lambda** + Pillow | Runs automatically for each new image and creates its thumbnail |
+| Image records | **Amazon DynamoDB** | Status (`PENDING` → `DONE` / `FAILED`), dimensions, sizes, processing time |
+| Logs | **Amazon CloudWatch** | Every run of both functions |
 
 ## Key concepts
 
-#### RAG (Retrieval-Augmented Generation)
-Asking an AI model directly about your university's rules does not work: it has never read them and may invent an answer. RAG adds a step: **retrieve** the relevant passages first, then let the model **generate** an answer using only those passages.
+#### Event-driven architecture
+Nothing polls the bucket. When an object is created, S3 emits an **event** and invokes the Lambda function directly. The function runs only when there is work, and AWS runs many copies in parallel when many images arrive.
 
-#### Chunking
-The Knowledge Base splits each PDF into small pieces (chunks) of a few paragraphs, so it can return just the relevant part instead of a whole 50-page file.
+#### S3 Event Notifications
+A bucket setting that says "when an object is created under this prefix, call this target". SnapThumb listens only to `uploads/`. Thumbnails are written to `thumbnails/`, so writing a thumbnail never triggers the function again. Without this split, the function would trigger itself in an endless loop.
 
-#### Embedding
-An embedding model (here **Titan Text Embeddings V2**) turns each chunk into a list of numbers (a vector). Passages with similar meaning get similar vectors, even if they use different words. "Scholarship" and "financial support for top students" end up close together.
+#### Presigned URL / presigned POST
+A link signed with the API Lambda's permissions that lets the browser upload one specific object directly to S3 for a short time (5 minutes). The browser never gets AWS credentials, and large files never pass through Lambda. The presigned POST also carries conditions: S3 rejects files that are not the declared type or are larger than 10 MB.
 
-#### Vector store
-A database built to store vectors and find the nearest ones fast. When a question arrives, it is also turned into a vector, and the vector store returns the closest chunks. This workshop uses **Amazon S3 Vectors** because it costs almost nothing at small scale.
+#### Lambda layer
+A zip of libraries shared by functions. Pillow (the Python imaging library) is not included in the Lambda runtime, so you publish it once as a layer and attach it to the Thumbnail function.
 
-#### IAM role
-An IAM user gives permissions to a person; an **IAM role** gives permissions to a service. The Lambda function gets a role that lets it call only the Knowledge Base and the model it needs.
-
-## What you will build
-
-1. A private S3 bucket holding the PDFs.
-2. A Bedrock Knowledge Base that indexes the PDFs into S3 Vectors.
-3. A Lambda function that calls the Knowledge Base.
-4. An HTTP API in API Gateway that exposes the Lambda function.
-5. A public S3 bucket hosting the chat page.
+#### DynamoDB on-demand
+A NoSQL table billed per request, with no capacity to plan. Each image is one item keyed by `id`.
 
 {{% notice tip %}}
-Work step by step and **test each part before moving on**: Knowledge Base test in the console → Lambda test event → curl against the API → the web page. When something breaks, you will know exactly which step caused it.
+Test each part before moving on: upload a file to the bucket by hand and check that a thumbnail appears (5.5) → call the API with curl (5.6) → use the web page (5.7).
 {{% /notice %}}

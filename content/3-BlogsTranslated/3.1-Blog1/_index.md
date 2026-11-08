@@ -6,22 +6,22 @@ chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# Amazon S3 Vectors now generally available with increased scale and performance
+# Uploading to Amazon S3 directly from a web or mobile application
 
 | Item | Detail |
 | --- | --- |
-| **Original post** | [Amazon S3 Vectors now generally available with increased scale and performance](https://aws.amazon.com/blogs/aws/amazon-s3-vectors-now-generally-available-with-increased-scale-and-performance) |
-| **Source** | AWS News Blog |
-| **Topic** | New service · Storage for AI |
+| **Original post** | [Uploading to Amazon S3 directly from a web or mobile application](https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/) |
+| **Source** | AWS Compute Blog · James Beswick · 2020 |
+| **Topic** | Serverless · Storage |
 | **Translated on** | <span style="background:#fff3c4">[dd/mm/2026]</span> |
 
 ## Summary
 
-The post introduces Amazon S3 Vectors, a new bucket type that stores and queries vectors directly in S3, billed by storage and queries. S3 Vectors can serve as the vector store for Amazon Bedrock Knowledge Bases: the Knowledge Base reads documents from a regular S3 bucket, chunks them, creates vectors and stores them in S3 Vectors.
+The post shows how to let a browser or mobile app upload files straight to Amazon S3 instead of through an application server. The client calls an API Gateway endpoint, Lambda creates a presigned URL valid for 300 seconds with a random object key, and the client sends the file directly to S3. This reduces server load and network traffic; the post also notes that the bucket needs CORS rules and that a JWT authorizer should restrict who can upload.
 
-## Relevance to StudyMate
+## Relevance to SnapThumb
 
-This is why StudyMate uses S3 Vectors instead of OpenSearch Serverless: for a student project's small data volume the cost is close to zero, whereas OpenSearch Serverless has a minimum hourly charge.
+SnapThumb uses exactly this pattern in steps 2–5. One difference: SnapThumb uses a presigned **POST** instead of a presigned PUT, because POST supports a `content-length-range` condition so S3 itself rejects files over 10 MB, a limit the original post leaves unaddressed.
 
 ## Translation
 

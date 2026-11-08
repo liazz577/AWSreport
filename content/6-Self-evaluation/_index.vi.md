@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 6. </b> "
 ---
 
-Trong quá trình tham gia chương trình **First Cloud AI Journey (FCAJ)**, tôi bắt đầu với rất ít kiến thức về AWS: chỉ mới tạo tài khoản, tạo database và IAM user. Sau 12 tuần, tôi đã tự xây dựng được một ứng dụng serverless dùng Amazon Bedrock, AWS Lambda, Amazon API Gateway, Amazon S3 và Amazon CloudWatch, đồng thời viết lại thành workshop để người khác làm theo.
+Trong quá trình tham gia chương trình **First Cloud AI Journey (FCAJ)**, tôi bắt đầu với rất ít kiến thức về AWS: chỉ mới tạo tài khoản, tạo database và IAM user. Sau 12 tuần, tôi đã tự xây dựng được một ứng dụng serverless dùng Amazon S3, AWS Lambda, Amazon DynamoDB, Amazon API Gateway và Amazon CloudWatch, đồng thời viết lại thành workshop để người khác làm theo.
 
 Bên cạnh kiến thức kỹ thuật, tôi rèn luyện được thói quen đọc tài liệu AWS bằng tiếng Anh, đọc log để tìm lỗi, và luôn dọn dẹp tài nguyên để kiểm soát chi phí.
 
@@ -43,7 +43,7 @@ Các mức đánh giá dưới đây chỉ là ví dụ. Hãy tự chọn lại 
 
 - Chủ động hỏi mentor sớm hơn thay vì tự loay hoay quá lâu với một lỗi.
 - Học Infrastructure as Code (AWS CloudFormation hoặc Terraform) để dựng hệ thống bằng code thay vì bấm console.
-- Tìm hiểu cách đánh giá chất lượng hệ thống RAG một cách có hệ thống.
+- Bổ sung đăng nhập (Amazon Cognito) và CDN (Amazon CloudFront) để ứng dụng sẵn sàng chạy thật.
 - Nâng cao kỹ năng thuyết trình kỹ thuật.
 
 ---

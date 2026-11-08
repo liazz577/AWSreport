@@ -39,7 +39,7 @@ pre: " <b> 4.2. </b> "
 
 ## Áp dụng vào công việc
 
-- <span style="background:#fff3c4">[Điều áp dụng được cho StudyMate hoặc công việc thực tập]</span>
+- <span style="background:#fff3c4">[Điều áp dụng được cho SnapThumb hoặc công việc thực tập]</span>
 
 ## Hình ảnh sự kiện
 

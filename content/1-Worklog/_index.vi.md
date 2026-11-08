@@ -8,7 +8,7 @@ pre: " <b> 1. </b> "
 
 # Nhật ký công việc
 
-Phần này ghi lại quá trình thực tập trong **12 tuần**. Năm tuần đầu tôi học các dịch vụ AWS cốt lõi (IAM, VPC, EC2, S3, RDS, DynamoDB, Lambda, API Gateway). Từ tuần 6, tôi thực hiện đề tài **StudyMate**, chatbot hỏi đáp Sổ tay sinh viên xây dựng bằng Amazon Bedrock Knowledge Bases, AWS Lambda, Amazon API Gateway và Amazon S3.
+Phần này ghi lại quá trình thực tập trong **12 tuần**. Năm tuần đầu tôi học các dịch vụ AWS cốt lõi (IAM, VPC, EC2, S3, RDS, DynamoDB, Lambda, API Gateway). Từ tuần 6, tôi thực hiện đề tài **SnapThumb**, dịch vụ tạo ảnh thu nhỏ tự động theo kiến trúc hướng sự kiện, xây dựng bằng Amazon S3, AWS Lambda, Amazon DynamoDB và Amazon API Gateway.
 
 **Tuần 1:** [Làm quen chương trình và bảo mật tài khoản AWS](1.1-week1/)
 
@@ -20,15 +20,15 @@ Phần này ghi lại quá trình thực tập trong **12 tuần**. Năm tuần 
 
 **Tuần 5:** [Serverless: AWS Lambda và Amazon API Gateway](1.5-week5/)
 
-**Tuần 6:** [Tìm hiểu Generative AI với Amazon Bedrock, chọn đề tài](1.6-week6/)
+**Tuần 6:** [Kiến trúc hướng sự kiện, chọn đề tài](1.6-week6/)
 
-**Tuần 7:** [Dựng Bedrock Knowledge Base](1.7-week7/)
+**Tuần 7:** [Lưu trữ ảnh và thư viện Pillow trên Lambda](1.7-week7/)
 
-**Tuần 8:** [Backend: hàm Lambda gọi Bedrock](1.8-week8/)
+**Tuần 8:** [Lambda tạo thumbnail kích hoạt bởi S3](1.8-week8/)
 
-**Tuần 9:** [API Gateway và giao diện web](1.9-week9/)
+**Tuần 9:** [API và giao diện web](1.9-week9/)
 
-**Tuần 10:** [Bảo mật, giám sát và đánh giá chất lượng](1.10-week10/)
+**Tuần 10:** [Tự động hoá bằng CloudFormation và kiểm thử](1.10-week10/)
 
 **Tuần 11:** [Viết workshop và đưa báo cáo lên GitHub Pages](1.11-week11/)
 

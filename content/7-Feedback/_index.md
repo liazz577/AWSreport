@@ -27,7 +27,7 @@ This section should be in your own words. The content below is a suggested outli
 **5. Skills gained**
 
 - Core AWS and serverless services.
-- Building a Generative AI application with Amazon Bedrock.
+- Building an event-driven serverless application (S3 events, Lambda, DynamoDB).
 - Least-privilege IAM permissions.
 - Writing bilingual technical documentation.
 - <span style="background:#fff3c4">[Other skills]</span>

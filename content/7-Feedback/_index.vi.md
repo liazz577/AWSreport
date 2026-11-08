@@ -27,7 +27,7 @@ Phần này nên viết bằng lời của chính bạn. Nội dung dưới đâ
 **5. Những kỹ năng đạt được**
 
 - Kiến thức về các dịch vụ AWS cốt lõi và serverless.
-- Xây dựng ứng dụng Generative AI với Amazon Bedrock.
+- Xây dựng ứng dụng serverless hướng sự kiện (S3 event, Lambda, DynamoDB).
 - Phân quyền IAM theo nguyên tắc quyền tối thiểu.
 - Viết tài liệu kỹ thuật song ngữ.
 - <span style="background:#fff3c4">[Kỹ năng khác]</span>

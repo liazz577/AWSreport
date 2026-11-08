@@ -14,9 +14,9 @@ pre: " <b> 1.11. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Dựng lại hệ thống từ đầu, chụp ảnh màn hình từng bước. | 16/11/2026 | 16/11/2026 | - |
-| 3 | - Viết mục 5.1 đến 5.4 (song ngữ). | 17/11/2026 | 17/11/2026 | - |
-| 4 | - Viết mục 5.5 đến 5.9 (song ngữ). | 18/11/2026 | 18/11/2026 | - |
+| 2 | - Dựng lại hệ thống bằng console, chụp ảnh từng bước. | 16/11/2026 | 16/11/2026 | - |
+| 3 | - Viết mục 5.1 đến 5.5 (song ngữ). | 17/11/2026 | 17/11/2026 | - |
+| 4 | - Viết mục 5.6 đến 5.10 (song ngữ). | 18/11/2026 | 18/11/2026 | - |
 | 5 | - Cấu hình Hugo và GitHub Actions để deploy. | 19/11/2026 | 19/11/2026 | <https://gohugo.io/documentation/> |
 | 6 | - Rà soát nội dung.<br>- Viết worklog tuần 11. | 20/11/2026 | 20/11/2026 | - |
 

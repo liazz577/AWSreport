@@ -8,7 +8,7 @@ pre: " <b> 1. </b> "
 
 # Worklog
 
-This section records my **12-week** internship. The first five weeks covered core AWS services (IAM, VPC, EC2, S3, RDS, DynamoDB, Lambda, API Gateway). From week 6 I worked on my project, **StudyMate**, a Q&A chatbot for the student handbook built with Amazon Bedrock Knowledge Bases, AWS Lambda, Amazon API Gateway and Amazon S3.
+This section records my **12-week** internship. The first five weeks covered core AWS services (IAM, VPC, EC2, S3, RDS, DynamoDB, Lambda, API Gateway). From week 6 I worked on my project, **SnapThumb**, an event-driven image thumbnail service built with Amazon S3, AWS Lambda, Amazon DynamoDB and Amazon API Gateway.
 
 **Week 1:** [Program onboarding and securing the AWS account](1.1-week1/)
 
@@ -20,15 +20,15 @@ This section records my **12-week** internship. The first five weeks covered cor
 
 **Week 5:** [Serverless: AWS Lambda and Amazon API Gateway](1.5-week5/)
 
-**Week 6:** [Generative AI with Amazon Bedrock; choosing the project](1.6-week6/)
+**Week 6:** [Event-driven architecture; choosing the project](1.6-week6/)
 
-**Week 7:** [Building the Bedrock Knowledge Base](1.7-week7/)
+**Week 7:** [Image storage and Pillow on Lambda](1.7-week7/)
 
-**Week 8:** [Backend: a Lambda function calling Bedrock](1.8-week8/)
+**Week 8:** [Thumbnail Lambda triggered by S3](1.8-week8/)
 
-**Week 9:** [API Gateway and web frontend](1.9-week9/)
+**Week 9:** [API and web frontend](1.9-week9/)
 
-**Week 10:** [Security, monitoring and quality evaluation](1.10-week10/)
+**Week 10:** [Automating with CloudFormation and testing](1.10-week10/)
 
 **Week 11:** [Writing the workshop and publishing the report on GitHub Pages](1.11-week11/)
 

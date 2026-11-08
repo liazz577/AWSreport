@@ -11,7 +11,7 @@ pre: " <b> 3.3. </b> "
 | Item | Detail |
 | --- | --- |
 | **Original post** | <span style="background:#fff3c4">[link]</span> |
-| **Source** | <span style="background:#fff3c4">[AWS Machine Learning Blog / AWS News Blog]</span> |
+| **Source** | <span style="background:#fff3c4">[AWS Compute Blog / AWS Database Blog]</span> |
 | **Topic** | <span style="background:#fff3c4">[topic]</span> |
 
-Suggestion: pick a post about Bedrock Knowledge Bases (chunking strategies, evaluating RAG) or Amazon Nova so all three blogs connect to the project.
+Suggestion: pick a post about S3 event notifications, Lambda best practices or DynamoDB data modelling so all three blogs connect to the project.

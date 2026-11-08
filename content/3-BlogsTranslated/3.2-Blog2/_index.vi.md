@@ -6,13 +6,13 @@ chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-# Simplified model access in Amazon Bedrock
+# Resize Images on the Fly with Amazon S3, AWS Lambda, and Amazon API Gateway
 
 | Mục | Chi tiết |
 | --- | --- |
-| **Bài gốc** | [Simplified model access in Amazon Bedrock](https://aws.amazon.com/blogs/security/simplified-amazon-bedrock-model-access/) |
-| **Nguồn** | AWS Security Blog |
-| **Chủ đề** | Bảo mật · Quản lý quyền truy cập |
+| **Bài gốc** | [Resize Images on the Fly with Amazon S3, AWS Lambda, and Amazon API Gateway](https://aws.amazon.com/blogs/compute/resize-images-on-the-fly-with-amazon-s3-aws-lambda-and-amazon-api-gateway/) |
+| **Nguồn** | AWS Compute Blog · John Pignata · 2017 |
+| **Chủ đề** | Serverless · Xử lý ảnh |
 | **Ngày dịch** | <span style="background:#fff3c4">[dd/mm/2026]</span> |
 
 {{% notice info %}}
@@ -21,11 +21,11 @@ Chương trình yêu cầu dịch bài gốc sang tiếng Việt. Dán bản d�
 
 ## Tóm tắt
 
-Amazon Bedrock đã bỏ trang "Model access": các mô hình serverless được bật sẵn trong mọi region thương mại, và quyền truy cập được kiểm soát bằng IAM policy và Service Control Policy như các dịch vụ AWS khác. Riêng mô hình của Anthropic vẫn yêu cầu điền form mô tả mục đích sử dụng một lần.
+Bài viết trình bày cách tạo ảnh đổi kích thước theo yêu cầu. Ảnh gốc lưu trên S3; khi người dùng yêu cầu một kích thước chưa có, quy tắc chuyển hướng của S3 đưa request tới API Gateway, Lambda tải ảnh gốc, đổi kích thước, lưu lại vào S3 và chuyển hướng người dùng tới file mới. Những lần sau, ảnh được phục vụ thẳng từ S3.
 
-## Liên hệ với dự án StudyMate
+## Liên hệ với dự án SnapThumb
 
-Vì mô hình được bật sẵn, việc giới hạn quyền trở nên quan trọng hơn. Trong StudyMate, IAM policy của Lambda chỉ cho phép gọi đúng mô hình Nova Lite và đúng Knowledge Base của dự án (mục 5.5.2).
+Bài này giúp so sánh hai cách thiết kế. Bài gốc tạo ảnh **khi có người xem** (lazy), phù hợp khi cần nhiều kích thước khác nhau. SnapThumb tạo ảnh **ngay khi upload** (eager) bằng sự kiện S3, phù hợp khi chỉ cần một kích thước cố định và muốn ảnh có sẵn ngay. Phần thảo luận này dùng cho mục rủi ro và hướng phát triển của báo cáo.
 
 ## Bản dịch
 

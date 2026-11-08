@@ -11,7 +11,7 @@ pre: " <b> 3.3. </b> "
 | Mục | Chi tiết |
 | --- | --- |
 | **Bài gốc** | <span style="background:#fff3c4">[link]</span> |
-| **Nguồn** | <span style="background:#fff3c4">[AWS Machine Learning Blog / AWS News Blog]</span> |
+| **Nguồn** | <span style="background:#fff3c4">[AWS Compute Blog / AWS Database Blog]</span> |
 | **Chủ đề** | <span style="background:#fff3c4">[chủ đề]</span> |
 
-Gợi ý: chọn một bài về Bedrock Knowledge Bases (chiến lược chunking, đánh giá chất lượng RAG) hoặc về Amazon Nova để cả ba bài đều liên quan tới dự án.
+Gợi ý: chọn một bài về S3 event notifications, các kinh nghiệm tốt khi dùng Lambda, hoặc cách thiết kế dữ liệu trên DynamoDB để cả ba bài đều liên quan tới dự án.

@@ -6,35 +6,39 @@ chapter: false
 pre: " <b> 5.8. </b> "
 ---
 
-## Kiểm thử chất lượng câu trả lời
+## Kiểm thử chức năng
 
-1. Soạn 20 câu hỏi mà bạn biết chắc đáp án nằm trong tài liệu.
-2. Hỏi lần lượt trên trang web và ghi kết quả vào bảng như sau:
+| # | Kiểm thử | Kết quả mong đợi |
+| --- | --- | --- |
+| 1 | Upload ảnh chụp điện thoại (JPEG) | `DONE` sau vài giây, thumbnail cạnh dài 320 px |
+| 2 | Upload ảnh chụp dọc | Thumbnail đúng chiều, cao hơn rộng |
+| 3 | Upload ảnh PNG nền trong suốt | Thumbnail có nền trắng |
+| 4 | Upload 5 ảnh cùng lúc | Cả năm ảnh đều xong; Lambda chạy song song |
+| 5 | Upload file `.txt` đổi đuôi thành `.png` | Thẻ ảnh báo `FAILED` kèm lỗi |
+| 6 | Chọn ảnh 12 MB | Trang từ chối ngay trước khi upload |
+| 7 | Xoá một ảnh | Thẻ ảnh biến mất; cả hai file trên S3 bị xoá |
 
-| # | Câu hỏi | Đúng? | Nguồn trích dẫn |
-| --- | --- | --- | --- |
-| 1 | Điều kiện xét học bổng là gì? | ✅ | quy-che-dao-tao.pdf |
-| 2 | ... | | |
+## Số liệu đo được
+Ghi lại 5 ảnh thật vào bảng: <span style="background:#fff3c4">[điền kết quả của bạn]</span>
 
-3. Hỏi thêm 2–3 câu nằm ngoài tài liệu (ví dụ *"Thời tiết hôm nay thế nào?"*) để kiểm tra hệ thống không bịa câu trả lời.
+| Ảnh | Ảnh gốc | Thumbnail | Giảm | Thời gian xử lý |
+| --- | --- | --- | --- | --- |
+| 1 | | | | |
 
-Kết quả: <span style="background:#fff3c4">[x/20 câu đúng]</span>
+## Giám sát
+1. **Lambda → snapthumb-thumbnail → Monitor**: số lần chạy, thời gian chạy, số lỗi.
+2. **CloudWatch → Log groups → /aws/lambda/snapthumb-thumbnail**: mỗi ảnh một dòng log ghi dung lượng trước và sau.
 
-## Giám sát bằng CloudWatch
-
-1. Mở **CloudWatch** → **Log groups** → `/aws/lambda/studymate-ask`.
-2. Mở log stream mới nhất. Mỗi request ghi lại **Duration** (thời gian chạy) và lỗi nếu có.
-3. Trong console Lambda, tab **Monitor** có biểu đồ số lần gọi, thời gian chạy và số lỗi.
-
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> biểu đồ ở tab Monitor của Lambda → <code>static/images/5-Workshop/5.8/01-monitor.png</code></p>
-<!-- ![biểu đồ ở tab Monitor của Lambda](/images/5-Workshop/5.8/01-monitor.png?width=90pc) -->
+<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> tab Monitor của Lambda Thumbnail → <code>static/images/5-Workshop/5.8/01-monitor.png</code></p>
+<!-- ![tab Monitor của Lambda Thumbnail](/images/5-Workshop/5.8/01-monitor.png?width=90pc) -->
 
 ## Lỗi thường gặp
 
-| Lỗi | Nguyên nhân | Cách sửa |
+| Hiện tượng | Nguyên nhân | Cách sửa |
 | --- | --- | --- |
-| `AccessDeniedException` | Role của Lambda thiếu quyền | Kiểm tra `ACCOUNT_ID`, `KB_ID` và region trong policy (5.5.2) |
-| `Task timed out after 3.00 seconds` | Timeout mặc định | Tăng timeout lên 30 giây (5.5.1) |
-| Lỗi CORS trong console trình duyệt | Chưa cấu hình CORS | Cấu hình CORS cho API (5.6.2) |
-| Câu nào cũng trả lời "Sorry, I am unable to assist..." | Chưa Sync dữ liệu hoặc PDF là ảnh scan | Chạy Sync (5.4.2); dùng PDF có lớp chữ |
-| `{"message":"Not Found"}` | Sai URL | Kiểm tra URL có kết thúc bằng `/ask` |
+| Log báo `No module named 'PIL'` | Chưa gắn layer, hoặc layer đóng gói sai nền tảng | Gắn `pillow-py312` (5.5.2); đóng gói lại đúng lệnh ở 5.5.1 |
+| Ảnh đứng mãi ở "Đang xử lý" | Thiếu trigger S3 hoặc sai prefix | Kiểm tra trigger có prefix `uploads/` |
+| Log báo `AccessDenied` | Inline policy sai tên bucket hoặc account ID | Sửa `YOURNAME` / `ACCOUNT_ID` |
+| Lỗi CORS khi upload | Bucket chưa cấu hình CORS | Thêm CORS cho bucket (5.3) |
+| Lỗi CORS khi gọi `/images` | API chưa cấu hình CORS | Cấu hình CORS cho API (5.6.2) |
+| S3 trả 403 khi upload | File lớn hơn 10 MB hoặc link đã hết hạn (5 phút) | Thử lại với file nhỏ hơn |

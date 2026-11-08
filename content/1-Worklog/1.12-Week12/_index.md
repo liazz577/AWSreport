@@ -15,8 +15,8 @@ pre: " <b> 1.12. </b> "
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
 | 2 | - Prepare final slides and demo. | 23/11/2026 | 23/11/2026 | - |
-| 3 | - Present the StudyMate demo. | 24/11/2026 | 24/11/2026 | - |
-| 4 | - Clean up all resources per section 5.9; check Billing. | 25/11/2026 | 25/11/2026 | - |
+| 3 | - Present the SnapThumb demo. | 24/11/2026 | 24/11/2026 | - |
+| 4 | - Clean up all resources per section 5.10; check Billing. | 25/11/2026 | 25/11/2026 | - |
 | 5 | - Write self-evaluation and feedback. | 26/11/2026 | 26/11/2026 | - |
 | 6 | - Review and submit the report. | 27/11/2026 | 27/11/2026 | - |
 

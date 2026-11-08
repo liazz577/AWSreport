@@ -14,7 +14,7 @@ home = ["HTML", "RSS", "JSON"]
 [params]
   themeVariant = "workshop"
   editURL = ""
-  description = "AWS FCAJ internship report - StudyMate"
+  description = "AWS FCAJ internship report - SnapThumb"
   author = "Nguyen Duc Lan"
   showVisitedLinks = false
   disableBreadcrumb = false

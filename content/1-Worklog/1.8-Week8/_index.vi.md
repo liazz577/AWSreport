@@ -8,19 +8,19 @@ pre: " <b> 1.8. </b> "
 
 ### Mục tiêu tuần 8:
 
-* Viết hàm Lambda gọi Knowledge Base và cấp quyền IAM tối thiểu.
+* Nối S3 với Lambda để ảnh mới tự động được thu nhỏ.
 
 ### Các công việc cần triển khai trong tuần này:
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc tài liệu API retrieve_and_generate của boto3. | 26/10/2026 | 26/10/2026 | <https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock-agent-runtime.html> |
-| 3 | - Viết hàm Lambda studymate-ask. | 27/10/2026 | 27/10/2026 | - |
-| 4 | - Viết IAM inline policy chỉ cho phép gọi đúng Knowledge Base và mô hình. | 28/10/2026 | 28/10/2026 | <https://docs.aws.amazon.com/IAM/> |
-| 5 | - Sửa lỗi AccessDeniedException và timeout, đọc log CloudWatch. | 29/10/2026 | 29/10/2026 | - |
-| 6 | - Dịch blog 2.<br>- Viết worklog tuần 8. | 30/10/2026 | 30/10/2026 | <https://aws.amazon.com/blogs/> |
+| 2 | - Tạo hàm Lambda Thumbnail, gắn layer Pillow. | 26/10/2026 | 26/10/2026 | <https://docs.aws.amazon.com/lambda/> |
+| 3 | - Thêm trigger S3 với tiền tố uploads/. | 27/10/2026 | 27/10/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html> |
+| 4 | - Viết IAM policy quyền tối thiểu cho hàm. | 28/10/2026 | 28/10/2026 | <https://docs.aws.amazon.com/IAM/> |
+| 5 | - Sửa lỗi vòng lặp vô hạn khi ghi thumbnail cùng bucket (dùng tiền tố riêng). | 29/10/2026 | 29/10/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html> |
+| 6 | - Dịch blog 2.<br>- Viết worklog tuần 8. | 30/10/2026 | 30/10/2026 | <https://aws.amazon.com/blogs/compute/> |
 
 ### Kết quả đạt được tuần 8:
 
-* Hàm Lambda trả về JSON gồm câu trả lời và danh sách nguồn.
-* Biết đọc log để tìm nguyên nhân lỗi.
+* Upload ảnh lên uploads/ là có thumbnail trong thumbnails/ sau 1–3 giây.
+* Đọc được log CloudWatch để tìm lỗi.

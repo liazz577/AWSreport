@@ -15,8 +15,8 @@ pre: " <b> 1.12. </b> "
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
 | 2 | - Chuẩn bị slide và demo cuối kỳ. | 23/11/2026 | 23/11/2026 | - |
-| 3 | - Thuyết trình demo StudyMate. | 24/11/2026 | 24/11/2026 | - |
-| 4 | - Dọn toàn bộ tài nguyên theo mục 5.9, kiểm tra Billing. | 25/11/2026 | 25/11/2026 | - |
+| 3 | - Thuyết trình demo SnapThumb. | 24/11/2026 | 24/11/2026 | - |
+| 4 | - Dọn toàn bộ tài nguyên theo mục 5.10, kiểm tra Billing. | 25/11/2026 | 25/11/2026 | - |
 | 5 | - Viết tự đánh giá và góp ý. | 26/11/2026 | 26/11/2026 | - |
 | 6 | - Rà soát và nộp báo cáo. | 27/11/2026 | 27/11/2026 | - |
 

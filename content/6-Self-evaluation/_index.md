@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 6. </b> "
 ---
 
-When I joined the **First Cloud AI Journey (FCAJ)** program, I knew very little about AWS: I had only created an account, a database and an IAM user. After 12 weeks I had built a serverless application on my own using Amazon Bedrock, AWS Lambda, Amazon API Gateway, Amazon S3 and Amazon CloudWatch, and turned it into a workshop others can follow.
+When I joined the **First Cloud AI Journey (FCAJ)** program, I knew very little about AWS: I had only created an account, a database and an IAM user. After 12 weeks I had built a serverless application on my own using Amazon S3, AWS Lambda, Amazon DynamoDB, Amazon API Gateway and Amazon CloudWatch, and turned it into a workshop others can follow.
 
 Beyond technical knowledge, I built the habits of reading AWS documentation in English, reading logs to find errors, and always cleaning up resources to control cost.
 
@@ -43,7 +43,7 @@ The ratings below are only examples. Choose the levels that honestly fit you.
 
 - Ask the mentor earlier instead of struggling alone with one error for too long.
 - Learn Infrastructure as Code (AWS CloudFormation or Terraform) to build systems from code instead of console clicks.
-- Learn systematic ways to evaluate RAG quality.
+- Add user sign-in (Amazon Cognito) and a CDN (Amazon CloudFront) to make the app production-ready.
 - Improve technical presentation skills.
 
 ---

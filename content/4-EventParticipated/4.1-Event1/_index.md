@@ -39,7 +39,7 @@ pre: " <b> 4.1. </b> "
 
 ## Applying to Work
 
-- <span style="background:#fff3c4">[What applies to StudyMate or your internship work]</span>
+- <span style="background:#fff3c4">[What applies to SnapThumb or your internship work]</span>
 
 ## Event Photos
 
