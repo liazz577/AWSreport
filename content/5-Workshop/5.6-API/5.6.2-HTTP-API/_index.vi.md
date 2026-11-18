@@ -15,8 +15,9 @@ pre: " <b> 5.6.2. </b> "
    - `DELETE` `/images/{id}`
 4. Stage `$default` bật **Auto-deploy** → **Next → Create**.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> ba route của API → <code>static/images/5-Workshop/5.6/01-routes.png</code></p>
-<!-- ![ba route của API](/images/5-Workshop/5.6/01-routes.png?width=90pc) -->
+![ba route của API](/images/5-Workshop/5.6/01-routes.png?width=90pc)
+
+*Ảnh chụp từ bản deploy bằng CloudFormation (mục 5.9) nên tên tài nguyên có thêm hậu tố ngẫu nhiên.*
 
 ## Bước 2: CORS
 **CORS → Configure:** Allow origin `*`, Allow methods `GET, POST, DELETE`, Allow headers `content-type` → **Save**.

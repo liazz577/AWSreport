@@ -47,8 +47,7 @@ Hãy đo lại bảng này với ảnh chụp điện thoại của bạn: mỗi
 1. **Lambda → snapthumb-thumbnail → Monitor**: số lần chạy, thời gian chạy, số lỗi.
 2. **CloudWatch → Log groups → /aws/lambda/snapthumb-thumbnail**: mỗi ảnh một dòng log ghi dung lượng trước và sau.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> tab Monitor của Lambda Thumbnail → <code>static/images/5-Workshop/5.8/01-monitor.png</code></p>
-<!-- ![tab Monitor của Lambda Thumbnail](/images/5-Workshop/5.8/01-monitor.png?width=90pc) -->
+![tab Monitor của Lambda Thumbnail](/images/5-Workshop/5.8/01-monitor.png?width=90pc)
 
 ## Lỗi thường gặp
 

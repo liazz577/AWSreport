@@ -185,8 +185,9 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 2. **Bucket:** `snapthumb-images-<your-name>`, **Event types:** *All object create events*, **Prefix:** `uploads/`.
 3. Tick the acknowledgement about recursive invocation → **Add**.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> function overview with the S3 trigger and Pillow layer → <code>static/images/5-Workshop/5.5/02-trigger.png</code></p>
-<!-- ![function overview with the S3 trigger and Pillow layer](/images/5-Workshop/5.5/02-trigger.png?width=90pc) -->
+![function overview with the S3 trigger and Pillow layer](/images/5-Workshop/5.5/02-trigger.png?width=90pc)
+
+*Screenshot from the CloudFormation deployment (5.9), so resource names carry a random suffix.*
 
 {{% notice warning %}}
 Never leave the prefix empty. The function writes to the same bucket; without `uploads/` it would trigger itself for every thumbnail.
@@ -201,5 +202,6 @@ Never leave the prefix empty. The function writes to the same bucket; without `u
 An image uploaded from the S3 console did not go through the API, so its `id` is the file name (e.g. `photo` for `uploads/photo.jpg`) instead of a random ID, and the function fills in `originalKey`, `filename` and `createdAt` itself. It shows up and can be deleted on the web page like any other image.
 {{% /notice %}}
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> thumbnail in thumbnails/ and the DONE item → <code>static/images/5-Workshop/5.5/03-test.png</code></p>
-<!-- ![thumbnail in thumbnails/ and the DONE item](/images/5-Workshop/5.5/03-test.png?width=90pc) -->
+![thumbnail in thumbnails/ and the DONE item](/images/5-Workshop/5.5/03-test.png?width=90pc)
+
+*Screenshot from the CloudFormation deployment (5.9), so resource names carry a random suffix.*

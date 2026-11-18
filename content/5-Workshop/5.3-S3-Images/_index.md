@@ -15,8 +15,9 @@ pre: " <b> 5.3. </b> "
 ## Create the two folders
 Open the bucket → **Create folder** → `uploads`, then again → `thumbnails`.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> bucket with uploads/ and thumbnails/ → <code>static/images/5-Workshop/5.3/01-bucket.png</code></p>
-<!-- ![bucket with uploads/ and thumbnails/](/images/5-Workshop/5.3/01-bucket.png?width=90pc) -->
+![bucket with uploads/ and thumbnails/](/images/5-Workshop/5.3/01-bucket.png?width=90pc)
+
+*Screenshot from the CloudFormation deployment (5.9), so resource names carry a random suffix.*
 
 ## Configure CORS
 The browser uploads straight to this bucket, which is a different address from the website, so the bucket must allow it.

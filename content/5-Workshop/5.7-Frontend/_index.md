@@ -46,8 +46,7 @@ window.SNAPTHUMB_CONFIG = { apiUrl: "https://abc123.execute-api.ap-southeast-1.a
 2. It builds a `FormData` with every field, then the file **last** (S3 requires this order), and posts it to `upload.url`.
 3. It calls `GET /images` every 1.5 seconds while any image is `PENDING`, and shows the thumbnail when it turns `DONE`.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> SnapThumb page showing finished thumbnails → <code>static/images/5-Workshop/5.7/01-website.png</code></p>
-<!-- ![SnapThumb page showing finished thumbnails](/images/5-Workshop/5.7/01-website.png?width=90pc) -->
+![SnapThumb page showing finished thumbnails](/images/5-Workshop/5.7/01-website.png?width=90pc)
 
 {{% notice tip %}}
 Without `config.js` the page runs in demo mode and shrinks images in the browser. The badge at the top says which mode you are in.

@@ -13,8 +13,9 @@ pre: " <b> 5.4. </b> "
 4. **Table settings:** **Customize settings** → **Capacity mode: On-demand**.
 5. **Create table**.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> table snapthumb-images with status Active → <code>static/images/5-Workshop/5.4/01-table.png</code></p>
-<!-- ![table snapthumb-images with status Active](/images/5-Workshop/5.4/01-table.png?width=90pc) -->
+![table snapthumb-images with status Active](/images/5-Workshop/5.4/01-table.png?width=90pc)
+
+*Screenshot from the CloudFormation deployment (5.9), so resource names carry a random suffix.*
 
 ## What one item looks like
 

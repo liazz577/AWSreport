@@ -27,8 +27,7 @@ Verified on a real account (ap-southeast-1, 18/11/2026): the template created al
 
 `deploy.sh` runs four steps: create or update the stack; package the Thumbnail function with Pillow; upload both functions' code; upload the web page with `config.js` filled in. It prints the website address at the end.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> CloudFormation stack Resources tab → <code>static/images/5-Workshop/5.9/01-stack.png</code></p>
-<!-- ![CloudFormation stack Resources tab](/images/5-Workshop/5.9/01-stack.png?width=90pc) -->
+![CloudFormation stack Resources tab](/images/5-Workshop/5.9/01-stack.png?width=90pc)
 
 ## Automated tests
 `backend/test_app.py` runs the whole flow against mocked AWS (moto): create an upload link, upload, run the thumbnail handler, list, delete, plus broken files, transparent PNGs, portrait and small images, and invalid input. Two regression tests cover images uploaded straight to S3 and records without file keys.

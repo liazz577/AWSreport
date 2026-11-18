@@ -27,8 +27,7 @@ unzip -oq snapthumb.zip && cd snapthumb && bash deploy.sh
 
 `deploy.sh` chạy bốn bước: tạo hoặc cập nhật stack; đóng gói hàm Thumbnail kèm Pillow; upload code cho cả hai hàm; upload trang web với `config.js` đã điền sẵn. Cuối cùng script in ra địa chỉ trang web.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> tab Resources của stack CloudFormation → <code>static/images/5-Workshop/5.9/01-stack.png</code></p>
-<!-- ![tab Resources của stack CloudFormation](/images/5-Workshop/5.9/01-stack.png?width=90pc) -->
+![tab Resources của stack CloudFormation](/images/5-Workshop/5.9/01-stack.png?width=90pc)
 
 ## Kiểm thử tự động
 `backend/test_app.py` chạy toàn luồng trên AWS giả lập (moto): tạo link upload, upload, chạy hàm tạo thumbnail, liệt kê, xoá, cùng các trường hợp file hỏng, PNG trong suốt, ảnh dọc, ảnh nhỏ và dữ liệu đầu vào sai. Hai test hồi quy kiểm tra ảnh upload thẳng lên S3 và bản ghi thiếu khoá file.
