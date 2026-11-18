@@ -27,8 +27,7 @@ aws lambda publish-layer-version --layer-name pillow-py312 \
 
 3. Lệnh cuối in ra ARN của layer, ví dụ `arn:aws:lambda:ap-southeast-1:123456789012:layer:pillow-py312:1`.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> CloudShell in ra ARN của layer → <code>static/images/5-Workshop/5.5/01-layer.png</code></p>
-<!-- ![CloudShell in ra ARN của layer](/images/5-Workshop/5.5/01-layer.png?width=90pc) -->
+![CloudShell in ra ARN của layer](/images/5-Workshop/5.5/01-layer.png?width=90pc)
 
 {{% notice note %}}
 Layer Python phải đặt thư viện trong thư mục `python/` bên trong file zip; Lambda tự thêm thư mục này vào đường dẫn import.

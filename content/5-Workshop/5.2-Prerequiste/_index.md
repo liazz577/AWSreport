@@ -12,8 +12,7 @@ An AWS account and an **IAM user with administrator permissions** for the lab. D
 ## 2. Select the region
 At the top right of the console, choose **Asia Pacific (Singapore) ap-southeast-1** and keep it for the whole workshop. It is the closest region to Vietnam, so uploads are fast.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> region selector set to ap-southeast-1 → <code>static/images/5-Workshop/5.2/01-region.png</code></p>
-<!-- ![region selector set to ap-southeast-1](/images/5-Workshop/5.2/01-region.png?width=90pc) -->
+![region selector set to ap-southeast-1](/images/5-Workshop/5.2/01-region.png?width=90pc)
 
 ## 3. Create a cost alert
 1. **Billing and Cost Management → Budgets → Create budget**.

@@ -27,8 +27,7 @@ aws lambda publish-layer-version --layer-name pillow-py312 \
 
 3. The last command prints the layer ARN, e.g. `arn:aws:lambda:ap-southeast-1:123456789012:layer:pillow-py312:1`.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> CloudShell output with the layer ARN → <code>static/images/5-Workshop/5.5/01-layer.png</code></p>
-<!-- ![CloudShell output with the layer ARN](/images/5-Workshop/5.5/01-layer.png?width=90pc) -->
+![CloudShell output with the layer ARN](/images/5-Workshop/5.5/01-layer.png?width=90pc)
 
 {{% notice note %}}
 A Python layer must put libraries under a `python/` folder inside the zip; Lambda adds that folder to the import path.

@@ -15,8 +15,9 @@ pre: " <b> 5.6.2. </b> "
    - `DELETE` `/images/{id}`
 4. Stage `$default` with **Auto-deploy** → **Next → Create**.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> the three routes → <code>static/images/5-Workshop/5.6/01-routes.png</code></p>
-<!-- ![the three routes](/images/5-Workshop/5.6/01-routes.png?width=90pc) -->
+![the three routes](/images/5-Workshop/5.6/01-routes.png?width=90pc)
+
+*Screenshot from the CloudFormation deployment (5.9), so resource names carry a random suffix.*
 
 ## Step 2: CORS
 **CORS → Configure:** Allow origin `*`, Allow methods `GET, POST, DELETE`, Allow headers `content-type` → **Save**.

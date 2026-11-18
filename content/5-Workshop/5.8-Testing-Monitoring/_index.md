@@ -47,8 +47,7 @@ Repeat the table with your own phone photos: the page shows the size, savings an
 1. **Lambda → snapthumb-thumbnail → Monitor**: invocations, duration, errors.
 2. **CloudWatch → Log groups → /aws/lambda/snapthumb-thumbnail**: one log line per image with sizes before and after.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> Monitor tab of the Thumbnail Lambda → <code>static/images/5-Workshop/5.8/01-monitor.png</code></p>
-<!-- ![Monitor tab of the Thumbnail Lambda](/images/5-Workshop/5.8/01-monitor.png?width=90pc) -->
+![Monitor tab of the Thumbnail Lambda](/images/5-Workshop/5.8/01-monitor.png?width=90pc)
 
 ## Common errors
 

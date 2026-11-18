@@ -13,8 +13,9 @@ pre: " <b> 5.4. </b> "
 4. **Table settings:** **Customize settings** → **Capacity mode: On-demand**.
 5. **Create table**.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> bảng snapthumb-images ở trạng thái Active → <code>static/images/5-Workshop/5.4/01-table.png</code></p>
-<!-- ![bảng snapthumb-images ở trạng thái Active](/images/5-Workshop/5.4/01-table.png?width=90pc) -->
+![bảng snapthumb-images ở trạng thái Active](/images/5-Workshop/5.4/01-table.png?width=90pc)
+
+*Ảnh chụp từ bản deploy bằng CloudFormation (mục 5.9) nên tên tài nguyên có thêm hậu tố ngẫu nhiên.*
 
 ## Một bản ghi trông như thế nào
 

@@ -185,8 +185,9 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 2. **Bucket:** `snapthumb-images-<ten-ban>`, **Event types:** *All object create events*, **Prefix:** `uploads/`.
 3. Tick ô xác nhận về recursive invocation → **Add**.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> tổng quan hàm có trigger S3 và layer Pillow → <code>static/images/5-Workshop/5.5/02-trigger.png</code></p>
-<!-- ![tổng quan hàm có trigger S3 và layer Pillow](/images/5-Workshop/5.5/02-trigger.png?width=90pc) -->
+![tổng quan hàm có trigger S3 và layer Pillow](/images/5-Workshop/5.5/02-trigger.png?width=90pc)
+
+*Ảnh chụp từ bản deploy bằng CloudFormation (mục 5.9) nên tên tài nguyên có thêm hậu tố ngẫu nhiên.*
 
 {{% notice warning %}}
 Không bao giờ để trống Prefix. Hàm ghi vào chính bucket này; nếu không có `uploads/`, mỗi thumbnail sẽ lại kích hoạt hàm thành vòng lặp vô hạn.
@@ -201,5 +202,6 @@ Không bao giờ để trống Prefix. Hàm ghi vào chính bucket này; nếu k
 Ảnh upload từ console S3 không đi qua API, nên `id` của bản ghi là tên file (ví dụ `anh` với `uploads/anh.jpg`) thay vì mã ngẫu nhiên, và hàm tự điền `originalKey`, `filename`, `createdAt`. Ảnh này vẫn hiện và xoá được trên trang web như các ảnh khác.
 {{% /notice %}}
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> thumbnail trong thumbnails/ và bản ghi DONE → <code>static/images/5-Workshop/5.5/03-test.png</code></p>
-<!-- ![thumbnail trong thumbnails/ và bản ghi DONE](/images/5-Workshop/5.5/03-test.png?width=90pc) -->
+![thumbnail trong thumbnails/ và bản ghi DONE](/images/5-Workshop/5.5/03-test.png?width=90pc)
+
+*Ảnh chụp từ bản deploy bằng CloudFormation (mục 5.9) nên tên tài nguyên có thêm hậu tố ngẫu nhiên.*

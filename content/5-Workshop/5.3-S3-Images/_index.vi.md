@@ -15,8 +15,9 @@ pre: " <b> 5.3. </b> "
 ## Tạo hai thư mục
 Mở bucket → **Create folder** → `uploads`, rồi làm lại với `thumbnails`.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> bucket có hai thư mục uploads/ và thumbnails/ → <code>static/images/5-Workshop/5.3/01-bucket.png</code></p>
-<!-- ![bucket có hai thư mục uploads/ và thumbnails/](/images/5-Workshop/5.3/01-bucket.png?width=90pc) -->
+![bucket có hai thư mục uploads/ và thumbnails/](/images/5-Workshop/5.3/01-bucket.png?width=90pc)
+
+*Ảnh chụp từ bản deploy bằng CloudFormation (mục 5.9) nên tên tài nguyên có thêm hậu tố ngẫu nhiên.*
 
 ## Cấu hình CORS
 Trình duyệt upload thẳng vào bucket này, mà bucket có địa chỉ khác với trang web, nên bucket phải cho phép.

@@ -12,8 +12,7 @@ Một tài khoản AWS và một **IAM user có quyền quản trị** để là
 ## 2. Chọn region
 Ở góc trên bên phải console, chọn **Asia Pacific (Singapore) ap-southeast-1** và giữ nguyên trong suốt workshop. Đây là region gần Việt Nam nhất nên upload ảnh nhanh.
 
-<p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> ô chọn region đang là ap-southeast-1 → <code>static/images/5-Workshop/5.2/01-region.png</code></p>
-<!-- ![ô chọn region đang là ap-southeast-1](/images/5-Workshop/5.2/01-region.png?width=90pc) -->
+![ô chọn region đang là ap-southeast-1](/images/5-Workshop/5.2/01-region.png?width=90pc)
 
 ## 3. Tạo cảnh báo chi phí
 1. **Billing and Cost Management → Budgets → Create budget**.
