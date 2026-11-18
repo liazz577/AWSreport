@@ -16,7 +16,7 @@ pre: " <b> 1.11. </b> "
 | --- | --- | --- | --- | --- |
 | 2 | - Dựng lại hệ thống bằng console, chụp ảnh từng bước. | 16/11/2026 | 16/11/2026 | - |
 | 3 | - Viết mục 5.1 đến 5.5 (song ngữ). | 17/11/2026 | 17/11/2026 | - |
-| 4 | - Viết mục 5.6 đến 5.10 (song ngữ). | 18/11/2026 | 18/11/2026 | - |
+| 4 | - Viết mục 5.6 đến 5.10 (song ngữ).<br>- Deploy và kiểm thử đầu-cuối trên AWS; sửa lỗi ảnh upload từ console S3 làm `GET /images` trả lỗi 500; thêm 2 test hồi quy. | 18/11/2026 | 18/11/2026 | - |
 | 5 | - Cấu hình Hugo và GitHub Actions để deploy. | 19/11/2026 | 19/11/2026 | <https://gohugo.io/documentation/> |
 | 6 | - Rà soát nội dung.<br>- Viết worklog tuần 11. | 20/11/2026 | 20/11/2026 | - |
 
@@ -24,3 +24,4 @@ pre: " <b> 1.11. </b> "
 
 * Workshop hoàn chỉnh, có ảnh minh họa từng bước.
 * Báo cáo đã được đưa lên GitHub Pages.
+* Phát hiện và sửa một lỗi thật nhờ kiểm thử trên AWS, không chỉ trên môi trường giả lập.

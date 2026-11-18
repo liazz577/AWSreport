@@ -16,7 +16,7 @@ pre: " <b> 1.11. </b> "
 | --- | --- | --- | --- | --- |
 | 2 | - Rebuild the system in the console, taking screenshots of each step. | 16/11/2026 | 16/11/2026 | - |
 | 3 | - Write sections 5.1 to 5.5 (bilingual). | 17/11/2026 | 17/11/2026 | - |
-| 4 | - Write sections 5.6 to 5.10 (bilingual). | 18/11/2026 | 18/11/2026 | - |
+| 4 | - Write sections 5.6 to 5.10 (bilingual).<br>- Deploy and test end to end on AWS; fix a bug where images uploaded from the S3 console broke `GET /images`; add 2 regression tests. | 18/11/2026 | 18/11/2026 | - |
 | 5 | - Configure Hugo and GitHub Actions for deployment. | 19/11/2026 | 19/11/2026 | <https://gohugo.io/documentation/> |
 | 6 | - Review content.<br>- Write week 11 worklog. | 20/11/2026 | 20/11/2026 | - |
 
@@ -24,3 +24,4 @@ pre: " <b> 1.11. </b> "
 
 * Workshop completed with step-by-step screenshots.
 * Report published on GitHub Pages.
+* Found and fixed a real bug by testing on AWS rather than only on mocks.

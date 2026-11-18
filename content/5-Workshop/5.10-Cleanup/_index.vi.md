@@ -22,5 +22,7 @@ cd ~/snapthumb && bash destroy.sh
 
 Gõ `yes`; script làm trống hai bucket rồi xoá stack.
 
+Nếu bạn có tạo layer Pillow ở mục 5.5.1, hãy xoá thêm: **Lambda → Layers → `pillow-py312` → Delete** cho từng phiên bản. Layer không nằm trong stack.
+
 ## Kiểm tra hoá đơn
 Một ngày sau, mở **Billing and Cost Management → Bills** để chắc chắn không còn chi phí phát sinh.
