@@ -1,4 +1,4 @@
-# Báo cáo thực tập AWS FCAJ – StudyMate
+# Báo cáo thực tập AWS FCAJ – SnapThumb
 
 Source Hugo của báo cáo thực tập song ngữ (English / Tiếng Việt), dựng từ [AWS-First-Cloud-Journey/Workshop-template](https://github.com/AWS-First-Cloud-Journey/Workshop-template).
 
@@ -11,10 +11,12 @@ content/
 ├── 2-Proposal/                       Bản đề xuất
 ├── 3-BlogsTranslated/3.1 … 3.3       Các bài blog đã dịch
 ├── 4-EventParticipated/4.1, 4.2      Sự kiện đã tham gia
-├── 5-Workshop/5.1 … 5.9              Workshop StudyMate (phần chính)
+├── 5-Workshop/5.1 … 5.10             Workshop SnapThumb (phần chính)
 ├── 6-Self-evaluation/                Tự đánh giá
 └── 7-Feedback/                       Chia sẻ, góp ý
 ```
+
+Mã nguồn SnapThumb (Lambda, giao diện, CloudFormation, script deploy) nằm ở `static/files/snapthumb.zip` và được tải từ mục 5.7 và 5.9.
 
 Mỗi thư mục có 2 file: `_index.md` (tiếng Anh) và `_index.vi.md` (tiếng Việt).
 

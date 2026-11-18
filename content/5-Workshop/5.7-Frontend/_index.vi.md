@@ -26,8 +26,12 @@ pre: " <b> 5.7. </b> "
 }
 ```
 
+{{% notice warning %}}
+Nếu lưu bucket policy báo **Access denied**, tài khoản đang bật *Block Public Access* ở cấp account. Vào **S3 → Block Public Access settings for this account → Edit**, bỏ chọn hai mục liên quan *bucket policies*, lưu lại rồi thêm policy lần nữa.
+{{% /notice %}}
+
 ## Bước 2: Tải trang web lên
-1. Lấy file `web/index.html` trong gói mã nguồn SnapThumb <span style="background:#fff3c4">[link mã nguồn của bạn]</span>.
+1. Tải gói mã nguồn [snapthumb.zip](/files/snapthumb.zip) và lấy file `web/index.html` trong đó.
 2. Tạo file `config.js` cùng thư mục, điền Invoke URL của bạn:
 
 ```js
