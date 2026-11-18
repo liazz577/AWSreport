@@ -26,8 +26,12 @@ pre: " <b> 5.7. </b> "
 }
 ```
 
+{{% notice warning %}}
+If saving the bucket policy fails with **Access denied**, *Block Public Access* is turned on for the whole account. Open **S3 → Block Public Access settings for this account → Edit**, untick the two settings about *bucket policies*, save, then add the policy again.
+{{% /notice %}}
+
 ## Step 2: Upload the page
-1. Take `web/index.html` from the SnapThumb source package <span style="background:#fff3c4">[link to your source code]</span>.
+1. Download the source package [snapthumb.zip](/files/snapthumb.zip) and take `web/index.html` from it.
 2. Create `config.js` next to it with your Invoke URL:
 
 ```js

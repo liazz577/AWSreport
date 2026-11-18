@@ -100,13 +100,17 @@ def process_record(record):
             UpdateExpression=(
                 "SET #s = :s, thumbKey = :tk, originalBytes = :ob, thumbBytes = :tb, "
                 "originalWidth = :ow, originalHeight = :oh, thumbWidth = :tw, thumbHeight = :th, "
-                "processedAt = :pa, processingMs = :pm REMOVE errorMessage"
+                "processedAt = :pa, processingMs = :pm, "
+                # Ảnh upload thẳng qua S3 console không có bản ghi từ API: bổ sung các trường còn thiếu.
+                "originalKey = if_not_exists(originalKey, :ok), filename = if_not_exists(filename, :fn), "
+                "createdAt = if_not_exists(createdAt, :ca) REMOVE errorMessage"
             ),
             ExpressionAttributeNames={"#s": "status"},
             ExpressionAttributeValues={
                 ":s": "DONE", ":tk": thumb_key, ":ob": len(data), ":tb": len(thumb),
                 ":ow": ow, ":oh": oh, ":tw": tw, ":th": th,
                 ":pa": now.isoformat(), ":pm": max(processing_ms, 0),
+                ":ok": key, ":fn": key[len(UPLOAD_PREFIX):], ":ca": record["eventTime"],
             },
         )
         logger.info("Thumbnail %s: %dx%d -> %dx%d, %d -> %d bytes",
@@ -115,9 +119,11 @@ def process_record(record):
         logger.exception("Failed to process %s", key)
         table().update_item(
             Key={"id": image_id},
-            UpdateExpression="SET #s = :s, errorMessage = :e",
+            UpdateExpression=("SET #s = :s, errorMessage = :e, originalKey = if_not_exists(originalKey, :ok), "
+                              "filename = if_not_exists(filename, :fn), createdAt = if_not_exists(createdAt, :ca)"),
             ExpressionAttributeNames={"#s": "status"},
-            ExpressionAttributeValues={":s": "FAILED", ":e": str(err)[:300]},
+            ExpressionAttributeValues={":s": "FAILED", ":e": str(err)[:300], ":ok": key,
+                                       ":fn": key[len(UPLOAD_PREFIX):], ":ca": record["eventTime"]},
         )
 
 
@@ -125,7 +131,6 @@ def handler(event, context):
     for record in event.get("Records", []):
         process_record(record)
     return {"processed": len(event.get("Records", []))}
-
 
 lambda_handler = handler  # tên hàm mặc định của Lambda console / default handler name in the console
 ```
@@ -138,6 +143,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `image_id_from_key` | `uploads/3f9c.jpg` → `3f9c`, chính là khoá của bản ghi trong DynamoDB |
 | `key.startswith(UPLOAD_PREFIX)` | Kiểm tra an toàn: bỏ qua mọi file ngoài `uploads/` |
 | `processing_ms` | Thời gian từ lúc S3 phát sự kiện tới khi thumbnail xong |
+| `if_not_exists(...)` | Chỉ điền `originalKey`, `filename`, `createdAt` khi chưa có: ảnh upload thẳng lên S3 (như Bước 5) không có bản ghi từ API, mà API liệt kê/xoá cần các trường này |
 | Nhánh `except` | File hỏng được đánh dấu `FAILED` kèm lỗi để trang web hiển thị |
 
 ## Bước 2: Cấu hình
@@ -190,6 +196,10 @@ Không bao giờ để trống Prefix. Hàm ghi vào chính bucket này; nếu k
 1. Trong console S3, upload một ảnh vào thư mục `uploads/` của bucket.
 2. Vài giây sau, mở `thumbnails/`: phải có file `.jpg` cùng tên.
 3. Vào DynamoDB → **Explore items**, bản ghi mới có `status` = `DONE`.
+
+{{% notice note %}}
+Ảnh upload từ console S3 không đi qua API, nên `id` của bản ghi là tên file (ví dụ `anh` với `uploads/anh.jpg`) thay vì mã ngẫu nhiên, và hàm tự điền `originalKey`, `filename`, `createdAt`. Ảnh này vẫn hiện và xoá được trên trang web như các ảnh khác.
+{{% /notice %}}
 
 <p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Chèn ảnh:</b> thumbnail trong thumbnails/ và bản ghi DONE → <code>static/images/5-Workshop/5.5/03-test.png</code></p>
 <!-- ![thumbnail trong thumbnails/ và bản ghi DONE](/images/5-Workshop/5.5/03-test.png?width=90pc) -->

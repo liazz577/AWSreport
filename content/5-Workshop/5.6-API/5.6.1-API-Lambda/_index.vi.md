@@ -122,7 +122,8 @@ def list_images(event):
     items.sort(key=lambda i: i.get("createdAt", ""), reverse=True)
     items = items[:LIST_LIMIT]
     for item in items:
-        item["originalUrl"] = view_url(item["originalKey"])
+        if item.get("originalKey"):
+            item["originalUrl"] = view_url(item["originalKey"])
         if item.get("thumbKey"):
             item["thumbUrl"] = view_url(item["thumbKey"])
     return reply(200, {"images": items})
@@ -133,8 +134,9 @@ def delete_image(event):
     item = table().get_item(Key={"id": image_id}).get("Item")
     if not item:
         return reply(404, {"error": "Image not found"})
-    keys = [item["originalKey"]] + ([item["thumbKey"]] if item.get("thumbKey") else [])
-    s3().delete_objects(Bucket=bucket(), Delete={"Objects": [{"Key": k} for k in keys]})
+    keys = [item[k] for k in ("originalKey", "thumbKey") if item.get(k)]
+    if keys:
+        s3().delete_objects(Bucket=bucket(), Delete={"Objects": [{"Key": k} for k in keys]})
     table().delete_item(Key={"id": image_id})
     return reply(204)
 
@@ -156,7 +158,6 @@ def handler(event, context):
         logger.exception("Unhandled error on %s", event.get("routeKey"))
         return reply(500, {"error": "Internal error"})
 
-
 lambda_handler = handler  # tên hàm mặc định của Lambda console / default handler name in the console
 ```
 
@@ -169,6 +170,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `Conditions` | Điều kiện gắn vào chữ ký: S3 từ chối file khác loại hoặc lớn hơn 10 MB |
 | `list_images` | Đọc toàn bộ bản ghi, sắp xếp mới nhất trước, thêm link xem bằng `generate_presigned_url` |
 | `_json_default` | DynamoDB trả số dạng `Decimal`; hàm này đổi lại để xuất JSON |
+| `item.get(...)` khi liệt kê/xoá | Bản ghi thiếu `originalKey` hoặc `thumbKey` (ảnh lỗi, ảnh upload từ console) vẫn được liệt kê và xoá, không làm hỏng cả API |
 
 ## Bước 2: Cấu hình
 1. **Timeout** `10` giây.

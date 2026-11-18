@@ -100,13 +100,17 @@ def process_record(record):
             UpdateExpression=(
                 "SET #s = :s, thumbKey = :tk, originalBytes = :ob, thumbBytes = :tb, "
                 "originalWidth = :ow, originalHeight = :oh, thumbWidth = :tw, thumbHeight = :th, "
-                "processedAt = :pa, processingMs = :pm REMOVE errorMessage"
+                "processedAt = :pa, processingMs = :pm, "
+                # Ảnh upload thẳng qua S3 console không có bản ghi từ API: bổ sung các trường còn thiếu.
+                "originalKey = if_not_exists(originalKey, :ok), filename = if_not_exists(filename, :fn), "
+                "createdAt = if_not_exists(createdAt, :ca) REMOVE errorMessage"
             ),
             ExpressionAttributeNames={"#s": "status"},
             ExpressionAttributeValues={
                 ":s": "DONE", ":tk": thumb_key, ":ob": len(data), ":tb": len(thumb),
                 ":ow": ow, ":oh": oh, ":tw": tw, ":th": th,
                 ":pa": now.isoformat(), ":pm": max(processing_ms, 0),
+                ":ok": key, ":fn": key[len(UPLOAD_PREFIX):], ":ca": record["eventTime"],
             },
         )
         logger.info("Thumbnail %s: %dx%d -> %dx%d, %d -> %d bytes",
@@ -115,9 +119,11 @@ def process_record(record):
         logger.exception("Failed to process %s", key)
         table().update_item(
             Key={"id": image_id},
-            UpdateExpression="SET #s = :s, errorMessage = :e",
+            UpdateExpression=("SET #s = :s, errorMessage = :e, originalKey = if_not_exists(originalKey, :ok), "
+                              "filename = if_not_exists(filename, :fn), createdAt = if_not_exists(createdAt, :ca)"),
             ExpressionAttributeNames={"#s": "status"},
-            ExpressionAttributeValues={":s": "FAILED", ":e": str(err)[:300]},
+            ExpressionAttributeValues={":s": "FAILED", ":e": str(err)[:300], ":ok": key,
+                                       ":fn": key[len(UPLOAD_PREFIX):], ":ca": record["eventTime"]},
         )
 
 
@@ -125,7 +131,6 @@ def handler(event, context):
     for record in event.get("Records", []):
         process_record(record)
     return {"processed": len(event.get("Records", []))}
-
 
 lambda_handler = handler  # tên hàm mặc định của Lambda console / default handler name in the console
 ```
@@ -138,6 +143,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `image_id_from_key` | `uploads/3f9c.jpg` → `3f9c`, the item's key in DynamoDB |
 | `key.startswith(UPLOAD_PREFIX)` | Safety check: ignores anything outside `uploads/` |
 | `processing_ms` | Time from the S3 event to the finished thumbnail |
+| `if_not_exists(...)` | Fills `originalKey`, `filename`, `createdAt` only when missing: an image uploaded straight to S3 (as in Step 5) has no record from the API, and the list/delete API needs these fields |
 | `except` branch | A broken file is marked `FAILED` with the error, so the page can show it |
 
 ## Step 2: Configuration
@@ -190,6 +196,10 @@ Never leave the prefix empty. The function writes to the same bucket; without `u
 1. Upload a photo to the bucket's `uploads/` folder in the S3 console.
 2. After a few seconds, open `thumbnails/`: a `.jpg` with the same name should be there.
 3. In DynamoDB → **Explore items**, the new item has `status` = `DONE`.
+
+{{% notice note %}}
+An image uploaded from the S3 console did not go through the API, so its `id` is the file name (e.g. `photo` for `uploads/photo.jpg`) instead of a random ID, and the function fills in `originalKey`, `filename` and `createdAt` itself. It shows up and can be deleted on the web page like any other image.
+{{% /notice %}}
 
 <p style="background:#fff3c4;padding:8px 12px;border-radius:4px">📷 <b>Insert screenshot:</b> thumbnail in thumbnails/ and the DONE item → <code>static/images/5-Workshop/5.5/03-test.png</code></p>
 <!-- ![thumbnail in thumbnails/ and the DONE item](/images/5-Workshop/5.5/03-test.png?width=90pc) -->
