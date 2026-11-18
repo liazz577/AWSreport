@@ -22,5 +22,7 @@ cd ~/snapthumb && bash destroy.sh
 
 Type `yes`; the script empties both buckets and deletes the stack.
 
+If you also published the Pillow layer in 5.5.1, delete it as well: **Lambda → Layers → `pillow-py312` → Delete** for each version. Layers are not part of the stack.
+
 ## Check billing
 A day later, open **Billing and Cost Management → Bills** to confirm nothing is still accruing.

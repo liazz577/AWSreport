@@ -22,9 +22,9 @@ Mỗi thư mục có 2 file: `_index.md` (tiếng Anh) và `_index.vi.md` (tiế
 
 ## Những việc bạn cần tự làm
 
-1. Tìm các chỗ **tô vàng** (`background:#fff3c4`) và thay bằng thông tin thật: số điện thoại, email, lớp, ngày thực tập, sự kiện, bản dịch blog, kết quả kiểm thử, phần góp ý.
+1. Tìm các chỗ **tô vàng** (`background:#fff3c4`) và thay bằng thông tin thật: số điện thoại, email, lớp, ngày thực tập, sự kiện, bản dịch blog, phần góp ý.
 2. Sửa ngày trong worklog cho đúng lịch thực tập của bạn.
-3. Chụp ảnh màn hình khi làm workshop, lưu vào `static/images/5-Workshop/...` đúng đường dẫn ghi trong từng ô "📷 Chèn ảnh", rồi bỏ comment dòng `<!-- ![...](...) -->` ngay bên dưới.
+3. Ảnh chụp màn hình workshop đã có trong `static/images/5-Workshop/` (chụp ngày 18/11/2026 trên bản deploy thật). Nếu dựng lại hệ thống, có thể chụp lại với cùng tên file.
 4. Đổi `baseURL` trong `config.toml` thành địa chỉ GitHub Pages của bạn.
 
 ## Xem thử trên máy
