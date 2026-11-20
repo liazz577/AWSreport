@@ -14,11 +14,11 @@ pre: " <b> 1.11. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Rebuild the system in the console, taking screenshots of each step. | 16/11/2026 | 16/11/2026 | - |
-| 3 | - Write sections 5.1 to 5.5 (bilingual). | 17/11/2026 | 17/11/2026 | - |
-| 4 | - Write sections 5.6 to 5.10 (bilingual).<br>- Deploy and test end to end on AWS; fix a bug where images uploaded from the S3 console broke `GET /images`; add 2 regression tests. | 18/11/2026 | 18/11/2026 | - |
-| 5 | - Configure Hugo and GitHub Actions for deployment. | 19/11/2026 | 19/11/2026 | <https://gohugo.io/documentation/> |
-| 6 | - Review content.<br>- Write week 11 worklog. | 20/11/2026 | 20/11/2026 | - |
+| 2 | - Rebuild the system in the console, taking screenshots of each step. | 12/10/2026 | 12/10/2026 | - |
+| 3 | - Write sections 5.1 to 5.5 (bilingual). | 13/10/2026 | 13/10/2026 | - |
+| 4 | - Write sections 5.6 to 5.10 (bilingual).<br>- Deploy and test end to end on AWS; fix a bug where images uploaded from the S3 console broke `GET /images`; add 2 regression tests. | 14/10/2026 | 14/10/2026 | - |
+| 5 | - Configure Hugo and GitHub Actions for deployment. | 15/10/2026 | 15/10/2026 | <https://gohugo.io/documentation/> |
+| 6 | - Review content.<br>- Write week 11 worklog. | 16/10/2026 | 16/10/2026 | - |
 
 ### Week 11 Achievements:
 

@@ -1,6 +1,6 @@
 ---
 title: "Week 1 Worklog"
-date: 2026-09-07
+date: 2026-08-03
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
@@ -16,11 +16,11 @@ pre: " <b> 1.1. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Attend the internship orientation.<br>- Read FCAJ rules and learning path. | 07/09/2026 | 07/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Learn Cloud Computing: IaaS, PaaS, SaaS.<br>- Learn Regions, Availability Zones, Edge Locations. | 08/09/2026 | 08/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Enable MFA for the root user.<br>- Create an Admin IAM group and IAM user. | 09/09/2026 | 09/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - Create a 5 USD AWS Budget with email alerts.<br>- Learn about AWS Free Tier. | 10/09/2026 | 10/09/2026 | <https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html> |
-| 6 | - Install AWS CLI and configure an access key for the IAM user.<br>- Write week 1 worklog. | 11/09/2026 | 11/09/2026 | <https://docs.aws.amazon.com/cli/> |
+| 2 | - Attend the internship orientation.<br>- Read FCAJ rules and learning path. | 03/08/2026 | 03/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Learn Cloud Computing: IaaS, PaaS, SaaS.<br>- Learn Regions, Availability Zones, Edge Locations. | 04/08/2026 | 04/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Enable MFA for the root user.<br>- Create an Admin IAM group and IAM user. | 05/08/2026 | 05/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - Create a 5 USD AWS Budget with email alerts.<br>- Learn about AWS Free Tier. | 06/08/2026 | 06/08/2026 | <https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html> |
+| 6 | - Install AWS CLI and configure an access key for the IAM user.<br>- Write week 1 worklog. | 07/08/2026 | 07/08/2026 | <https://docs.aws.amazon.com/cli/> |
 
 ### Week 1 Achievements:
 

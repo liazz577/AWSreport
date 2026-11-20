@@ -15,11 +15,11 @@ pre: " <b> 1.6. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Learn S3 Event Notifications and how S3 triggers Lambda. | 12/10/2026 | 12/10/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html> |
-| 3 | - Tried Bedrock for a chatbot idea; the new account's quota was too low, so changed direction. | 13/10/2026 | 13/10/2026 | <https://docs.aws.amazon.com/bedrock/> |
-| 4 | - Discuss and agree on SnapThumb with the mentor. | 14/10/2026 | 14/10/2026 | - |
-| 5 | - Draw the architecture; estimate cost with AWS Pricing Calculator. | 15/10/2026 | 15/10/2026 | <https://calculator.aws/> |
-| 6 | - Finish the proposal.<br>- Write week 6 worklog. | 16/10/2026 | 16/10/2026 | - |
+| 2 | - Learn S3 Event Notifications and how S3 triggers Lambda. | 07/09/2026 | 07/09/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html> |
+| 3 | - Tried Bedrock for a chatbot idea; the new account's quota was too low, so changed direction. | 08/09/2026 | 08/09/2026 | <https://docs.aws.amazon.com/bedrock/> |
+| 4 | - Discuss and agree on SnapThumb with the mentor. | 09/09/2026 | 09/09/2026 | - |
+| 5 | - Draw the architecture; estimate cost with AWS Pricing Calculator. | 10/09/2026 | 10/09/2026 | <https://calculator.aws/> |
+| 6 | - Finish the proposal.<br>- Write week 6 worklog. | 11/09/2026 | 11/09/2026 | - |
 
 ### Week 6 Achievements:
 

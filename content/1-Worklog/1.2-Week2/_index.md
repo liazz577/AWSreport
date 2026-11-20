@@ -15,11 +15,11 @@ pre: " <b> 1.2. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Learn Amazon VPC, public/private subnets, CIDR. | 14/09/2026 | 14/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Create a VPC, subnets, Internet Gateway, route tables. | 15/09/2026 | 15/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Learn Security Groups and Network ACLs. | 16/09/2026 | 16/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - Launch an Amazon Linux EC2 instance and SSH in.<br>- Install Apache and serve a simple page. | 17/09/2026 | 17/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Terminate the EC2 instance and delete the VPC.<br>- Write week 2 worklog. | 18/09/2026 | 18/09/2026 | - |
+| 2 | - Learn Amazon VPC, public/private subnets, CIDR. | 10/08/2026 | 10/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Create a VPC, subnets, Internet Gateway, route tables. | 11/08/2026 | 11/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Learn Security Groups and Network ACLs. | 12/08/2026 | 12/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - Launch an Amazon Linux EC2 instance and SSH in.<br>- Install Apache and serve a simple page. | 13/08/2026 | 13/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6 | - Terminate the EC2 instance and delete the VPC.<br>- Write week 2 worklog. | 14/08/2026 | 14/08/2026 | - |
 
 ### Week 2 Achievements:
 
