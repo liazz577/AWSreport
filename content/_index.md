@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Internship Position:** Workforce Bootcamp - First Cloud AI Journey
 
-&emsp; **Internship Duration:** From <span style="background:#fff3c4">[dd/mm/2026]</span> to <span style="background:#fff3c4">[dd/mm/2026]</span>
+&emsp; **Internship Duration:** From 03/08/2026 to 23/10/2026
 
 <!-- Add a profile photo: put it at static/images/avatar.jpg and uncomment the line below -->
 <!-- ![Profile photo](/images/avatar.jpg?width=200px) -->

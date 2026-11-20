@@ -15,11 +15,11 @@ pre: " <b> 1.2. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu Amazon VPC, Subnet public/private, CIDR. | 14/09/2026 | 14/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Tạo VPC, Subnet, Internet Gateway, Route Table. | 15/09/2026 | 15/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Tìm hiểu Security Group và Network ACL. | 16/09/2026 | 16/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - Tạo EC2 Amazon Linux, kết nối SSH.<br>- Cài Apache, chạy trang web đơn giản. | 17/09/2026 | 17/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Terminate EC2, xóa VPC.<br>- Viết worklog tuần 2. | 18/09/2026 | 18/09/2026 | - |
+| 2 | - Tìm hiểu Amazon VPC, Subnet public/private, CIDR. | 10/08/2026 | 10/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Tạo VPC, Subnet, Internet Gateway, Route Table. | 11/08/2026 | 11/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Tìm hiểu Security Group và Network ACL. | 12/08/2026 | 12/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - Tạo EC2 Amazon Linux, kết nối SSH.<br>- Cài Apache, chạy trang web đơn giản. | 13/08/2026 | 13/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6 | - Terminate EC2, xóa VPC.<br>- Viết worklog tuần 2. | 14/08/2026 | 14/08/2026 | - |
 
 ### Kết quả đạt được tuần 2:
 

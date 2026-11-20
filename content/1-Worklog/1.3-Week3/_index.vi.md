@@ -15,11 +15,11 @@ pre: " <b> 1.3. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu S3: bucket, object, storage class. | 21/09/2026 | 21/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Tìm hiểu Block Public Access, Bucket Policy, Versioning. | 22/09/2026 | 22/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Host website tĩnh trên S3. | 23/09/2026 | 23/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - Đưa CloudFront phía trước S3 để có HTTPS. | 24/09/2026 | 24/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Dọn tài nguyên.<br>- Viết worklog tuần 3. | 25/09/2026 | 25/09/2026 | - |
+| 2 | - Tìm hiểu S3: bucket, object, storage class. | 17/08/2026 | 17/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Tìm hiểu Block Public Access, Bucket Policy, Versioning. | 18/08/2026 | 18/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Host website tĩnh trên S3. | 19/08/2026 | 19/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - Đưa CloudFront phía trước S3 để có HTTPS. | 20/08/2026 | 20/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6 | - Dọn tài nguyên.<br>- Viết worklog tuần 3. | 21/08/2026 | 21/08/2026 | - |
 
 ### Kết quả đạt được tuần 3:
 

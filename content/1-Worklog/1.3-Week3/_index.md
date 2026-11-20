@@ -15,11 +15,11 @@ pre: " <b> 1.3. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Learn S3: buckets, objects, storage classes. | 21/09/2026 | 21/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Learn Block Public Access, bucket policies, versioning. | 22/09/2026 | 22/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Host a static website on S3. | 23/09/2026 | 23/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 5 | - Put CloudFront in front of S3 for HTTPS. | 24/09/2026 | 24/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Clean up resources.<br>- Write week 3 worklog. | 25/09/2026 | 25/09/2026 | - |
+| 2 | - Learn S3: buckets, objects, storage classes. | 17/08/2026 | 17/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Learn Block Public Access, bucket policies, versioning. | 18/08/2026 | 18/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Host a static website on S3. | 19/08/2026 | 19/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - Put CloudFront in front of S3 for HTTPS. | 20/08/2026 | 20/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6 | - Clean up resources.<br>- Write week 3 worklog. | 21/08/2026 | 21/08/2026 | - |
 
 ### Week 3 Achievements:
 

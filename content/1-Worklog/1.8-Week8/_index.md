@@ -14,11 +14,11 @@ pre: " <b> 1.8. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Create the Thumbnail Lambda and attach the Pillow layer. | 26/10/2026 | 26/10/2026 | <https://docs.aws.amazon.com/lambda/> |
-| 3 | - Add an S3 trigger on the uploads/ prefix. | 27/10/2026 | 27/10/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html> |
-| 4 | - Write a least-privilege IAM policy for the function. | 28/10/2026 | 28/10/2026 | <https://docs.aws.amazon.com/IAM/> |
-| 5 | - Fix the recursive-trigger risk when writing to the same bucket (separate prefixes). | 29/10/2026 | 29/10/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html> |
-| 6 | - Translate blog 2.<br>- Write week 8 worklog. | 30/10/2026 | 30/10/2026 | <https://aws.amazon.com/blogs/compute/> |
+| 2 | - Create the Thumbnail Lambda and attach the Pillow layer. | 21/09/2026 | 21/09/2026 | <https://docs.aws.amazon.com/lambda/> |
+| 3 | - Add an S3 trigger on the uploads/ prefix. | 22/09/2026 | 22/09/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html> |
+| 4 | - Write a least-privilege IAM policy for the function. | 23/09/2026 | 23/09/2026 | <https://docs.aws.amazon.com/IAM/> |
+| 5 | - Fix the recursive-trigger risk when writing to the same bucket (separate prefixes). | 24/09/2026 | 24/09/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html> |
+| 6 | - Translate blog 2.<br>- Write week 8 worklog. | 25/09/2026 | 25/09/2026 | <https://aws.amazon.com/blogs/compute/> |
 
 ### Week 8 Achievements:
 

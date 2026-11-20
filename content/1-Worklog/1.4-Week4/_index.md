@@ -14,11 +14,11 @@ pre: " <b> 1.4. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 2 | - Review Amazon RDS (created a database earlier); learn backups and Multi-AZ. | 28/09/2026 | 28/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 3 | - Connect to RDS from EC2 and run a few SQL queries. | 29/09/2026 | 29/09/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 4 | - Learn DynamoDB: partition key, sort key, capacity modes. | 30/09/2026 | 30/09/2026 | <https://docs.aws.amazon.com/dynamodb/> |
-| 5 | - Create a DynamoDB table; put and query items. | 01/10/2026 | 01/10/2026 | <https://cloudjourney.awsstudygroup.com/> |
-| 6 | - Compare RDS and DynamoDB.<br>- Write week 4 worklog. | 02/10/2026 | 02/10/2026 | - |
+| 2 | - Review Amazon RDS (created a database earlier); learn backups and Multi-AZ. | 24/08/2026 | 24/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Connect to RDS from EC2 and run a few SQL queries. | 25/08/2026 | 25/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Learn DynamoDB: partition key, sort key, capacity modes. | 26/08/2026 | 26/08/2026 | <https://docs.aws.amazon.com/dynamodb/> |
+| 5 | - Create a DynamoDB table; put and query items. | 27/08/2026 | 27/08/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6 | - Compare RDS and DynamoDB.<br>- Write week 4 worklog. | 28/08/2026 | 28/08/2026 | - |
 
 ### Week 4 Achievements:
 

@@ -15,11 +15,11 @@ pre: " <b> 1.6. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tìm hiểu S3 Event Notifications và cách S3 kích hoạt Lambda. | 12/10/2026 | 12/10/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html> |
-| 3 | - Thử nghiệm Bedrock cho đề tài chatbot; tài khoản mới bị giới hạn quota nên đổi hướng. | 13/10/2026 | 13/10/2026 | <https://docs.aws.amazon.com/bedrock/> |
-| 4 | - Thảo luận và chốt đề tài SnapThumb với mentor. | 14/10/2026 | 14/10/2026 | - |
-| 5 | - Vẽ kiến trúc, ước tính chi phí bằng AWS Pricing Calculator. | 15/10/2026 | 15/10/2026 | <https://calculator.aws/> |
-| 6 | - Hoàn thành bản đề xuất.<br>- Viết worklog tuần 6. | 16/10/2026 | 16/10/2026 | - |
+| 2 | - Tìm hiểu S3 Event Notifications và cách S3 kích hoạt Lambda. | 07/09/2026 | 07/09/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html> |
+| 3 | - Thử nghiệm Bedrock cho đề tài chatbot; tài khoản mới bị giới hạn quota nên đổi hướng. | 08/09/2026 | 08/09/2026 | <https://docs.aws.amazon.com/bedrock/> |
+| 4 | - Thảo luận và chốt đề tài SnapThumb với mentor. | 09/09/2026 | 09/09/2026 | - |
+| 5 | - Vẽ kiến trúc, ước tính chi phí bằng AWS Pricing Calculator. | 10/09/2026 | 10/09/2026 | <https://calculator.aws/> |
+| 6 | - Hoàn thành bản đề xuất.<br>- Viết worklog tuần 6. | 11/09/2026 | 11/09/2026 | - |
 
 ### Kết quả đạt được tuần 6:
 

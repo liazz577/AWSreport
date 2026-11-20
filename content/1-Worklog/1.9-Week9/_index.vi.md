@@ -14,11 +14,11 @@ pre: " <b> 1.9. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Viết Lambda API: tạo presigned POST, liệt kê, xoá ảnh. | 02/11/2026 | 02/11/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html> |
-| 3 | - Tạo HTTP API với 3 route, cấu hình CORS. | 03/11/2026 | 03/11/2026 | <https://docs.aws.amazon.com/apigateway/> |
-| 4 | - Viết giao diện kéo thả và thư viện ảnh. | 04/11/2026 | 04/11/2026 | - |
-| 5 | - Host giao diện trên S3 static website. | 05/11/2026 | 05/11/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html> |
-| 6 | - Demo nội bộ với mentor.<br>- Viết worklog tuần 9. | 06/11/2026 | 06/11/2026 | - |
+| 2 | - Viết Lambda API: tạo presigned POST, liệt kê, xoá ảnh. | 28/09/2026 | 28/09/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html> |
+| 3 | - Tạo HTTP API với 3 route, cấu hình CORS. | 29/09/2026 | 29/09/2026 | <https://docs.aws.amazon.com/apigateway/> |
+| 4 | - Viết giao diện kéo thả và thư viện ảnh. | 30/09/2026 | 30/09/2026 | - |
+| 5 | - Host giao diện trên S3 static website. | 01/10/2026 | 01/10/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html> |
+| 6 | - Demo nội bộ với mentor.<br>- Viết worklog tuần 9. | 02/10/2026 | 02/10/2026 | - |
 
 ### Kết quả đạt được tuần 9:
 

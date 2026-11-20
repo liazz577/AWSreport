@@ -14,11 +14,11 @@ pre: " <b> 1.7. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Tạo bucket S3 private, cấu hình CORS. | 19/10/2026 | 19/10/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html> |
-| 3 | - Tạo bảng DynamoDB chế độ on-demand. | 20/10/2026 | 20/10/2026 | <https://docs.aws.amazon.com/dynamodb/> |
-| 4 | - Tìm hiểu Lambda layer, đóng gói Pillow cho Python 3.12. | 21/10/2026 | 21/10/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/chapter-layers.html> |
-| 5 | - Viết hàm tạo thumbnail chạy thử trên máy. | 22/10/2026 | 22/10/2026 | <https://pillow.readthedocs.io/> |
-| 6 | - Dịch blog 1.<br>- Viết worklog tuần 7. | 23/10/2026 | 23/10/2026 | <https://aws.amazon.com/blogs/compute/> |
+| 2 | - Tạo bucket S3 private, cấu hình CORS. | 14/09/2026 | 14/09/2026 | <https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html> |
+| 3 | - Tạo bảng DynamoDB chế độ on-demand. | 15/09/2026 | 15/09/2026 | <https://docs.aws.amazon.com/dynamodb/> |
+| 4 | - Tìm hiểu Lambda layer, đóng gói Pillow cho Python 3.12. | 16/09/2026 | 16/09/2026 | <https://docs.aws.amazon.com/lambda/latest/dg/chapter-layers.html> |
+| 5 | - Viết hàm tạo thumbnail chạy thử trên máy. | 17/09/2026 | 17/09/2026 | <https://pillow.readthedocs.io/> |
+| 6 | - Dịch blog 1.<br>- Viết worklog tuần 7. | 18/09/2026 | 18/09/2026 | <https://aws.amazon.com/blogs/compute/> |
 
 ### Kết quả đạt được tuần 7:
 
