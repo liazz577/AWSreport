@@ -46,6 +46,7 @@ Replace the placeholders everywhere you see them:
 | `<yourname>` / `YOURNAME` | a short lowercase name, no accents or spaces (bucket names are global) | `minhquan` |
 | `ACCOUNT_ID` | your 12-digit account ID (step 4) | `123456789012` |
 | `https://abc123.execute-api…` | the Invoke URL of your API (5.6.2) | |
+| `DISTRIBUTION_ID` | the ID of your CloudFront distribution (5.7) | `E1A2B3C4D5E6F7` |
 
 ## 7. AWS CloudShell
 Command-line steps (packaging Pillow, testing with curl, deploying with CloudFormation) run in **CloudShell**: the `>_` icon in the console's top bar. It already has the AWS CLI, Python 3 and pip, and is signed in as your user, so nothing needs installing on your computer.

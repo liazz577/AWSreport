@@ -26,6 +26,8 @@ Gõ `yes`; script làm trống hai bucket rồi xoá stack. Xoá stack cũng xo�
 
 Nếu bạn có tạo layer Pillow ở mục 5.5.1, hãy xoá thêm: **Lambda → Layers → `pillow-py312` → Delete** cho từng phiên bản. Layer không nằm trong stack.
 
+Budget hằng tháng ở mục 5.2 có thể giữ lại để phòng ngừa; nếu không muốn nhận email nữa thì xoá ở **Billing and Cost Management → Budgets**.
+
 ## Chi phí nếu để hệ thống chạy
 Nếu cần để SnapThumb chạy một thời gian (ví dụ đến khi chấm xong báo cáo), chi phí gần như bằng 0 (bảng ước tính chi tiết theo lượng sử dụng ở [Proposal, mục 6](../../2-proposal/)):
 

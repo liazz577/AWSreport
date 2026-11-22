@@ -46,6 +46,7 @@ Thay các chỗ giữ chỗ ở mọi nơi bạn gặp:
 | `<ten-ban>` / `YOURNAME` | một tên ngắn, chữ thường, không dấu, không khoảng trắng (tên bucket là duy nhất toàn cầu) | `minhquan` |
 | `ACCOUNT_ID` | Account ID 12 chữ số (bước 4) | `123456789012` |
 | `https://abc123.execute-api…` | Invoke URL của API (5.6.2) | |
+| `DISTRIBUTION_ID` | ID của CloudFront distribution (5.7) | `E1A2B3C4D5E6F7` |
 
 ## 7. AWS CloudShell
 Các bước dòng lệnh (đóng gói Pillow, thử API bằng curl, deploy bằng CloudFormation) chạy trong **CloudShell**: biểu tượng `>_` trên thanh trên cùng của console. CloudShell có sẵn AWS CLI, Python 3 và pip, và đã đăng nhập bằng user của bạn, nên không cần cài gì trên máy.

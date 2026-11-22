@@ -46,6 +46,8 @@ Hãy đo lại bảng này với ảnh chụp điện thoại của bạn: mỗi
 ## Giám sát
 1. **Lambda → snapthumb-thumbnail → Monitor**: số lần chạy, thời gian chạy, số lỗi.
 2. **CloudWatch → Log groups → /aws/lambda/snapthumb-thumbnail**: mỗi ảnh một dòng log ghi dung lượng trước và sau.
+3. Log group do Lambda tự tạo sẽ giữ log mãi mãi. Nếu dựng bằng tay, chọn cả hai log group `/aws/lambda/snapthumb-…` → **Actions → Edit retention setting(s)** → **2 weeks** để log không tích tụ (template CloudFormation đã đặt sẵn 14 ngày).
+4. **CloudFront → Monitoring** (hoặc nút **View metrics** trên trang distribution): số request, lượng dữ liệu truyền đi và tỉ lệ lỗi 4xx/5xx của trang web.
 
 ![tab Monitor của Lambda Thumbnail](/images/5-Workshop/5.8/01-monitor.png?width=90pc)
 
@@ -105,6 +107,9 @@ Kết quả trên AWS (ap-southeast-1, 22/11/2026): upload ba ảnh giả; `snap
 | Thẻ ảnh đứng ở "Đang xử lý" sau khi upload lỗi | Trang bản cũ để lại bản ghi `PENDING` | Dùng `index.html` mới: trang xoá bản ghi khi upload lỗi và ngừng hỏi lại sau 2 phút |
 | Không nhận được email cảnh báo | Chưa xác nhận subscription, hoặc thư vào Spam | **SNS → Subscriptions**: trạng thái phải là *Confirmed*; kiểm tra thư mục Spam |
 | Nhận email "OK" ngay sau khi tạo alarm | Mỗi alarm chuyển từ *Insufficient data* sang *OK* một lần | Bình thường, không cần xử lý |
+| Link CloudFront báo `AccessDenied` | Thiếu bucket policy hoặc sai distribution ID, hoặc chưa đặt *Default root object* | Chép lại policy ở trang **Origins → Edit** của distribution; đặt *Default root object* là `index.html` (5.7) |
+| Trang vẫn hiện bản cũ hoặc nhãn *chế độ demo* | CloudFront đang trả file trong cache | **Invalidations → Create invalidation** → `/*` rồi tải lại; kiểm tra `config.js` đã có trong bucket |
+| Distribution đứng mãi ở *Deploying* | Distribution mới hoặc vừa sửa cần vài phút để tới mọi edge location | Đợi 5–10 phút |
 | Console không thấy bảng, hàm hoặc alarm | Đang chọn region khác | Chọn **Asia Pacific (Singapore)** ở góc trên bên phải (S3 hiện bucket của mọi region, các dịch vụ khác thì không) |
 
 ## Khó khăn và cách giải quyết
@@ -116,6 +121,7 @@ Kết quả trên AWS (ap-southeast-1, 22/11/2026): upload ba ảnh giả; `snap
 | Phụ thuộc vòng trong CloudFormation | Bucket cần quyền gọi Lambda, còn quyền đó lại cần ARN của bucket | Đặt tên bucket từ tên stack và account ID, cho bucket phụ thuộc vào quyền | Dùng tên đoán trước được để phá vòng phụ thuộc |
 | Pillow cài trên máy cá nhân không chạy trên Lambda | Bản build cho Windows hoặc macOS không nạp được trên Amazon Linux | `pip install --platform manylinux… --python-version 3.12 --only-binary=:all:` trong CloudShell | Đóng gói thư viện native đúng runtime và kiến trúc của Lambda |
 | Lỗi chỉ lộ ra trên AWS thật | Ảnh upload từ console S3 không có bản ghi từ API, nên `GET /images` lỗi 500 | Điền trường còn thiếu bằng `if_not_exists`, đọc trường tuỳ chọn bằng `.get()`, thêm 2 test hồi quy | Test giả lập chỉ kiểm tra những gì mình đã nghĩ tới; phải test đầu-cuối trên dịch vụ thật |
+| Bucket website phải để public | Bản đầu dùng S3 static website endpoint: chỉ chạy HTTP và bucket cần policy public | Chuyển sang CloudFront + Origin Access Control qua hai lần cập nhật stack (thêm distribution chạy song song với trang cũ, kiểm tra xong mới khoá bucket), nên trang không lúc nào bị gián đoạn | Giữ bucket riêng tư và đặt CloudFront phía trước; thay đổi hệ thống đang chạy theo từng bước nhỏ có kiểm tra |
 | Người dùng khai gian dung lượng file | Trình duyệt tự khai dung lượng; client có thể gửi file lớn hơn | Điều kiện `content-length-range` trong presigned POST: chính S3 từ chối file trên 10 MB (`400 EntityTooLarge`) | Kiểm tra giới hạn ở phía server, không chỉ trên giao diện |
 
 ## Hạn chế và hướng phát triển
@@ -125,6 +131,6 @@ SnapThumb là bản demo. Dưới đây là các hạn chế đã biết và d�
 | Hạn chế | Rủi ro | Hướng phát triển |
 | --- | --- | --- |
 | API chưa có đăng nhập | Ai biết địa chỉ API cũng xem được và **xoá được mọi ảnh** | Thêm **Amazon Cognito** user pool và JWT authorizer cho HTTP API; lưu `userId` cùng mỗi ảnh |
-| Chưa có tường lửa trước trang web và API | Bot có thể gửi dồn dập vượt giới hạn tần suất | Gắn **AWS WAF** với rate-based rule vào CloudFront distribution (bucket đã riêng tư sau CloudFront với Origin Access Control) |
+| Chưa có tường lửa trước trang web và API | Bot có thể dùng hết giới hạn tần suất của API (người dùng thật nhận lỗi `429`) hoặc gửi dồn dập vào trang | Gắn **AWS WAF** với rate-based rule vào CloudFront distribution. HTTP API không gắn WAF trực tiếp được, nên cần cho API đi qua CloudFront (ví dụ behavior `/api/*`) hoặc chuyển sang REST API |
 | `GET /images` quét toàn bộ bảng | Chậm và tốn hơn khi số ảnh tăng | Thêm GSI theo `createdAt` (hoặc theo người dùng) và dùng `Query` có phân trang |
 | Thumbnail lỗi không được thử lại | Lỗi tạm thời khiến ảnh bị `FAILED` | Cấu hình on-failure destination / **SQS dead-letter queue** và thử lại |

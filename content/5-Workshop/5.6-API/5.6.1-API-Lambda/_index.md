@@ -174,7 +174,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `item.get(...)` in list/delete | Records without `originalKey` or `thumbKey` (failed or console uploads) are listed and deleted without crashing the whole API |
 
 ## Step 2: Configuration
-1. **Timeout** `10` sec.
+1. **Configuration → General configuration → Edit:** **Memory** `256` MB, **Timeout** `10` sec.
 2. **Environment variables:** `TABLE_NAME` = `snapthumb-images`, `BUCKET_NAME` = `snapthumb-images-<your-name>`.
 
 ## Step 3: Permissions

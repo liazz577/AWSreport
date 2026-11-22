@@ -36,5 +36,5 @@ Tab **Permissions** → **Cross-origin resource sharing (CORS)** → **Edit** �
 ```
 
 {{% notice tip %}}
-`"*"` cho phép mọi trang web, chấp nhận được khi demo. Khi chạy thật, hãy thay bằng địa chỉ trang web của bạn.
+`"*"` cho phép mọi trang web, chấp nhận được khi demo. Khi chạy thật, hãy thay bằng địa chỉ trang web của bạn, ví dụ `https://d1234abcd.cloudfront.net` ở mục 5.7.
 {{% /notice %}}

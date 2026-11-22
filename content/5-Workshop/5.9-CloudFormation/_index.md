@@ -20,6 +20,18 @@ Everything in 5.3–5.7 can be created by one template. This is **Infrastructure
 
 To change the other parameters, edit their `Default` in the template or pass `--parameter-overrides` to `aws cloudformation deploy`.
 
+After deployment, the **Outputs** tab lists what you need:
+
+| Output | Used for |
+| --- | --- |
+| `WebsiteUrl` | The HTTPS CloudFront address of the web page (the production link) |
+| `ApiUrl` | The API Invoke URL, written into `config.js` |
+| `DistributionId` | Cache invalidation after uploading a new page |
+| `ImagesBucketName`, `WebBucketName`, `TableName` | Finding the resources in the console |
+| `ApiFunctionName`, `ThumbnailFunctionName` | Logs and monitoring in Lambda / CloudWatch |
+| `AlarmTopicArn` | Adding another administrator to the alerts |
+
+
 ## A circular dependency to solve
 The bucket's trigger needs the function, the function's permission needs the bucket's ARN, and the function's IAM policy also needs the bucket. Referencing the bucket resource from both would create a cycle CloudFormation refuses. The template breaks it by **building the bucket name from the stack name**: `${AWS::StackName}-images-${AWS::AccountId}-${AWS::Region}`. The permission and the policy use that string, not a reference to the bucket.
 
@@ -38,7 +50,9 @@ Verified on a real account (ap-southeast-1, 18/11/2026): the template created al
 
 `deploy.sh` runs four steps: create or update the stack; package the Thumbnail function with Pillow; upload both functions' code; upload the web page with `config.js` filled in and clear the CloudFront cache (invalidation `/*`). It prints the HTTPS CloudFront address at the end.
 
-![CloudFormation stack Resources tab](/images/5-Workshop/5.9/01-stack.png?width=90pc)
+![CloudFormation stack Resources tab: 26 resources](/images/5-Workshop/5.9/01-stack.png?width=90pc)
+
+![The four website resources: private bucket, bucket policy, CloudFront distribution and Origin Access Control](/images/5-Workshop/5.9/02-web-resources.png?width=90pc)
 
 ## Automated tests
 `backend/test_app.py` runs the whole flow against mocked AWS (moto): create an upload link, upload, run the thumbnail handler, list, delete, plus broken files, transparent PNGs, portrait and small images, and invalid input. Two regression tests cover images uploaded straight to S3 and records without file keys.

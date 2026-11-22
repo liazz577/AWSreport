@@ -20,6 +20,18 @@ Toàn bộ những gì làm ở mục 5.3–5.7 có thể tạo bằng một tem
 
 Muốn đổi các tham số còn lại, sửa `Default` trong template hoặc truyền `--parameter-overrides` cho `aws cloudformation deploy`.
 
+Sau khi deploy, tab **Outputs** liệt kê những thông tin cần dùng:
+
+| Output | Dùng để |
+| --- | --- |
+| `WebsiteUrl` | Địa chỉ HTTPS CloudFront của trang web (production link) |
+| `ApiUrl` | Invoke URL của API, được ghi vào `config.js` |
+| `DistributionId` | Xoá cache sau khi upload trang web mới |
+| `ImagesBucketName`, `WebBucketName`, `TableName` | Tìm tài nguyên trên console |
+| `ApiFunctionName`, `ThumbnailFunctionName` | Xem log và giám sát trong Lambda / CloudWatch |
+| `AlarmTopicArn` | Thêm người quản trị nhận cảnh báo |
+
+
 ## Một phụ thuộc vòng cần giải
 Trigger của bucket cần hàm Lambda, quyền gọi hàm cần ARN của bucket, và IAM policy của hàm cũng cần bucket. Nếu cả hai tham chiếu thẳng tới tài nguyên bucket sẽ tạo thành vòng, CloudFormation từ chối. Template giải bằng cách **tạo tên bucket từ tên stack**: `${AWS::StackName}-images-${AWS::AccountId}-${AWS::Region}`. Quyền gọi hàm và policy dùng chuỗi tên này thay vì tham chiếu tới bucket.
 
@@ -38,7 +50,9 @@ bash deploy.sh
 
 `deploy.sh` chạy bốn bước: tạo hoặc cập nhật stack; đóng gói hàm Thumbnail kèm Pillow; upload code cho cả hai hàm; upload trang web với `config.js` đã điền sẵn và xoá cache CloudFront (invalidation `/*`). Cuối cùng script in ra địa chỉ HTTPS của CloudFront.
 
-![tab Resources của stack CloudFormation](/images/5-Workshop/5.9/01-stack.png?width=90pc)
+![tab Resources của stack CloudFormation: 26 tài nguyên](/images/5-Workshop/5.9/01-stack.png?width=90pc)
+
+![Bốn tài nguyên của trang web: bucket riêng tư, bucket policy, CloudFront distribution và Origin Access Control](/images/5-Workshop/5.9/02-web-resources.png?width=90pc)
 
 ## Kiểm thử tự động
 `backend/test_app.py` chạy toàn luồng trên AWS giả lập (moto): tạo link upload, upload, chạy hàm tạo thumbnail, liệt kê, xoá, cùng các trường hợp file hỏng, PNG trong suốt, ảnh dọc, ảnh nhỏ và dữ liệu đầu vào sai. Hai test hồi quy kiểm tra ảnh upload thẳng lên S3 và bản ghi thiếu khoá file.

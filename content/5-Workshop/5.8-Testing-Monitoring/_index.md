@@ -46,6 +46,8 @@ Repeat the table with your own phone photos: the page shows the size, savings an
 ## Monitoring
 1. **Lambda → snapthumb-thumbnail → Monitor**: invocations, duration, errors.
 2. **CloudWatch → Log groups → /aws/lambda/snapthumb-thumbnail**: one log line per image with sizes before and after.
+3. Log groups that Lambda creates by itself never expire. If you built by hand, select both `/aws/lambda/snapthumb-…` groups → **Actions → Edit retention setting(s)** → **2 weeks**, so logs do not pile up (the CloudFormation template already sets 14 days).
+4. **CloudFront → Monitoring** (or **View metrics** on the distribution page): requests, data transferred and the share of 4xx/5xx errors for the web page.
 
 ![Monitor tab of the Thumbnail Lambda](/images/5-Workshop/5.8/01-monitor.png?width=90pc)
 
@@ -105,6 +107,9 @@ Result on AWS (ap-southeast-1, 22/11/2026): three fake images were uploaded; `sn
 | A card stays at "Processing" after a failed upload | Old page version kept the `PENDING` record | Use the current `index.html`: it deletes the record when the upload fails and stops polling after 2 minutes |
 | No alert email arrives | Subscription not confirmed, or the email went to spam | **SNS → Subscriptions**: status must be *Confirmed*; check the spam folder |
 | An "OK" alert email right after creating the alarms | Each alarm moves from *Insufficient data* to *OK* once | Normal, nothing to do |
+| The CloudFront link shows `AccessDenied` | Bucket policy is missing or has the wrong distribution ID, or *Default root object* is empty | Copy the policy again from the distribution's **Origins → Edit** page; set *Default root object* to `index.html` (5.7) |
+| The page still shows the old version or the *demo mode* badge | CloudFront serves the cached files | **Invalidations → Create invalidation** → `/*`, then reload; check that `config.js` is in the bucket |
+| The distribution stays at *Deploying* | A new or changed distribution takes a few minutes to reach every edge location | Wait 5–10 minutes |
 | The console shows no table, function or alarm | Another region is selected | Choose **Asia Pacific (Singapore)** at the top right (S3 lists buckets from every region, other services do not) |
 
 ## Challenges and solutions
@@ -116,6 +121,7 @@ Result on AWS (ap-southeast-1, 22/11/2026): three fake images were uploaded; `sn
 | Circular dependency in CloudFormation | The bucket needs the Lambda permission, and the permission needs the bucket ARN | Build the bucket name from the stack name and account ID, and make the bucket depend on the permission | Use predictable names to break cycles |
 | Pillow does not run on Lambda when installed on a laptop | Wheels built for Windows or macOS do not load on Amazon Linux | `pip install --platform manylinux… --python-version 3.12 --only-binary=:all:` in CloudShell | Package native libraries for the Lambda runtime and architecture |
 | Bug found only on real AWS | An image uploaded from the S3 console had no record from the API, so `GET /images` crashed with a 500 | Fill missing fields with `if_not_exists`, read optional fields with `.get()`, add 2 regression tests | Mocks pass only what you thought of; test end to end on the real service |
+| Website bucket had to be public | The first version used the S3 static website endpoint: HTTP only, and the bucket needed a public policy | Moved to CloudFront + Origin Access Control in two stack updates (first add the distribution next to the public site, test it, then lock the bucket), so the site never went offline | Keep buckets private and put CloudFront in front; change live systems in small, tested steps |
 | Users lying about file size | The browser declares the size; a client could send a bigger file | `content-length-range` in the presigned POST policy: S3 itself rejects files over 10 MB (`400 EntityTooLarge`) | Enforce limits on the server side, not only in the UI |
 
 ## Limitations and next steps
@@ -125,6 +131,6 @@ SnapThumb is a demo. These are known limitations and how AWS services would addr
 | Limitation | Risk | Next step |
 | --- | --- | --- |
 | The API has no sign-in | Anyone who knows the API address can list and **delete every image** | Add an **Amazon Cognito** user pool and a JWT authorizer on the HTTP API; store `userId` with each image |
-| No firewall in front of the website and API | Bots can flood the page or API beyond the throttling limit | Attach **AWS WAF** rate-based rules to the CloudFront distribution (the bucket is already private behind CloudFront with Origin Access Control) |
+| No firewall in front of the website and API | Bots can use up the API's throttling limit (real users then get `429`) or flood the page | Attach **AWS WAF** rate-based rules to the CloudFront distribution. HTTP APIs cannot use WAF directly, so also route the API through CloudFront (for example a `/api/*` behavior) or switch to a REST API |
 | `GET /images` scans the whole table | Gets slower and costlier as images grow | Add a GSI on `createdAt` (or per-user key) and use `Query` with pagination |
 | A failed thumbnail is not retried | A temporary error leaves the image `FAILED` | Configure an on-failure destination / **SQS dead-letter queue** and retry |

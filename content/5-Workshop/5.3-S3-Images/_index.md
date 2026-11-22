@@ -36,5 +36,5 @@ The browser uploads straight to this bucket, which is a different address from t
 ```
 
 {{% notice tip %}}
-`"*"` allows any website, which is fine for a demo. In production, put your website's address there.
+`"*"` allows any website, which is fine for a demo. In production, put your website's address there, e.g. `https://d1234abcd.cloudfront.net` from 5.7.
 {{% /notice %}}
