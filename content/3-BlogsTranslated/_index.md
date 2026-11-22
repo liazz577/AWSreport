@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-# Translated Blogs
-
 During the internship I translated AWS blog posts into Vietnamese. I chose posts connected to my project so that each one explains a decision in SnapThumb.
 
 | # | Post | Topic |

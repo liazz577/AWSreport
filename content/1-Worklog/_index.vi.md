@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 1. </b> "
 ---
 
-# Nhật ký công việc
-
 Phần này ghi lại quá trình thực tập trong **12 tuần**. Năm tuần đầu tôi học các dịch vụ AWS cốt lõi (IAM, VPC, EC2, S3, RDS, DynamoDB, Lambda, API Gateway). Từ tuần 6, tôi thực hiện đề tài **SnapThumb**, dịch vụ tạo ảnh thu nhỏ tự động theo kiến trúc hướng sự kiện, xây dựng bằng Amazon S3, AWS Lambda, Amazon DynamoDB và Amazon API Gateway.
 
 **Tuần 1:** [Làm quen chương trình và bảo mật tài khoản AWS](1.1-week1/)
