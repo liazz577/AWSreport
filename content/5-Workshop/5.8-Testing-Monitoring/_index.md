@@ -125,6 +125,6 @@ SnapThumb is a demo. These are known limitations and how AWS services would addr
 | Limitation | Risk | Next step |
 | --- | --- | --- |
 | The API has no sign-in | Anyone who knows the API address can list and **delete every image** | Add an **Amazon Cognito** user pool and a JWT authorizer on the HTTP API; store `userId` with each image |
-| The website is a public S3 website endpoint (HTTP only) | No HTTPS; the account must allow public bucket policies | Private bucket behind **Amazon CloudFront** with Origin Access Control, HTTPS, and **AWS WAF** |
+| No firewall in front of the website and API | Bots can flood the page or API beyond the throttling limit | Attach **AWS WAF** rate-based rules to the CloudFront distribution (the bucket is already private behind CloudFront with Origin Access Control) |
 | `GET /images` scans the whole table | Gets slower and costlier as images grow | Add a GSI on `createdAt` (or per-user key) and use `Query` with pagination |
 | A failed thumbnail is not retried | A temporary error leaves the image `FAILED` | Configure an on-failure destination / **SQS dead-letter queue** and retry |

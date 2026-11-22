@@ -40,7 +40,7 @@ Bảng dùng đúng 8 tiêu chí trong quy định project của FCAJ. Mức đ�
 
 - Chủ động hỏi mentor sớm hơn thay vì tự loay hoay quá lâu với một lỗi.
 - Học sâu hơn về Infrastructure as Code (AWS CDK hoặc Terraform) sau khi đã dùng AWS CloudFormation cho SnapThumb.
-- Bổ sung đăng nhập (Amazon Cognito) và CDN (Amazon CloudFront) để ứng dụng sẵn sàng chạy thật.
+- Bổ sung đăng nhập (Amazon Cognito) và tường lửa (AWS WAF gắn vào CloudFront distribution) để ứng dụng sẵn sàng chạy thật.
 - Nâng cao kỹ năng thuyết trình kỹ thuật.
 
 ---

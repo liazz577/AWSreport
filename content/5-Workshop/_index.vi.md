@@ -22,7 +22,7 @@ Bạn sẽ dựng hệ thống bằng tay trên AWS Management Console trước,
 | **Mức độ** | Cơ bản (cần tài khoản AWS và một IAM user) |
 | **Chi phí** | Vài cent; gần như bằng 0 nếu dọn dẹp sau khi làm |
 | **Region** | Asia Pacific (Singapore) `ap-southeast-1` |
-| **Dịch vụ AWS** | S3, Lambda, API Gateway, DynamoDB, CloudWatch, SNS, IAM, CloudFormation, CloudShell, Budgets |
+| **Dịch vụ AWS** | S3, CloudFront, Lambda, API Gateway, DynamoDB, CloudWatch, SNS, IAM, CloudFormation, CloudShell, Budgets |
 
 #### Nội dung
 

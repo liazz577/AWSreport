@@ -125,6 +125,6 @@ SnapThumb là bản demo. Dưới đây là các hạn chế đã biết và d�
 | Hạn chế | Rủi ro | Hướng phát triển |
 | --- | --- | --- |
 | API chưa có đăng nhập | Ai biết địa chỉ API cũng xem được và **xoá được mọi ảnh** | Thêm **Amazon Cognito** user pool và JWT authorizer cho HTTP API; lưu `userId` cùng mỗi ảnh |
-| Trang web là S3 website endpoint public (chỉ HTTP) | Không có HTTPS; tài khoản phải cho phép bucket policy public | Bucket private đặt sau **Amazon CloudFront** với Origin Access Control, HTTPS và **AWS WAF** |
+| Chưa có tường lửa trước trang web và API | Bot có thể gửi dồn dập vượt giới hạn tần suất | Gắn **AWS WAF** với rate-based rule vào CloudFront distribution (bucket đã riêng tư sau CloudFront với Origin Access Control) |
 | `GET /images` quét toàn bộ bảng | Chậm và tốn hơn khi số ảnh tăng | Thêm GSI theo `createdAt` (hoặc theo người dùng) và dùng `Query` có phân trang |
 | Thumbnail lỗi không được thử lại | Lỗi tạm thời khiến ảnh bị `FAILED` | Cấu hình on-failure destination / **SQS dead-letter queue** và thử lại |

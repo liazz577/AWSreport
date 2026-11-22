@@ -50,7 +50,7 @@ SnapThumb là một ứng dụng web cho phép người dùng tải ảnh lên v
 | Dung lượng thumbnail so với ảnh chụp điện thoại | Giảm ít nhất 90% | Giảm 99,8% (6,1 MB → 12,7 KB) |
 | Xử lý dữ liệu sai | Không treo, báo lỗi rõ ràng | File giả ảnh → `FAILED`; GIF hoặc khai 11 MB → `400`; gửi 10,5 MB → S3 trả `400 EntityTooLarge` |
 | Cảnh báo | Người quản trị nhận email trong vòng 5 phút | Alarm báo động sau 71 giây, email gửi thành công |
-| Tái tạo hạ tầng | Một lệnh | `deploy.sh` tạo 24 tài nguyên; `destroy.sh` xoá sạch |
+| Tái tạo hạ tầng | Một lệnh | `deploy.sh` tạo 26 tài nguyên; `destroy.sh` xoá sạch |
 | Chi phí | Dưới 1 USD/tháng cho 1.000 ảnh | Ước tính dưới 0,20 USD/tháng (mục 6) |
 
 ## Phù hợp với chương trình FCAJ
@@ -81,7 +81,7 @@ SnapThumb dùng đúng các dịch vụ cốt lõi của chương trình (Amazon
 
 | Dịch vụ | Thuộc phần | Vai trò |
 | --- | --- | --- |
-| Amazon S3 (bucket web) | Frontend | Host giao diện web tĩnh |
+| Amazon CloudFront + Amazon S3 (bucket web, riêng tư) | Frontend | Phục vụ giao diện web tĩnh qua HTTPS; Origin Access Control giữ bucket riêng tư |
 | Amazon API Gateway | API | Endpoint HTTPS `POST /uploads`, `GET /images`, `DELETE /images/{id}`; CORS; giới hạn tần suất |
 | AWS Lambda (API) | Backend | Kiểm tra file, tạo link upload/xem có thời hạn, liệt kê và xoá ảnh |
 | Amazon S3 (bucket ảnh) | Backend | Lưu ảnh gốc (`uploads/`) và ảnh thu nhỏ (`thumbnails/`), phát sự kiện khi có ảnh mới |
@@ -121,6 +121,7 @@ SnapThumb dùng đúng các dịch vụ cốt lõi của chương trình (Amazon
 
 ### Bảo mật
 - Bucket ảnh chặn mọi truy cập công khai; chỉ xem được qua link có thời hạn.
+- Bucket web cũng riêng tư: chỉ CloudFront distribution đọc được (Origin Access Control), và người dùng luôn truy cập qua HTTPS.
 - Link upload hết hạn sau 5 phút, giới hạn 10 MB và đúng loại file.
 - API Gateway giới hạn 10 request/giây.
 
@@ -172,6 +173,7 @@ Giả định: region ap-southeast-1; 1.000 ảnh/tháng, mỗi ảnh khoảng 3
 | AWS Lambda (1.000 lần tạo thumbnail × ~1 giây × 1 GB, cùng các lần gọi API) | ~0.00 (Free Tier) |
 | Amazon DynamoDB on-demand (vài chục nghìn lượt đọc/ghi) | ~0.01 |
 | Amazon API Gateway HTTP API (khoảng 25.000 request) | ~0.03 |
+| Amazon CloudFront (trang web, dưới xa mức 1 TB / 10 triệu request) | ~0.00 (Free Tier) |
 | Amazon CloudWatch Logs | ~0.00 (Free Tier) |
 | Amazon CloudWatch alarm (3) + metric filter, Amazon SNS email | ~0.00 (Free Tier) |
 | **Tổng** | **< 0.20** |
