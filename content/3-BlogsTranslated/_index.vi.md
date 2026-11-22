@@ -6,8 +6,6 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-# Các bài blog đã dịch
-
 Trong thời gian thực tập, tôi dịch các bài viết trên AWS Blog sang tiếng Việt. Tôi chọn những bài liên quan đến dự án để mỗi bài giải thích một quyết định trong SnapThumb.
 
 | # | Bài viết | Chủ đề |
