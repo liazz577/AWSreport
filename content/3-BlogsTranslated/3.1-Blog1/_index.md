@@ -13,7 +13,6 @@ pre: " <b> 3.1. </b> "
 | **Original post** | [Uploading to Amazon S3 directly from a web or mobile application](https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/) |
 | **Source** | AWS Compute Blog · James Beswick · 2020 |
 | **Topic** | Serverless · Storage |
-| **Translated on** | <span style="background:#fff3c4">[dd/mm/2026]</span> |
 
 ## Summary
 

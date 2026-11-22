@@ -18,7 +18,7 @@ pre: " <b> 1.10. </b> "
 | 3 | - Xử lý phụ thuộc vòng giữa S3 notification và Lambda permission. | 06/10/2026 | 06/10/2026 | <https://docs.aws.amazon.com/cloudformation/> |
 | 4 | - Viết script deploy.sh và destroy.sh. | 07/10/2026 | 07/10/2026 | - |
 | 5 | - Viết test toàn luồng với moto (AWS giả lập). | 08/10/2026 | 08/10/2026 | <https://docs.getmoto.org/> |
-| 6 | - Dịch blog 3.<br>- Viết worklog tuần 10. | 09/10/2026 | 09/10/2026 | <https://aws.amazon.com/blogs/> |
+| 6 | - Viết worklog tuần 10. | 09/10/2026 | 09/10/2026 | - |
 
 ### Kết quả đạt được tuần 10:
 
