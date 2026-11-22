@@ -21,6 +21,10 @@ Hệ thống có hai hàm Lambda với hai nhiệm vụ khác nhau:
 | Nhật ký | **Amazon CloudWatch** | Ghi lại mọi lần chạy của hai hàm |
 | Cảnh báo (chỉ cho admin) | **CloudWatch alarm + Amazon SNS** | Gửi email cho người quản trị khi hàm thumbnail bị lỗi, API trả lỗi 5xx, hoặc nhiều ảnh xử lý thất bại |
 
+![Kiến trúc SnapThumb](/images/5-Workshop/architecture-vi.svg?width=100pc)
+
+Các số trong sơ đồ đi theo luồng dữ liệu: (1) mở trang web, (2) `POST /uploads`, (3) API Gateway gọi Lambda API, (4) Lambda ghi bản ghi `PENDING` và trả link có chữ ký, (5) trình duyệt upload thẳng lên S3, (6) sự kiện `ObjectCreated` gọi Lambda Thumbnail, (7) lưu thumbnail vào `thumbnails/`, (8) cập nhật bản ghi thành `DONE`, (9) trang web lấy danh sách bằng `GET /images`. CloudWatch thu thập log, metric và alarm trong suốt quá trình.
+
 ## Vì sao chọn các dịch vụ này
 
 | Nhu cầu | Dịch vụ chọn | Lý do | Phương án đã cân nhắc |

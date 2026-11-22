@@ -21,12 +21,12 @@ pre: " <b> 5.10. </b> "
 cd ~/snapthumb && bash destroy.sh
 ```
 
-Type `yes`; the script empties both buckets and deletes the stack.
+Type `yes`; the script empties both buckets and deletes the stack. Deleting the stack also removes the three alarms, the SNS topic and its subscription, the metric filter, both Lambda functions, the API, the table, the IAM roles and the log groups.
 
 If you also published the Pillow layer in 5.5.1, delete it as well: **Lambda → Layers → `pillow-py312` → Delete** for each version. Layers are not part of the stack.
 
 ## Cost of leaving it running
-If you need to keep SnapThumb online for a while (for example until the report is graded), it costs almost nothing:
+If you need to keep SnapThumb online for a while (for example until the report is graded), it costs almost nothing (the detailed estimate by usage is in [Proposal, section 6](../../2-proposal/)):
 
 | Part | Cost while idle | Note |
 | --- | --- | --- |

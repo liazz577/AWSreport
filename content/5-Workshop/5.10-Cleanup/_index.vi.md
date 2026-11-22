@@ -21,12 +21,12 @@ pre: " <b> 5.10. </b> "
 cd ~/snapthumb && bash destroy.sh
 ```
 
-Gõ `yes`; script làm trống hai bucket rồi xoá stack.
+Gõ `yes`; script làm trống hai bucket rồi xoá stack. Xoá stack cũng xoá luôn ba alarm, SNS topic và subscription, metric filter, hai hàm Lambda, API, bảng, các IAM role và log group.
 
 Nếu bạn có tạo layer Pillow ở mục 5.5.1, hãy xoá thêm: **Lambda → Layers → `pillow-py312` → Delete** cho từng phiên bản. Layer không nằm trong stack.
 
 ## Chi phí nếu để hệ thống chạy
-Nếu cần để SnapThumb chạy một thời gian (ví dụ đến khi chấm xong báo cáo), chi phí gần như bằng 0:
+Nếu cần để SnapThumb chạy một thời gian (ví dụ đến khi chấm xong báo cáo), chi phí gần như bằng 0 (bảng ước tính chi tiết theo lượng sử dụng ở [Proposal, mục 6](../../2-proposal/)):
 
 | Thành phần | Chi phí khi không có người dùng | Ghi chú |
 | --- | --- | --- |

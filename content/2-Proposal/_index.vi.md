@@ -34,6 +34,29 @@ SnapThumb là một ứng dụng web cho phép người dùng tải ảnh lên v
 - Tự mở rộng: 1 ảnh hay 100 ảnh cùng lúc, Lambda tự chạy song song.
 - Dễ mở rộng thêm bước xử lý khác (nén, đóng dấu, nhận diện) mà không sửa phần upload.
 
+## Đối tượng sử dụng
+
+- **Lập trình viên và nhóm nhỏ** làm web/app có nhiều ảnh do người dùng tải lên (thư viện ảnh lớp học, câu lạc bộ, trang bán hàng, ảnh đại diện trong hệ thống quản lý sinh viên), cần ảnh thu nhỏ mà không muốn vận hành máy chủ.
+- **Người dùng cuối:** người tải ảnh lên và xem ảnh trên trang web.
+- **Người quản trị:** người deploy và vận hành hệ thống, nhận email cảnh báo khi có sự cố.
+
+## Mục tiêu và tiêu chí thành công
+
+**Đầu ra mong muốn:** (1) trang web để tải lên, xem và xoá ảnh; (2) HTTP API với ba route; (3) ảnh thu nhỏ tự động trên S3 kèm bản ghi trong DynamoDB; (4) log, metric và ba alarm gửi email cho người quản trị; (5) template CloudFormation dựng và xoá toàn bộ hệ thống bằng một lệnh.
+
+| Tiêu chí | Mục tiêu | Kết quả đo trên AWS |
+| --- | --- | --- |
+| Thời gian từ lúc upload tới khi có thumbnail | 1–3 giây | 1,1–2,8 giây kể cả cold start; 0,48 giây thời gian chạy hàm khi đã chạy sẵn |
+| Dung lượng thumbnail so với ảnh chụp điện thoại | Giảm ít nhất 90% | Giảm 99,8% (6,1 MB → 12,7 KB) |
+| Xử lý dữ liệu sai | Không treo, báo lỗi rõ ràng | File giả ảnh → `FAILED`; GIF hoặc khai 11 MB → `400`; gửi 10,5 MB → S3 trả `400 EntityTooLarge` |
+| Cảnh báo | Người quản trị nhận email trong vòng 5 phút | Alarm báo động sau 71 giây, email gửi thành công |
+| Tái tạo hạ tầng | Một lệnh | `deploy.sh` tạo 24 tài nguyên; `destroy.sh` xoá sạch |
+| Chi phí | Dưới 1 USD/tháng cho 1.000 ảnh | Ước tính dưới 0,20 USD/tháng (mục 6) |
+
+## Phù hợp với chương trình FCAJ
+
+SnapThumb dùng đúng các dịch vụ cốt lõi của chương trình (Amazon S3, AWS Lambda, Amazon API Gateway, Amazon DynamoDB, AWS IAM, Amazon CloudWatch, AWS CloudFormation) và áp dụng mẫu kiến trúc **serverless hướng sự kiện** để xử lý file, thay vì một ứng dụng web chạy trên máy chủ thường trực.
+
 # 3. Kiến trúc giải pháp
 
 ## Kiến trúc giải pháp
@@ -179,6 +202,7 @@ Giá trên là ước tính theo giá niêm yết và có thể thay đổi. <sp
 ## Kết quả kỹ thuật
 
 - Ứng dụng web chạy được: upload nhiều ảnh, nhận thumbnail trong 1–3 giây, xem và xoá ảnh.
+- Log, metric và cảnh báo email cho người quản trị khi có sự cố.
 - Ảnh thu nhỏ nhẹ hơn ảnh gốc ít nhất 90% với ảnh chụp điện thoại.
 - Toàn bộ hạ tầng dựng lại được bằng một lệnh; có bộ test tự động.
 

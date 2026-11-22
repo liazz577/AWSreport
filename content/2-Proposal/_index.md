@@ -34,6 +34,29 @@ SnapThumb is a web app where users upload images and get thumbnails back within 
 - Scales automatically: 1 or 100 images at once, Lambda runs them in parallel.
 - New processing steps (compression, watermarking, detection) can be added without touching the upload path.
 
+## Target users
+
+- **Developers and small teams** building web or mobile apps with many user-uploaded images (class or club photo galleries, online shops, profile pictures in a student management system) who need thumbnails without running servers.
+- **End users:** people who upload and view images on the web page.
+- **Administrators:** whoever deploys and operates the system and receives alert emails when something goes wrong.
+
+## Goals and success criteria
+
+**Expected outputs:** (1) a web page to upload, view and delete images; (2) an HTTP API with three routes; (3) automatic thumbnails in S3 with a record in DynamoDB; (4) logs, metrics and three alarms that email the administrator; (5) a CloudFormation template that creates and deletes the whole system with one command.
+
+| Criterion | Target | Measured on AWS |
+| --- | --- | --- |
+| Time from upload to finished thumbnail | 1–3 seconds | 1.1–2.8 seconds including cold start; 0.48 seconds of function time when warm |
+| Thumbnail size versus a phone photo | At least 90% smaller | 99.8% smaller (6.1 MB → 12.7 KB) |
+| Handling bad input | No hang, clear error | Fake image → `FAILED`; GIF or declared 11 MB → `400`; sending 10.5 MB → S3 returns `400 EntityTooLarge` |
+| Alerts | Administrator emailed within 5 minutes | Alarm fired after 71 seconds, email delivered |
+| Rebuilding the infrastructure | One command | `deploy.sh` creates 24 resources; `destroy.sh` removes everything |
+| Cost | Under 1 USD/month for 1,000 images | Estimated under 0.20 USD/month (section 6) |
+
+## Fit with the FCAJ program
+
+SnapThumb uses the program's core services (Amazon S3, AWS Lambda, Amazon API Gateway, Amazon DynamoDB, AWS IAM, Amazon CloudWatch, AWS CloudFormation) and applies the **serverless, event-driven** pattern for file processing instead of a web application on an always-on server.
+
 # 3. Solution Architecture
 
 ## Solution Architecture
@@ -179,6 +202,7 @@ These are estimates based on list prices, which can change. <span style="backgro
 ## Technical Outcomes
 
 - A working web app: upload multiple images, get thumbnails in 1–3 seconds, view and delete them.
+- Logs, metrics and alert emails to the administrator when something goes wrong.
 - Thumbnails at least 90% smaller than phone photos.
 - All infrastructure rebuilt with one command; automated tests included.
 
