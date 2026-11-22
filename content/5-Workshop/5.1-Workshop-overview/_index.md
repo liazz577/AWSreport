@@ -21,6 +21,10 @@ The system has two Lambda functions with different jobs:
 | Logs | **Amazon CloudWatch** | Every run of both functions |
 | Alerts (admin only) | **CloudWatch alarms + Amazon SNS** | Email the administrator when the thumbnail function crashes, the API returns 5xx, or many uploads fail |
 
+![SnapThumb architecture](/images/5-Workshop/architecture-en.svg?width=100pc)
+
+The numbers in the diagram follow the data flow: (1) open the web page, (2) `POST /uploads`, (3) API Gateway calls the API Lambda, (4) it writes a `PENDING` record and returns a signed link, (5) the browser uploads straight to S3, (6) the `ObjectCreated` event calls the thumbnail Lambda, (7) it saves the thumbnail in `thumbnails/`, (8) updates the record to `DONE`, (9) the page lists images with `GET /images`. CloudWatch collects logs, metrics and alarms throughout.
+
 ## Why these services
 
 | Need | Chosen service | Why | Alternative considered |
