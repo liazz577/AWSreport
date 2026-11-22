@@ -51,7 +51,15 @@ Repeat the table with your own phone photos: the page shows the size, savings an
 
 ## Alerts (CloudWatch alarms + Amazon SNS)
 
-Watching the Monitor tab only works while someone is looking at it. Three alarms send an email as soon as something goes wrong:
+Watching the Monitor tab only works while someone is looking at it. Three alarms send an email as soon as something goes wrong.
+
+{{% notice info %}}
+**Who receives the alerts:** only the **administrator / operator** of the system, i.e. the person who deployed SnapThumb, not the people who upload images. The purpose is to let the admin notice and fix problems (a crashing function, server errors, abuse with fake files) without watching the console all day. End users never receive these emails and cannot subscribe themselves.
+
+- The recipient is the email given when deploying (`ALARM_EMAIL`) or subscribed by hand to the SNS topic. Whoever follows this workshop uses **their own** email.
+- To add another admin (for example a mentor or teammate): **Amazon SNS → Topics → the alarm topic → Create subscription → Email**. That person must click **Confirm subscription** before receiving anything, so nobody is added without agreeing.
+{{% /notice %}}
+
 
 | Alarm | Metric | Fires when | What it catches |
 | --- | --- | --- | --- |

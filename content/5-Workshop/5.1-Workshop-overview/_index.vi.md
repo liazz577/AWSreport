@@ -19,7 +19,7 @@ Hệ thống có hai hàm Lambda với hai nhiệm vụ khác nhau:
 | Lambda Thumbnail | **AWS Lambda** + Pillow | Tự chạy với mỗi ảnh mới và tạo ảnh thu nhỏ |
 | Hồ sơ ảnh | **Amazon DynamoDB** | Trạng thái (`PENDING` → `DONE` / `FAILED`), kích thước, dung lượng, thời gian xử lý |
 | Nhật ký | **Amazon CloudWatch** | Ghi lại mọi lần chạy của hai hàm |
-| Cảnh báo | **CloudWatch alarm + Amazon SNS** | Gửi email khi hàm thumbnail bị lỗi, API trả lỗi 5xx, hoặc nhiều ảnh xử lý thất bại |
+| Cảnh báo (chỉ cho admin) | **CloudWatch alarm + Amazon SNS** | Gửi email cho người quản trị khi hàm thumbnail bị lỗi, API trả lỗi 5xx, hoặc nhiều ảnh xử lý thất bại |
 
 ## Vì sao chọn các dịch vụ này
 

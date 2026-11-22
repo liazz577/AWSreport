@@ -19,7 +19,7 @@ The system has two Lambda functions with different jobs:
 | Thumbnail Lambda | **AWS Lambda** + Pillow | Runs automatically for each new image and creates its thumbnail |
 | Image records | **Amazon DynamoDB** | Status (`PENDING` → `DONE` / `FAILED`), dimensions, sizes, processing time |
 | Logs | **Amazon CloudWatch** | Every run of both functions |
-| Alerts | **CloudWatch alarms + Amazon SNS** | Email when the thumbnail function crashes, the API returns 5xx, or many uploads fail |
+| Alerts (admin only) | **CloudWatch alarms + Amazon SNS** | Email the administrator when the thumbnail function crashes, the API returns 5xx, or many uploads fail |
 
 ## Why these services
 

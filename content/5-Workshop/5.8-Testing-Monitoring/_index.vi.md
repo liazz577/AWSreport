@@ -51,7 +51,15 @@ Hãy đo lại bảng này với ảnh chụp điện thoại của bạn: mỗi
 
 ## Cảnh báo (CloudWatch alarm + Amazon SNS)
 
-Xem tab Monitor chỉ có tác dụng khi có người đang nhìn. Ba alarm dưới đây gửi email ngay khi có sự cố:
+Xem tab Monitor chỉ có tác dụng khi có người đang nhìn. Ba alarm dưới đây gửi email ngay khi có sự cố.
+
+{{% notice info %}}
+**Ai nhận cảnh báo:** chỉ **người quản trị / vận hành** hệ thống, tức người đã deploy SnapThumb, không phải người dùng upload ảnh. Mục đích là giúp admin phát hiện và xử lý sự cố (hàm bị lỗi, API lỗi máy chủ, bị lạm dụng bằng file giả) mà không phải ngồi theo dõi console cả ngày. Người dùng cuối không nhận các email này và không tự đăng ký được.
+
+- Người nhận là email được truyền khi deploy (`ALARM_EMAIL`) hoặc được đăng ký tay vào SNS topic. Ai làm theo workshop này thì dùng **email của chính mình**.
+- Muốn thêm một admin khác (ví dụ mentor hoặc bạn cùng nhóm): **Amazon SNS → Topics → topic cảnh báo → Create subscription → Email**. Người đó phải bấm **Confirm subscription** thì mới nhận được, nên không ai bị thêm vào mà không đồng ý.
+{{% /notice %}}
+
 
 | Alarm | Metric | Báo động khi | Phát hiện điều gì |
 | --- | --- | --- | --- |
