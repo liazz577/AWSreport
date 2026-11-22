@@ -23,7 +23,7 @@ The system has two Lambda functions with different jobs:
 
 ![SnapThumb architecture](/images/5-Workshop/architecture-en.svg?width=100pc)
 
-The numbers in the diagram follow the data flow: (1) open the web page, (2) `POST /uploads`, (3) API Gateway calls the API Lambda, (4) it writes a `PENDING` record and returns a signed link, (5) the browser uploads straight to S3, (6) the `ObjectCreated` event calls the thumbnail Lambda, (7) it saves the thumbnail in `thumbnails/`, (8) updates the record to `DONE`, (9) the page lists images with `GET /images`. CloudWatch collects logs, metrics and alarms throughout.
+The numbers in the diagram follow the data flow: (1) open the web page through CloudFront over HTTPS, (2) `POST /uploads`, (3) API Gateway calls the API Lambda, (4) it writes a `PENDING` record and returns a signed link, (5) the browser uploads straight to S3, (6) the `ObjectCreated` event calls the thumbnail Lambda, (7) it saves the thumbnail in `thumbnails/`, (8) updates the record to `DONE`, (9) the page lists images with `GET /images`. CloudWatch collects logs, metrics and alarms throughout.
 
 ## Why these services
 
@@ -31,7 +31,7 @@ The numbers in the diagram follow the data flow: (1) open the web page, (2) `POS
 | --- | --- | --- | --- |
 | Store originals and thumbnails, notify on new files | **Amazon S3** | Unlimited, cheap storage; built-in Event Notifications start the processing; presigned POST lets the browser upload directly with size and type limits | Disk on EC2 / EFS: needs a running server and has no built-in "new file" event |
 | Process each image | **AWS Lambda** | Runs only when an image arrives, billed per millisecond, scales out automatically when many images arrive at once | EC2 or ECS worker: pays 24/7 even when idle, needs scaling and patching |
-| HTTPS endpoints for the web page | **Amazon API Gateway – HTTP API** | Managed HTTPS, CORS and throttling with no server; cheaper and lower latency than REST API, and SnapThumb needs none of the REST-only features (API keys, request validation) | REST API (more features, higher price); ALB + EC2 (always-on cost) |
+| HTTPS endpoints for the web page | **Amazon API Gateway – HTTP API** | Managed HTTPS, CORS and throttling with no server; cheaper and lower latency than REST API, and SnapThumb needs none of the REST-only features (API keys, request validation, direct AWS WAF integration) | REST API (more features, higher price); ALB + EC2 (always-on cost) |
 | Store each image's status and details | **Amazon DynamoDB (on-demand)** | Simple key–value access by `id`, millisecond latency, no server or connection pool to manage from Lambda, pay per request | Amazon RDS: always-on instance cost, schema and database connections from Lambda to manage |
 | Logs, metrics and alerts | **Amazon CloudWatch** | Lambda and API Gateway send logs and metrics automatically; metric filters turn log lines into metrics; alarms watch them | Third-party monitoring: extra cost and agents |
 | Serve the web page securely | **Amazon CloudFront** + Origin Access Control | HTTPS with an AWS certificate, edge caching, and the web bucket stays private: only this distribution can read it | S3 static website endpoint: HTTP only and the bucket must be public |
@@ -48,6 +48,8 @@ The numbers in the diagram follow the data flow: (1) open the web page, (2) `POS
 | Permissions too broad | Each role has only the actions it needs, scoped to the table and to a prefix: the thumbnail function can only read `uploads/*`, write `thumbnails/*` and call `UpdateItem` |
 | Malicious or oversized uploads | The API checks type and size; the presigned POST carries `Content-Type` and `content-length-range` conditions so S3 itself rejects other files; upload links expire after 5 minutes; Pillow checks the real file content |
 | API abuse | Throttling of 10 requests/s (burst 20) on the HTTP API |
+| Someone reads or changes the web page files in S3 | The web bucket blocks all public access; only the CloudFront distribution can read it (Origin Access Control, policy condition on the distribution ARN) |
+| Data intercepted in transit | Every connection is HTTPS: CloudFront redirects HTTP to HTTPS, API Gateway and presigned S3 links use HTTPS only |
 | Data at rest | S3 encrypts objects (SSE-S3, AES-256) and DynamoDB encrypts the table by default |
 | Problems go unnoticed | CloudWatch alarms email the administrator through SNS (5.8) |
 
@@ -76,6 +78,9 @@ A zip of libraries shared by functions. Pillow (the Python imaging library) is n
 
 #### DynamoDB on-demand
 A NoSQL table billed per request, with no capacity to plan. Each image is one item keyed by `id`.
+
+#### CloudFront and Origin Access Control (OAC)
+CloudFront is AWS's content delivery network: it serves files over HTTPS from edge locations near the user and caches them. With **OAC**, CloudFront signs every request it sends to S3, and the bucket policy allows only that distribution. The bucket stays private, yet the page is public through the CloudFront link.
 
 #### Metric filter and alarm
 A **metric filter** counts log lines that match a pattern (for example `Failed to process`) and publishes the count as a CloudWatch metric. An **alarm** watches a metric and, when it crosses a threshold, sends a message to an Amazon SNS topic, which emails the subscribers.

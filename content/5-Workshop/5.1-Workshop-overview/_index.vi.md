@@ -23,7 +23,7 @@ Hệ thống có hai hàm Lambda với hai nhiệm vụ khác nhau:
 
 ![Kiến trúc SnapThumb](/images/5-Workshop/architecture-vi.svg?width=100pc)
 
-Các số trong sơ đồ đi theo luồng dữ liệu: (1) mở trang web, (2) `POST /uploads`, (3) API Gateway gọi Lambda API, (4) Lambda ghi bản ghi `PENDING` và trả link có chữ ký, (5) trình duyệt upload thẳng lên S3, (6) sự kiện `ObjectCreated` gọi Lambda Thumbnail, (7) lưu thumbnail vào `thumbnails/`, (8) cập nhật bản ghi thành `DONE`, (9) trang web lấy danh sách bằng `GET /images`. CloudWatch thu thập log, metric và alarm trong suốt quá trình.
+Các số trong sơ đồ đi theo luồng dữ liệu: (1) mở trang web qua CloudFront bằng HTTPS, (2) `POST /uploads`, (3) API Gateway gọi Lambda API, (4) Lambda ghi bản ghi `PENDING` và trả link có chữ ký, (5) trình duyệt upload thẳng lên S3, (6) sự kiện `ObjectCreated` gọi Lambda Thumbnail, (7) lưu thumbnail vào `thumbnails/`, (8) cập nhật bản ghi thành `DONE`, (9) trang web lấy danh sách bằng `GET /images`. CloudWatch thu thập log, metric và alarm trong suốt quá trình.
 
 ## Vì sao chọn các dịch vụ này
 
@@ -31,7 +31,7 @@ Các số trong sơ đồ đi theo luồng dữ liệu: (1) mở trang web, (2) 
 | --- | --- | --- | --- |
 | Lưu ảnh gốc và ảnh thu nhỏ, báo khi có file mới | **Amazon S3** | Dung lượng không giới hạn, giá rẻ; Event Notifications có sẵn để kích hoạt xử lý; presigned POST cho trình duyệt upload thẳng, có giới hạn dung lượng và loại file | Ổ đĩa trên EC2 / EFS: phải chạy máy chủ và không có sẵn sự kiện "có file mới" |
 | Xử lý từng ảnh | **AWS Lambda** | Chỉ chạy khi có ảnh, tính tiền theo mili giây, tự chạy song song khi nhiều ảnh đến cùng lúc | Worker trên EC2 hoặc ECS: trả tiền 24/7 kể cả lúc rảnh, phải tự scale và vá lỗi hệ điều hành |
-| Endpoint HTTPS cho trang web | **Amazon API Gateway – HTTP API** | HTTPS, CORS và giới hạn tần suất có sẵn, không cần máy chủ; rẻ và nhanh hơn REST API, mà SnapThumb không cần các tính năng chỉ REST API mới có (API key, kiểm tra request) | REST API (nhiều tính năng hơn, giá cao hơn); ALB + EC2 (tốn phí thường trực) |
+| Endpoint HTTPS cho trang web | **Amazon API Gateway – HTTP API** | HTTPS, CORS và giới hạn tần suất có sẵn, không cần máy chủ; rẻ và nhanh hơn REST API, mà SnapThumb không cần các tính năng chỉ REST API mới có (API key, kiểm tra request, tích hợp trực tiếp AWS WAF) | REST API (nhiều tính năng hơn, giá cao hơn); ALB + EC2 (tốn phí thường trực) |
 | Lưu trạng thái và thông số từng ảnh | **Amazon DynamoDB (on-demand)** | Truy cập đơn giản theo `id`, độ trễ vài mili giây, không phải quản lý máy chủ hay kết nối database từ Lambda, trả tiền theo request | Amazon RDS: tốn phí instance thường trực, phải quản lý schema và kết nối từ Lambda |
 | Log, số liệu và cảnh báo | **Amazon CloudWatch** | Lambda và API Gateway tự gửi log và metric; metric filter biến dòng log thành số liệu; alarm theo dõi số liệu đó | Công cụ giám sát bên thứ ba: tốn thêm phí và phải cài agent |
 | Phục vụ trang web an toàn | **Amazon CloudFront** + Origin Access Control | HTTPS với chứng chỉ của AWS, cache ở edge, bucket web vẫn riêng tư: chỉ distribution này đọc được | S3 static website endpoint: chỉ chạy HTTP và bucket phải public |
@@ -48,6 +48,8 @@ Các số trong sơ đồ đi theo luồng dữ liệu: (1) mở trang web, (2) 
 | Quyền quá rộng | Mỗi role chỉ có đúng hành động cần dùng, giới hạn theo bảng và theo tiền tố: hàm thumbnail chỉ được đọc `uploads/*`, ghi `thumbnails/*` và gọi `UpdateItem` |
 | Upload file độc hại hoặc quá lớn | API kiểm tra loại và dung lượng; presigned POST gắn điều kiện `Content-Type` và `content-length-range` nên chính S3 từ chối file khác; link upload hết hạn sau 5 phút; Pillow kiểm tra nội dung thật của file |
 | Lạm dụng API | Giới hạn 10 request/giây (burst 20) trên HTTP API |
+| Người khác đọc hoặc sửa file trang web trong S3 | Bucket web chặn toàn bộ truy cập public; chỉ CloudFront distribution đọc được (Origin Access Control, policy ràng buộc theo ARN của distribution) |
+| Dữ liệu bị nghe lén trên đường truyền | Mọi kết nối đều là HTTPS: CloudFront chuyển HTTP sang HTTPS, API Gateway và link S3 có chữ ký chỉ dùng HTTPS |
 | Dữ liệu lưu trữ | S3 mã hoá object (SSE-S3, AES-256) và DynamoDB mã hoá bảng theo mặc định |
 | Sự cố không ai biết | CloudWatch alarm gửi email cho người quản trị qua SNS (5.8) |
 
@@ -76,6 +78,9 @@ Một gói thư viện dùng chung cho các hàm. Pillow (thư viện xử lý �
 
 #### DynamoDB on-demand
 Bảng NoSQL tính tiền theo số lượt đọc/ghi, không cần tính trước dung lượng. Mỗi ảnh là một bản ghi với khoá `id`.
+
+#### CloudFront và Origin Access Control (OAC)
+CloudFront là mạng phân phối nội dung (CDN) của AWS: phục vụ file qua HTTPS từ các edge location gần người dùng và cache lại. Với **OAC**, CloudFront ký mọi request gửi tới S3, và bucket policy chỉ cho phép đúng distribution đó. Nhờ vậy bucket vẫn riêng tư, trong khi ai cũng mở được trang web qua link CloudFront.
 
 #### Metric filter và alarm
 **Metric filter** đếm các dòng log khớp một mẫu (ví dụ `Failed to process`) và đưa con số đó thành metric trên CloudWatch. **Alarm** theo dõi một metric; khi vượt ngưỡng, alarm gửi thông báo tới một Amazon SNS topic, và SNS gửi email cho những người đã đăng ký.

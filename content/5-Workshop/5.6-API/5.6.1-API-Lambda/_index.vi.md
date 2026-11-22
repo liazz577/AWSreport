@@ -174,7 +174,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `item.get(...)` khi liệt kê/xoá | Bản ghi thiếu `originalKey` hoặc `thumbKey` (ảnh lỗi, ảnh upload từ console) vẫn được liệt kê và xoá, không làm hỏng cả API |
 
 ## Bước 2: Cấu hình
-1. **Timeout** `10` giây.
+1. **Configuration → General configuration → Edit:** **Memory** `256` MB, **Timeout** `10` giây.
 2. **Environment variables:** `TABLE_NAME` = `snapthumb-images`, `BUCKET_NAME` = `snapthumb-images-<ten-ban>`.
 
 ## Bước 3: Cấp quyền

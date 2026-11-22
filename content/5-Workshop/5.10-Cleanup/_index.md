@@ -26,6 +26,8 @@ Type `yes`; the script empties both buckets and deletes the stack. Deleting the 
 
 If you also published the Pillow layer in 5.5.1, delete it as well: **Lambda → Layers → `pillow-py312` → Delete** for each version. Layers are not part of the stack.
 
+The monthly budget from 5.2 can stay as a safety net; delete it in **Billing and Cost Management → Budgets** if you no longer want its emails.
+
 ## Cost of leaving it running
 If you need to keep SnapThumb online for a while (for example until the report is graded), it costs almost nothing (the detailed estimate by usage is in [Proposal, section 6](../../2-proposal/)):
 
