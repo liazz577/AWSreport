@@ -8,8 +8,9 @@ pre: " <b> 5.5.2. </b> "
 
 ## Step 1: Create the function
 1. **AWS Lambda → Create function → Author from scratch**.
-2. **Name:** `snapthumb-thumbnail`, **Runtime:** **Python 3.12**, **Architecture:** **x86_64** → **Create function**.
-3. Replace `lambda_function.py` with the code below → **Deploy**.
+2. **Name:** `snapthumb-thumbnail`, **Runtime:** **Python 3.12**, **Architecture:** **x86_64**.
+3. **Permissions:** keep *Create a new role with basic Lambda permissions*. Lambda creates the role `snapthumb-thumbnail-role-…`, which can already write logs to CloudWatch; Step 3 adds S3 and DynamoDB access. → **Create function**.
+4. Replace `lambda_function.py` with the code below → **Deploy**.
 
 ```python
 """SnapThumb - hàm Lambda tạo ảnh thu nhỏ.
@@ -142,6 +143,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `make_thumbnail` | Opens the image, fixes EXIF rotation, flattens transparency onto white, shrinks so the longest edge is at most 320 px keeping the aspect ratio, saves as JPEG quality 85 |
 | `image_id_from_key` | `uploads/3f9c.jpg` → `3f9c`, the item's key in DynamoDB |
 | `key.startswith(UPLOAD_PREFIX)` | Safety check: ignores anything outside `uploads/` |
+| `lambda_handler = handler` | The console calls `lambda_function.lambda_handler` by default; this line lets the default handler setting work |
 | `processing_ms` | Time from the S3 event to the finished thumbnail |
 | `if_not_exists(...)` | Fills `originalKey`, `filename`, `createdAt` only when missing: an image uploaded straight to S3 (as in Step 5) has no record from the API, and the list/delete API needs these fields |
 | `except` branch | A broken file is marked `FAILED` with the error, so the page can show it |

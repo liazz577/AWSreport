@@ -34,6 +34,27 @@ Hệ thống có hai hàm Lambda với hai nhiệm vụ khác nhau:
 | Phân quyền | **AWS IAM** | Mỗi hàm một role, chỉ có đúng quyền và tài nguyên cần dùng; không có access key trong code | Dùng chung role quản trị (vi phạm nguyên tắc quyền tối thiểu) |
 | Dựng và xoá toàn bộ hệ thống | **AWS CloudFormation** | Cả hệ thống trong một template, dựng lần nào cũng giống nhau; một lệnh xoá sạch để không phát sinh phí; chạy được ngay trong CloudShell | AWS CDK / Terraform: phải cài thêm công cụ và bước build |
 
+## Bảo mật trong thiết kế
+
+| Rủi ro | SnapThumb xử lý thế nào |
+| --- | --- |
+| Người khác xem được ảnh | Bucket ảnh chặn toàn bộ truy cập public; ảnh chỉ hiển thị qua link có chữ ký, hết hạn sau 1 giờ |
+| Lộ khoá truy cập AWS | Không có access key trong code hay trên trình duyệt; mỗi hàm Lambda chạy bằng IAM role riêng |
+| Quyền quá rộng | Mỗi role chỉ có đúng hành động cần dùng, giới hạn theo bảng và theo tiền tố: hàm thumbnail chỉ được đọc `uploads/*`, ghi `thumbnails/*` và gọi `UpdateItem` |
+| Upload file độc hại hoặc quá lớn | API kiểm tra loại và dung lượng; presigned POST gắn điều kiện `Content-Type` và `content-length-range` nên chính S3 từ chối file khác; link upload hết hạn sau 5 phút; Pillow kiểm tra nội dung thật của file |
+| Lạm dụng API | Giới hạn 10 request/giây (burst 20) trên HTTP API |
+| Dữ liệu lưu trữ | S3 mã hoá object (SSE-S3, AES-256) và DynamoDB mã hoá bảng theo mặc định |
+| Sự cố không ai biết | CloudWatch alarm gửi email cho người quản trị qua SNS (5.8) |
+
+Các điểm còn hở của bản demo: API chưa có đăng nhập và bucket website là public, chạy HTTP. Mục 5.8 nêu cách khắc phục (Cognito, CloudFront với Origin Access Control).
+
+## Khả năng mở rộng
+
+- **Amazon S3** lưu không giới hạn số ảnh, và trình duyệt upload thẳng vào S3 nên API không phải truyền dữ liệu ảnh, không trở thành nút thắt.
+- **AWS Lambda** gọi một lần cho mỗi ảnh và chạy song song: trong bài test, 6 ảnh upload cùng lúc được xử lý bởi 5 instance chạy đồng thời. Giới hạn là concurrency Lambda của tài khoản trong region (xem **Service Quotas**).
+- **Amazon DynamoDB on-demand** tự điều chỉnh thông lượng, không cần tính trước capacity.
+- Khi dữ liệu lớn hơn, `GET /images` không nên quét toàn bảng (xem *Hạn chế và hướng phát triển* ở 5.8).
+
 ## Các khái niệm chính
 
 #### Kiến trúc hướng sự kiện (event-driven)
@@ -50,6 +71,9 @@ Một gói thư viện dùng chung cho các hàm. Pillow (thư viện xử lý �
 
 #### DynamoDB on-demand
 Bảng NoSQL tính tiền theo số lượt đọc/ghi, không cần tính trước dung lượng. Mỗi ảnh là một bản ghi với khoá `id`.
+
+#### Metric filter và alarm
+**Metric filter** đếm các dòng log khớp một mẫu (ví dụ `Failed to process`) và đưa con số đó thành metric trên CloudWatch. **Alarm** theo dõi một metric; khi vượt ngưỡng, alarm gửi thông báo tới một Amazon SNS topic, và SNS gửi email cho những người đã đăng ký.
 
 {{% notice tip %}}
 Kiểm tra từng phần trước khi sang phần tiếp theo: upload một file vào bucket bằng tay và xem có thumbnail không (5.5) → gọi API bằng curl (5.6) → dùng trang web (5.7).

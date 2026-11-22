@@ -103,6 +103,9 @@ Result on AWS (ap-southeast-1, 22/11/2026): three fake images were uploaded; `sn
 | S3 answers `400 EntityTooLarge` on upload | File larger than 10 MB (the presigned POST allows at most 10 MB) | Choose a smaller file |
 | S3 answers `403` on upload | Upload link expired (valid 5 minutes) | Upload again: the page asks for a new link |
 | A card stays at "Processing" after a failed upload | Old page version kept the `PENDING` record | Use the current `index.html`: it deletes the record when the upload fails and stops polling after 2 minutes |
+| No alert email arrives | Subscription not confirmed, or the email went to spam | **SNS → Subscriptions**: status must be *Confirmed*; check the spam folder |
+| An "OK" alert email right after creating the alarms | Each alarm moves from *Insufficient data* to *OK* once | Normal, nothing to do |
+| The console shows no table, function or alarm | Another region is selected | Choose **Asia Pacific (Singapore)** at the top right (S3 lists buckets from every region, other services do not) |
 
 ## Challenges and solutions
 

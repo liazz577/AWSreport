@@ -8,8 +8,9 @@ pre: " <b> 5.5.2. </b> "
 
 ## Bước 1: Tạo hàm
 1. **AWS Lambda → Create function → Author from scratch**.
-2. **Name:** `snapthumb-thumbnail`, **Runtime:** **Python 3.12**, **Architecture:** **x86_64** → **Create function**.
-3. Thay nội dung `lambda_function.py` bằng code dưới đây → **Deploy**.
+2. **Name:** `snapthumb-thumbnail`, **Runtime:** **Python 3.12**, **Architecture:** **x86_64**.
+3. **Permissions:** giữ mặc định *Create a new role with basic Lambda permissions*. Lambda tạo role `snapthumb-thumbnail-role-…` có sẵn quyền ghi log lên CloudWatch; Bước 3 thêm quyền S3 và DynamoDB. → **Create function**.
+4. Thay nội dung `lambda_function.py` bằng code dưới đây → **Deploy**.
 
 ```python
 """SnapThumb - hàm Lambda tạo ảnh thu nhỏ.
@@ -142,6 +143,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `make_thumbnail` | Mở ảnh, xoay đúng chiều theo EXIF, đặt phần trong suốt lên nền trắng, thu nhỏ để cạnh dài nhất tối đa 320 px mà giữ tỉ lệ, lưu thành JPEG chất lượng 85 |
 | `image_id_from_key` | `uploads/3f9c.jpg` → `3f9c`, chính là khoá của bản ghi trong DynamoDB |
 | `key.startswith(UPLOAD_PREFIX)` | Kiểm tra an toàn: bỏ qua mọi file ngoài `uploads/` |
+| `lambda_handler = handler` | Console Lambda mặc định gọi `lambda_function.lambda_handler`; dòng này giúp dùng được cấu hình handler mặc định |
 | `processing_ms` | Thời gian từ lúc S3 phát sự kiện tới khi thumbnail xong |
 | `if_not_exists(...)` | Chỉ điền `originalKey`, `filename`, `createdAt` khi chưa có: ảnh upload thẳng lên S3 (như Bước 5) không có bản ghi từ API, mà API liệt kê/xoá cần các trường này |
 | Nhánh `except` | File hỏng được đánh dấu `FAILED` kèm lỗi để trang web hiển thị |

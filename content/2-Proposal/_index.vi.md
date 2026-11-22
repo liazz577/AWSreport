@@ -150,6 +150,7 @@ Giả định: region ap-southeast-1; 1.000 ảnh/tháng, mỗi ảnh khoảng 3
 | Amazon DynamoDB on-demand (vài chục nghìn lượt đọc/ghi) | ~0.01 |
 | Amazon API Gateway HTTP API (khoảng 25.000 request) | ~0.03 |
 | Amazon CloudWatch Logs | ~0.00 (Free Tier) |
+| Amazon CloudWatch alarm (3) + metric filter, Amazon SNS email | ~0.00 (Free Tier) |
 | **Tổng** | **< 0.20** |
 
 {{% notice warning %}}

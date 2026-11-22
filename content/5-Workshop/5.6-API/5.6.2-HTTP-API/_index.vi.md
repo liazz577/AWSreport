@@ -26,7 +26,7 @@ pre: " <b> 5.6.2. </b> "
 **Throttling → Edit** stage `$default`: rate `10`, burst `20`.
 
 ## Bước 4: Thử bằng curl
-Sao chép **Invoke URL** rồi chạy trong CloudShell:
+Sao chép **Invoke URL** (ở trang chính của API, hoặc **Stages → $default**) rồi chạy trong CloudShell:
 
 ```bash
 API=https://abc123.execute-api.ap-southeast-1.amazonaws.com
@@ -36,3 +36,9 @@ curl -s -X POST "$API/uploads" -H "content-type: application/json" \
 ```
 
 Lệnh đầu trả về `{"images": [...]}`; lệnh sau trả về `id` và đối tượng `upload` gồm `url` và `fields`.
+
+Lệnh thứ hai đã tạo một bản ghi `PENDING` cho `test.jpg` mà không upload file nào. Hãy xoá bản ghi này để trang web không hiện thẻ đứng mãi ở "Đang xử lý" (thay `ID` bằng `id` vừa nhận; `204` nghĩa là đã xoá):
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" -X DELETE "$API/images/ID"
+```
