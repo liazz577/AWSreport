@@ -25,5 +25,17 @@ Type `yes`; the script empties both buckets and deletes the stack.
 
 If you also published the Pillow layer in 5.5.1, delete it as well: **Lambda → Layers → `pillow-py312` → Delete** for each version. Layers are not part of the stack.
 
+## Cost of leaving it running
+If you need to keep SnapThumb online for a while (for example until the report is graded), it costs almost nothing:
+
+| Part | Cost while idle | Note |
+| --- | --- | --- |
+| Lambda, API Gateway, DynamoDB on-demand | 0 USD | Billed per request only |
+| S3 | About 0.025 USD per GB per month | A few test images are a few MB |
+| CloudWatch | 0 USD | 3 alarms and 1 custom metric fit in the Free Tier (10 alarms, 10 custom metrics); logs are kept 14 days |
+| SNS email | 0 USD | Emails are sent only when an alarm changes state |
+
+Delete everything as soon as you no longer need it.
+
 ## Check billing
 A day later, open **Billing and Cost Management → Bills** to confirm nothing is still accruing.

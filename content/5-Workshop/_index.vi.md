@@ -10,7 +10,7 @@ pre: " <b> 5. </b> "
 
 #### Tổng quan
 
-Trong workshop này, bạn sẽ xây dựng **SnapThumb**: người dùng tải ảnh lên từ trang web, và mỗi ảnh mới trong Amazon S3 sẽ tự động kích hoạt AWS Lambda tạo ảnh thu nhỏ 320 px. Thông tin ảnh được lưu trong Amazon DynamoDB và trả về trang web qua Amazon API Gateway.
+Trong workshop này, bạn sẽ xây dựng **SnapThumb**: người dùng tải ảnh lên từ trang web, và mỗi ảnh mới trong Amazon S3 sẽ tự động kích hoạt AWS Lambda tạo ảnh thu nhỏ 320 px. Thông tin ảnh được lưu trong Amazon DynamoDB và trả về trang web qua Amazon API Gateway. Amazon CloudWatch ghi log và số liệu, và ba CloudWatch alarm gửi email cho người quản trị qua Amazon SNS khi có sự cố.
 
 Bạn sẽ dựng hệ thống bằng tay trên AWS Management Console trước, để thấy rõ mỗi dịch vụ làm gì. Sau đó mục 5.9 cho thấy cách tạo toàn bộ hệ thống chỉ với một lệnh bằng AWS CloudFormation.
 
@@ -22,6 +22,7 @@ Bạn sẽ dựng hệ thống bằng tay trên AWS Management Console trước,
 | **Mức độ** | Cơ bản (cần tài khoản AWS và một IAM user) |
 | **Chi phí** | Vài cent; gần như bằng 0 nếu dọn dẹp sau khi làm |
 | **Region** | Asia Pacific (Singapore) `ap-southeast-1` |
+| **Dịch vụ AWS** | S3, Lambda, API Gateway, DynamoDB, CloudWatch, SNS, IAM, CloudFormation, CloudShell, Budgets |
 
 #### Nội dung
 

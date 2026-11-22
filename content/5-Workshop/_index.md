@@ -10,7 +10,7 @@ pre: " <b> 5. </b> "
 
 #### Overview
 
-In this workshop you build **SnapThumb**: users upload images from a web page, and every new image in Amazon S3 automatically triggers AWS Lambda to create a 320 px thumbnail. Image details are stored in Amazon DynamoDB and served to the page through Amazon API Gateway.
+In this workshop you build **SnapThumb**: users upload images from a web page, and every new image in Amazon S3 automatically triggers AWS Lambda to create a 320 px thumbnail. Image details are stored in Amazon DynamoDB and served to the page through Amazon API Gateway. Amazon CloudWatch records logs and metrics, and three CloudWatch alarms email the administrator through Amazon SNS when something goes wrong.
 
 You build it by hand in the AWS Management Console first, so you see what each service does. Section 5.9 then shows how the same system is created with one command using AWS CloudFormation.
 
@@ -22,6 +22,7 @@ You build it by hand in the AWS Management Console first, so you see what each s
 | **Level** | Beginner (you need an AWS account and an IAM user) |
 | **Cost** | A few cents; close to zero if you clean up afterwards |
 | **Region** | Asia Pacific (Singapore) `ap-southeast-1` |
+| **AWS services** | S3, Lambda, API Gateway, DynamoDB, CloudWatch, SNS, IAM, CloudFormation, CloudShell, Budgets |
 
 #### Content
 

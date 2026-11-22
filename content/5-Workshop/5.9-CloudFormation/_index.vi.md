@@ -9,7 +9,16 @@ pre: " <b> 5.9. </b> "
 Toàn bộ những gì làm ở mục 5.3–5.7 có thể tạo bằng một template. Đây là **Infrastructure as Code**: hệ thống được mô tả trong file, nên dựng lại giống hệt được, xem lại được và quản lý phiên bản được.
 
 ## Template gồm những gì
-`infra/template.yaml` trong gói mã nguồn tạo ra: bucket ảnh (CORS, trigger S3), bảng DynamoDB, hai hàm Lambda cùng IAM role và log group, HTTP API với ba route và giới hạn tần suất, và bucket website.
+`infra/template.yaml` trong gói mã nguồn tạo ra: bucket ảnh (CORS, trigger S3), bảng DynamoDB, hai hàm Lambda cùng IAM role và log group, HTTP API với ba route và giới hạn tần suất, bucket website, và phần cảnh báo (SNS topic kèm đăng ký email tuỳ chọn, metric filter và ba CloudWatch alarm). Các tham số:
+
+| Tham số | Mặc định | Ý nghĩa |
+| --- | --- | --- |
+| `ThumbnailMaxSize` | `320` | Cạnh dài của thumbnail, 64–1024 px |
+| `ThrottlingRateLimit` / `ThrottlingBurstLimit` | `10` / `20` | Giới hạn request API mỗi giây / đột biến |
+| `AlarmEmail` | trống | Email người quản trị nhận cảnh báo; `deploy.sh` lấy từ biến `ALARM_EMAIL` |
+| `FailedImagesThreshold` | `3` | Số ảnh lỗi trong 5 phút để alarm báo động |
+
+Muốn đổi các tham số còn lại, sửa `Default` trong template hoặc truyền `--parameter-overrides` cho `aws cloudformation deploy`.
 
 ## Một phụ thuộc vòng cần giải
 Trigger của bucket cần hàm Lambda, quyền gọi hàm cần ARN của bucket, và IAM policy của hàm cũng cần bucket. Nếu cả hai tham chiếu thẳng tới tài nguyên bucket sẽ tạo thành vòng, CloudFormation từ chối. Template giải bằng cách **tạo tên bucket từ tên stack**: `${AWS::StackName}-images-${AWS::AccountId}-${AWS::Region}`. Quyền gọi hàm và policy dùng chuỗi tên này thay vì tham chiếu tới bucket.
@@ -33,3 +42,10 @@ bash deploy.sh
 
 ## Kiểm thử tự động
 `backend/test_app.py` chạy toàn luồng trên AWS giả lập (moto): tạo link upload, upload, chạy hàm tạo thumbnail, liệt kê, xoá, cùng các trường hợp file hỏng, PNG trong suốt, ảnh dọc, ảnh nhỏ và dữ liệu đầu vào sai. Hai test hồi quy kiểm tra ảnh upload thẳng lên S3 và bản ghi thiếu khoá file.
+
+Chạy test trên máy của bạn hoặc trong CloudShell:
+
+```bash
+pip install "moto[s3,dynamodb]" Pillow
+cd backend && python3 -m unittest -v
+```

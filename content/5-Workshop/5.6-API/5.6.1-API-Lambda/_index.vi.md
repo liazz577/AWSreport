@@ -7,7 +7,7 @@ pre: " <b> 5.6.1. </b> "
 ---
 
 ## Bước 1: Tạo hàm
-1. **Lambda → Create function**, tên `snapthumb-api`, **Python 3.12** → **Create function**.
+1. **Lambda → Create function**, tên `snapthumb-api`, **Python 3.12**, giữ mặc định *Create a new role with basic Lambda permissions* → **Create function**.
 2. Thay nội dung `lambda_function.py` bằng code dưới đây → **Deploy**.
 
 ```python
@@ -169,6 +169,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `create_upload` | Kiểm tra tên, loại (JPEG/PNG/WebP) và dung lượng (≤ 10 MB), ghi `PENDING`, gọi `generate_presigned_post` |
 | `Conditions` | Điều kiện gắn vào chữ ký: S3 từ chối file khác loại hoặc lớn hơn 10 MB |
 | `list_images` | Đọc toàn bộ bản ghi, sắp xếp mới nhất trước, thêm link xem bằng `generate_presigned_url` |
+| `lambda_handler = handler` | Giúp handler mặc định của console `lambda_function.lambda_handler` gọi được code |
 | `_json_default` | DynamoDB trả số dạng `Decimal`; hàm này đổi lại để xuất JSON |
 | `item.get(...)` khi liệt kê/xoá | Bản ghi thiếu `originalKey` hoặc `thumbKey` (ảnh lỗi, ảnh upload từ console) vẫn được liệt kê và xoá, không làm hỏng cả API |
 

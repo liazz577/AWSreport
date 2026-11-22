@@ -7,7 +7,7 @@ pre: " <b> 5.6.1. </b> "
 ---
 
 ## Step 1: Create the function
-1. **Lambda → Create function**, name `snapthumb-api`, **Python 3.12** → **Create function**.
+1. **Lambda → Create function**, name `snapthumb-api`, **Python 3.12**, keep *Create a new role with basic Lambda permissions* → **Create function**.
 2. Replace `lambda_function.py` with the code below → **Deploy**.
 
 ```python
@@ -169,6 +169,7 @@ lambda_handler = handler  # tên hàm mặc định của Lambda console / defau
 | `create_upload` | Checks name, type (JPEG/PNG/WebP) and size (≤ 10 MB), writes `PENDING`, calls `generate_presigned_post` |
 | `Conditions` | Rules baked into the signature: S3 rejects a file of another type or over 10 MB |
 | `list_images` | Reads all items, sorts newest first, adds `generate_presigned_url` view links |
+| `lambda_handler = handler` | Lets the console's default handler `lambda_function.lambda_handler` call the code |
 | `_json_default` | DynamoDB returns numbers as `Decimal`; this converts them for JSON |
 | `item.get(...)` in list/delete | Records without `originalKey` or `thumbKey` (failed or console uploads) are listed and deleted without crashing the whole API |
 

@@ -34,6 +34,27 @@ The system has two Lambda functions with different jobs:
 | Permissions | **AWS IAM** | One role per function with only the actions and resources it needs; no access keys in code | Shared admin role (violates least privilege) |
 | Build and delete everything | **AWS CloudFormation** | Whole system as one template; same result every time; one command deletes everything so nothing keeps costing money; runs in CloudShell with no extra tools | AWS CDK / Terraform: need extra tooling and a build step |
 
+## Security in the design
+
+| Risk | What SnapThumb does |
+| --- | --- |
+| Someone reads other people's images | The image bucket blocks all public access; images are only shown through presigned links that expire after 1 hour |
+| AWS keys leak | No access keys in code or in the browser; each Lambda function runs with its own IAM role |
+| Permissions too broad | Each role has only the actions it needs, scoped to the table and to a prefix: the thumbnail function can only read `uploads/*`, write `thumbnails/*` and call `UpdateItem` |
+| Malicious or oversized uploads | The API checks type and size; the presigned POST carries `Content-Type` and `content-length-range` conditions so S3 itself rejects other files; upload links expire after 5 minutes; Pillow checks the real file content |
+| API abuse | Throttling of 10 requests/s (burst 20) on the HTTP API |
+| Data at rest | S3 encrypts objects (SSE-S3, AES-256) and DynamoDB encrypts the table by default |
+| Problems go unnoticed | CloudWatch alarms email the administrator through SNS (5.8) |
+
+Known gaps for a demo: the API has no sign-in and the website bucket is public over HTTP. 5.8 lists how to close them (Cognito, CloudFront with Origin Access Control).
+
+## Scalability
+
+- **Amazon S3** stores any number of images, and browsers upload straight to it, so the API never carries image data and does not become a bottleneck.
+- **AWS Lambda** runs one invocation per image and runs them in parallel: in the test, 6 images uploaded at once were processed by 5 instances at the same time. The limit is the account's Lambda concurrency in the region (see **Service Quotas**).
+- **Amazon DynamoDB on-demand** adjusts throughput automatically; no capacity planning.
+- At larger scale, `GET /images` should stop scanning the whole table (see *Limitations and next steps* in 5.8).
+
 ## Key concepts
 
 #### Event-driven architecture
@@ -50,6 +71,9 @@ A zip of libraries shared by functions. Pillow (the Python imaging library) is n
 
 #### DynamoDB on-demand
 A NoSQL table billed per request, with no capacity to plan. Each image is one item keyed by `id`.
+
+#### Metric filter and alarm
+A **metric filter** counts log lines that match a pattern (for example `Failed to process`) and publishes the count as a CloudWatch metric. An **alarm** watches a metric and, when it crosses a threshold, sends a message to an Amazon SNS topic, which emails the subscribers.
 
 {{% notice tip %}}
 Test each part before moving on: upload a file to the bucket by hand and check that a thumbnail appears (5.5) → call the API with curl (5.6) → use the web page (5.7).

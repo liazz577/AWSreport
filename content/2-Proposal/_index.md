@@ -150,6 +150,7 @@ Assumptions: ap-southeast-1; 1,000 images/month of about 3 MB each; each image v
 | Amazon DynamoDB on-demand (tens of thousands of reads/writes) | ~0.01 |
 | Amazon API Gateway HTTP API (about 25,000 requests) | ~0.03 |
 | Amazon CloudWatch Logs | ~0.00 (Free Tier) |
+| Amazon CloudWatch alarms (3) + metric filter, Amazon SNS email | ~0.00 (Free Tier) |
 | **Total** | **< 0.20** |
 
 {{% notice warning %}}

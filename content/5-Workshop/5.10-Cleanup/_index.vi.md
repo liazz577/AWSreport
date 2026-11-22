@@ -25,5 +25,17 @@ Gõ `yes`; script làm trống hai bucket rồi xoá stack.
 
 Nếu bạn có tạo layer Pillow ở mục 5.5.1, hãy xoá thêm: **Lambda → Layers → `pillow-py312` → Delete** cho từng phiên bản. Layer không nằm trong stack.
 
+## Chi phí nếu để hệ thống chạy
+Nếu cần để SnapThumb chạy một thời gian (ví dụ đến khi chấm xong báo cáo), chi phí gần như bằng 0:
+
+| Thành phần | Chi phí khi không có người dùng | Ghi chú |
+| --- | --- | --- |
+| Lambda, API Gateway, DynamoDB on-demand | 0 USD | Chỉ tính tiền theo request |
+| S3 | Khoảng 0,025 USD mỗi GB mỗi tháng | Vài ảnh test chỉ vài MB |
+| CloudWatch | 0 USD | 3 alarm và 1 custom metric nằm trong Free Tier (10 alarm, 10 custom metric); log giữ 14 ngày |
+| SNS email | 0 USD | Chỉ gửi email khi alarm đổi trạng thái |
+
+Hãy xoá toàn bộ ngay khi không còn cần dùng.
+
 ## Kiểm tra hoá đơn
 Một ngày sau, mở **Billing and Cost Management → Bills** để chắc chắn không còn chi phí phát sinh.

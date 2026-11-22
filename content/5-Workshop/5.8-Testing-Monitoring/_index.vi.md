@@ -103,6 +103,9 @@ Kết quả trên AWS (ap-southeast-1, 22/11/2026): upload ba ảnh giả; `snap
 | S3 trả `400 EntityTooLarge` khi upload | File lớn hơn 10 MB (presigned POST chỉ cho tối đa 10 MB) | Chọn file nhỏ hơn |
 | S3 trả `403` khi upload | Link upload đã hết hạn (5 phút) | Upload lại: trang sẽ xin link mới |
 | Thẻ ảnh đứng ở "Đang xử lý" sau khi upload lỗi | Trang bản cũ để lại bản ghi `PENDING` | Dùng `index.html` mới: trang xoá bản ghi khi upload lỗi và ngừng hỏi lại sau 2 phút |
+| Không nhận được email cảnh báo | Chưa xác nhận subscription, hoặc thư vào Spam | **SNS → Subscriptions**: trạng thái phải là *Confirmed*; kiểm tra thư mục Spam |
+| Nhận email "OK" ngay sau khi tạo alarm | Mỗi alarm chuyển từ *Insufficient data* sang *OK* một lần | Bình thường, không cần xử lý |
+| Console không thấy bảng, hàm hoặc alarm | Đang chọn region khác | Chọn **Asia Pacific (Singapore)** ở góc trên bên phải (S3 hiện bucket của mọi region, các dịch vụ khác thì không) |
 
 ## Khó khăn và cách giải quyết
 
