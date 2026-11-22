@@ -24,7 +24,7 @@ bash deploy.sh
 ```
 
 {{% notice tip %}}
-Verified on a real account (ap-southeast-1, 18/11/2026): the template created all **18 resources** on the first attempt (table, 2 buckets + policy, 2 functions, 2 roles, 2 log groups, 2 permissions, HTTP API, integration, 3 routes, stage) in about 1–2 minutes.
+Verified on a real account (ap-southeast-1, 18/11/2026): the template created all **18 resources** on the first attempt (table, 2 buckets + policy, 2 functions, 2 roles, 2 log groups, 2 permissions, HTTP API, integration, 3 routes, stage) in about 1–2 minutes. Adding the alerts on 22/11/2026 (SNS topic, email subscription, metric filter and 3 alarms) brought the stack to **24 resources**.
 {{% /notice %}}
 
 `deploy.sh` runs four steps: create or update the stack; package the Thumbnail function with Pillow; upload both functions' code; upload the web page with `config.js` filled in. It prints the website address at the end.

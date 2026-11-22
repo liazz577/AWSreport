@@ -24,7 +24,7 @@ bash deploy.sh
 ```
 
 {{% notice tip %}}
-Đã kiểm chứng trên tài khoản thật (ap-southeast-1, 18/11/2026): template tạo đủ **18 tài nguyên** ngay lần đầu (bảng, 2 bucket + policy, 2 hàm, 2 role, 2 log group, 2 quyền gọi hàm, HTTP API, integration, 3 route, stage) trong khoảng 1–2 phút.
+Đã kiểm chứng trên tài khoản thật (ap-southeast-1, 18/11/2026): template tạo đủ **18 tài nguyên** ngay lần đầu (bảng, 2 bucket + policy, 2 hàm, 2 role, 2 log group, 2 quyền gọi hàm, HTTP API, integration, 3 route, stage) trong khoảng 1–2 phút. Khi bổ sung cảnh báo ngày 22/11/2026 (SNS topic, đăng ký email, metric filter và 3 alarm), stack có tổng cộng **24 tài nguyên**.
 {{% /notice %}}
 
 `deploy.sh` chạy bốn bước: tạo hoặc cập nhật stack; đóng gói hàm Thumbnail kèm Pillow; upload code cho cả hai hàm; upload trang web với `config.js` đã điền sẵn. Cuối cùng script in ra địa chỉ trang web.

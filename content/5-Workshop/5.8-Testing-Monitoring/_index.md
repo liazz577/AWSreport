@@ -77,7 +77,11 @@ ALARM_EMAIL=you@example.com bash deploy.sh
 
 #### Test the alert
 
-Upload three fake images (text files renamed to `.png`) on the web page. Within a few minutes `snapthumb-failed-images` turns **In alarm** and the email arrives; about 5 minutes later it returns to **OK** and a second email confirms it.
+Upload three fake images (text files renamed to `.png`) on the web page. Within a few minutes `snapthumb-failed-images` turns **In alarm** and the email arrives; when no new failures arrive it returns to **OK** and a second email confirms it.
+
+Result on AWS (ap-southeast-1, 22/11/2026): three fake images were uploaded; `snapthumb-failed-images` went from **OK** to **In alarm** after **71 seconds**, and CloudWatch reported *Successfully executed action* on the SNS topic, which delivered the email. With no new failures it returned to **OK** 15 minutes later and sent the second email.
+
+![CloudWatch alarms: snapthumb-failed-images In alarm](/images/5-Workshop/5.8/02-alarm.png?width=90pc)
 
 ## Common errors
 

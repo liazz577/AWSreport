@@ -77,7 +77,11 @@ ALARM_EMAIL=ban@example.com bash deploy.sh
 
 #### Kiểm thử cảnh báo
 
-Upload ba file ảnh giả (file text đổi đuôi `.png`) trên trang web. Sau vài phút, `snapthumb-failed-images` chuyển sang **In alarm** và email được gửi tới; khoảng 5 phút sau alarm trở về **OK** và có thêm một email xác nhận.
+Upload ba file ảnh giả (file text đổi đuôi `.png`) trên trang web. Sau vài phút, `snapthumb-failed-images` chuyển sang **In alarm** và email được gửi tới; khi không còn ảnh lỗi mới, alarm trở về **OK** và có thêm một email xác nhận.
+
+Kết quả trên AWS (ap-southeast-1, 22/11/2026): upload ba ảnh giả; `snapthumb-failed-images` chuyển từ **OK** sang **In alarm** sau **71 giây**, CloudWatch ghi nhận *Successfully executed action* tới SNS topic và email được gửi tới hộp thư. Không còn ảnh lỗi mới, alarm trở về **OK** sau 15 phút và gửi email thứ hai.
+
+![CloudWatch alarm: snapthumb-failed-images In alarm](/images/5-Workshop/5.8/02-alarm.png?width=90pc)
 
 ## Lỗi thường gặp
 
