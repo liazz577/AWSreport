@@ -11,25 +11,22 @@ When I joined the **First Cloud AI Journey (FCAJ)** program, I knew very little 
 Beyond technical knowledge, I built the habits of reading AWS documentation in English, reading logs to find errors, and always cleaning up resources to control cost.
 
 {{% notice info %}}
-The ratings below are only examples. Choose the levels that honestly fit you.
+The table uses the 8 criteria from the FCAJ project rules. Ratings and comments are a draft based on the SnapThumb work; adjust them to match yourself.
 {{% /notice %}}
 
 ## Self-assessment
 
-| No. | Criterion | Good | Fair | Average |
-| --- | --- | :---: | :---: | :---: |
-| 1 | AWS technical knowledge |  | ✅ |  |
-| 2 | Ability to learn |  | ✅ |  |
-| 3 | Hands-on skills |  | ✅ |  |
-| 4 | Sense of responsibility |  | ✅ |  |
-| 5 | Time management |  | ✅ |  |
-| 6 | Drive to improve |  | ✅ |  |
-| 7 | Communication |  | ✅ |  |
-| 8 | Teamwork |  | ✅ |  |
-| 9 | Professional conduct | ✅ |  |  |
-| 10 | Problem solving |  | ✅ |  |
-| 11 | Participation in learning activities |  | ✅ |  |
-| 12 | Overall |  | ✅ |  |
+| No. | Criterion | Good | Fair | Average | Comment |
+| --- | --- | :---: | :---: | :---: | --- |
+| 1 | **Knowledge** |  | ✅ |  | Built and deployed a serverless app with 10 AWS services; still need deeper networking and security knowledge |
+| 2 | **Ability to learn** | ✅ |  |  | Went from creating an account to CloudFormation and event-driven design in 12 weeks, mostly from the AWS docs |
+| 3 | **Initiative** | ✅ |  |  | Changed the project myself when Bedrock quota blocked it; tested on real AWS and found a bug the mocks missed |
+| 4 | **Discipline** |  | ✅ |  | Kept a weekly worklog and cleaned up resources; sometimes wrote the worklog late |
+| 5 | **Communication** |  |  | ✅ | Can explain the architecture, but need to present more concisely and ask the mentor earlier |
+| 6 | **Teamwork** |  | ✅ |  | Shared fixes and AWS tips with other interns; the project itself was mostly individual work |
+| 7 | **Problem solving** |  | ✅ |  | Solved the S3–Lambda loop, the CloudFormation cycle and Pillow packaging by reading logs and docs |
+| 8 | **Contribution to the project** | ✅ |  |  | Designed, built, tested and documented SnapThumb end to end (code, template, bilingual workshop) |
+| 9 | **Overall** |  | ✅ |  | Solid progress in hands-on AWS skills; communication is the main area to improve |
 
 ---
 
@@ -42,7 +39,7 @@ The ratings below are only examples. Choose the levels that honestly fit you.
 # Areas for Improvement
 
 - Ask the mentor earlier instead of struggling alone with one error for too long.
-- Learn Infrastructure as Code (AWS CloudFormation or Terraform) to build systems from code instead of console clicks.
+- Go deeper into Infrastructure as Code (AWS CDK or Terraform) after using AWS CloudFormation for SnapThumb.
 - Add user sign-in (Amazon Cognito) and a CDN (Amazon CloudFront) to make the app production-ready.
 - Improve technical presentation skills.
 

@@ -49,6 +49,40 @@ Repeat the table with your own phone photos: the page shows the size, savings an
 
 ![Monitor tab of the Thumbnail Lambda](/images/5-Workshop/5.8/01-monitor.png?width=90pc)
 
+## Alerts (CloudWatch alarms + Amazon SNS)
+
+Watching the Monitor tab only works while someone is looking at it. Three alarms send an email as soon as something goes wrong:
+
+| Alarm | Metric | Fires when | What it catches |
+| --- | --- | --- | --- |
+| `snapthumb-thumbnail-errors` | `AWS/Lambda` → `Errors` of the thumbnail function | ≥ 1 in 5 minutes | Crash, timeout or out-of-memory in the thumbnail function |
+| `snapthumb-api-5xx` | `AWS/ApiGateway` → `5xx` of the HTTP API | ≥ 1 in 5 minutes | The API Lambda failed and users see "Internal error" |
+| `snapthumb-failed-images` | `SnapThumb` → `FailedImages` (metric filter on the log line `Failed to process`) | ≥ 3 in 5 minutes | Many corrupt or fake image files at once (abuse or a broken client) |
+
+The thumbnail function catches bad files and marks them `FAILED`, so the built-in `Errors` metric stays at 0 for them. The **metric filter** counts those log lines and turns them into the `FailedImages` metric.
+
+#### With CloudFormation (5.9)
+
+The template already contains the SNS topic, the metric filter and the three alarms. Pass your email when deploying, then click **Confirm subscription** in the email from AWS:
+
+```bash
+ALARM_EMAIL=you@example.com bash deploy.sh
+```
+
+#### By hand in the console
+
+1. **Amazon SNS → Topics → Create topic**: type **Standard**, name `snapthumb-alarms`. Then **Create subscription**: protocol **Email**, your address. Confirm the email.
+2. **CloudWatch → Log groups → `/aws/lambda/snapthumb-thumbnail` → Metric filters → Create metric filter**: pattern `"Failed to process"`, namespace `SnapThumb`, metric name `FailedImages`, metric value `1`, default value `0`.
+3. **CloudWatch → Alarms → Create alarm** three times, using the table above: statistic **Sum**, period **5 minutes**, condition **Greater/Equal**, notification to `snapthumb-alarms` for both **In alarm** and **OK**. Under *Missing data treatment* choose **Treat missing data as good (not breaching threshold)**.
+
+#### Test the alert
+
+Upload three fake images (text files renamed to `.png`) on the web page. Within a few minutes `snapthumb-failed-images` turns **In alarm** and the email arrives; when no new failures arrive it returns to **OK** and a second email confirms it.
+
+Result on AWS (ap-southeast-1, 22/11/2026): three fake images were uploaded; `snapthumb-failed-images` went from **OK** to **In alarm** after **71 seconds**, and CloudWatch reported *Successfully executed action* on the SNS topic, which delivered the email. With no new failures it returned to **OK** 15 minutes later and sent the second email.
+
+![CloudWatch alarms: snapthumb-failed-images In alarm](/images/5-Workshop/5.8/02-alarm.png?width=90pc)
+
 ## Common errors
 
 | Symptom | Cause | Fix |
@@ -62,6 +96,17 @@ Repeat the table with your own phone photos: the page shows the size, savings an
 | S3 answers `403` on upload | Upload link expired (valid 5 minutes) | Upload again: the page asks for a new link |
 | A card stays at "Processing" after a failed upload | Old page version kept the `PENDING` record | Use the current `index.html`: it deletes the record when the upload fails and stops polling after 2 minutes |
 
+## Challenges and solutions
+
+| Challenge | What happened | Solution | Lesson |
+| --- | --- | --- | --- |
+| Project idea blocked by quota | The first idea (a chatbot on Amazon Bedrock) could not run because the new account's quota was too low | Switched to SnapThumb, which uses only core services with generous limits | Check service quotas before choosing an architecture |
+| Risk of an infinite loop | The thumbnail function writes to the same bucket that triggers it | Trigger only on the `uploads/` prefix and write to `thumbnails/` | Separate input and output prefixes (or buckets) for S3-triggered Lambda |
+| Circular dependency in CloudFormation | The bucket needs the Lambda permission, and the permission needs the bucket ARN | Build the bucket name from the stack name and account ID, and make the bucket depend on the permission | Use predictable names to break cycles |
+| Pillow does not run on Lambda when installed on a laptop | Wheels built for Windows or macOS do not load on Amazon Linux | `pip install --platform manylinux… --python-version 3.12 --only-binary=:all:` in CloudShell | Package native libraries for the Lambda runtime and architecture |
+| Bug found only on real AWS | An image uploaded from the S3 console had no record from the API, so `GET /images` crashed with a 500 | Fill missing fields with `if_not_exists`, read optional fields with `.get()`, add 2 regression tests | Mocks pass only what you thought of; test end to end on the real service |
+| Users lying about file size | The browser declares the size; a client could send a bigger file | `content-length-range` in the presigned POST policy: S3 itself rejects files over 10 MB (`400 EntityTooLarge`) | Enforce limits on the server side, not only in the UI |
+
 ## Limitations and next steps
 
 SnapThumb is a demo. These are known limitations and how AWS services would address them:
@@ -71,5 +116,4 @@ SnapThumb is a demo. These are known limitations and how AWS services would addr
 | The API has no sign-in | Anyone who knows the API address can list and **delete every image** | Add an **Amazon Cognito** user pool and a JWT authorizer on the HTTP API; store `userId` with each image |
 | The website is a public S3 website endpoint (HTTP only) | No HTTPS; the account must allow public bucket policies | Private bucket behind **Amazon CloudFront** with Origin Access Control, HTTPS, and **AWS WAF** |
 | `GET /images` scans the whole table | Gets slower and costlier as images grow | Add a GSI on `createdAt` (or per-user key) and use `Query` with pagination |
-| Monitoring is manual (Monitor tab, logs) | Errors are noticed late | **CloudWatch alarms** on Lambda `Errors` and API `5xx` that email through **Amazon SNS** |
 | A failed thumbnail is not retried | A temporary error leaves the image `FAILED` | Configure an on-failure destination / **SQS dead-letter queue** and retry |

@@ -19,6 +19,20 @@ Hệ thống có hai hàm Lambda với hai nhiệm vụ khác nhau:
 | Lambda Thumbnail | **AWS Lambda** + Pillow | Tự chạy với mỗi ảnh mới và tạo ảnh thu nhỏ |
 | Hồ sơ ảnh | **Amazon DynamoDB** | Trạng thái (`PENDING` → `DONE` / `FAILED`), kích thước, dung lượng, thời gian xử lý |
 | Nhật ký | **Amazon CloudWatch** | Ghi lại mọi lần chạy của hai hàm |
+| Cảnh báo | **CloudWatch alarm + Amazon SNS** | Gửi email khi hàm thumbnail bị lỗi, API trả lỗi 5xx, hoặc nhiều ảnh xử lý thất bại |
+
+## Vì sao chọn các dịch vụ này
+
+| Nhu cầu | Dịch vụ chọn | Lý do | Phương án đã cân nhắc |
+| --- | --- | --- | --- |
+| Lưu ảnh gốc và ảnh thu nhỏ, báo khi có file mới | **Amazon S3** | Dung lượng không giới hạn, giá rẻ; Event Notifications có sẵn để kích hoạt xử lý; presigned POST cho trình duyệt upload thẳng, có giới hạn dung lượng và loại file | Ổ đĩa trên EC2 / EFS: phải chạy máy chủ và không có sẵn sự kiện "có file mới" |
+| Xử lý từng ảnh | **AWS Lambda** | Chỉ chạy khi có ảnh, tính tiền theo mili giây, tự chạy song song khi nhiều ảnh đến cùng lúc | Worker trên EC2 hoặc ECS: trả tiền 24/7 kể cả lúc rảnh, phải tự scale và vá lỗi hệ điều hành |
+| Endpoint HTTPS cho trang web | **Amazon API Gateway – HTTP API** | HTTPS, CORS và giới hạn tần suất có sẵn, không cần máy chủ; rẻ và nhanh hơn REST API, mà SnapThumb không cần các tính năng chỉ REST API mới có (API key, kiểm tra request) | REST API (nhiều tính năng hơn, giá cao hơn); ALB + EC2 (tốn phí thường trực) |
+| Lưu trạng thái và thông số từng ảnh | **Amazon DynamoDB (on-demand)** | Truy cập đơn giản theo `id`, độ trễ vài mili giây, không phải quản lý máy chủ hay kết nối database từ Lambda, trả tiền theo request | Amazon RDS: tốn phí instance thường trực, phải quản lý schema và kết nối từ Lambda |
+| Log, số liệu và cảnh báo | **Amazon CloudWatch** | Lambda và API Gateway tự gửi log và metric; metric filter biến dòng log thành số liệu; alarm theo dõi số liệu đó | Công cụ giám sát bên thứ ba: tốn thêm phí và phải cài agent |
+| Gửi email cảnh báo | **Amazon SNS** | Alarm gửi thẳng vào SNS topic, không cần viết code; đăng ký email chỉ cần bấm xác nhận | Amazon SES: phải xác minh địa chỉ gửi và viết code |
+| Phân quyền | **AWS IAM** | Mỗi hàm một role, chỉ có đúng quyền và tài nguyên cần dùng; không có access key trong code | Dùng chung role quản trị (vi phạm nguyên tắc quyền tối thiểu) |
+| Dựng và xoá toàn bộ hệ thống | **AWS CloudFormation** | Cả hệ thống trong một template, dựng lần nào cũng giống nhau; một lệnh xoá sạch để không phát sinh phí; chạy được ngay trong CloudShell | AWS CDK / Terraform: phải cài thêm công cụ và bước build |
 
 ## Các khái niệm chính
 

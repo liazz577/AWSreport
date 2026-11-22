@@ -13,6 +13,7 @@ pre: " <b> 5.10. </b> "
 4. **DynamoDB:** delete `snapthumb-images`.
 5. **S3:** **Empty** then **Delete** `snapthumb-images-…` and `snapthumb-web-…`.
 6. **IAM → Roles:** delete the roles starting with `snapthumb-api-role` and `snapthumb-thumbnail-role`.
+7. **CloudWatch → Alarms:** delete the three `snapthumb-…` alarms; **Amazon SNS:** delete the topic `snapthumb-alarms` and its subscription. (The metric filter is deleted with its log group.)
 
 ## If you used CloudFormation (5.9)
 

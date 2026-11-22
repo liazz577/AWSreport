@@ -49,6 +49,40 @@ Hãy đo lại bảng này với ảnh chụp điện thoại của bạn: mỗi
 
 ![tab Monitor của Lambda Thumbnail](/images/5-Workshop/5.8/01-monitor.png?width=90pc)
 
+## Cảnh báo (CloudWatch alarm + Amazon SNS)
+
+Xem tab Monitor chỉ có tác dụng khi có người đang nhìn. Ba alarm dưới đây gửi email ngay khi có sự cố:
+
+| Alarm | Metric | Báo động khi | Phát hiện điều gì |
+| --- | --- | --- | --- |
+| `snapthumb-thumbnail-errors` | `AWS/Lambda` → `Errors` của hàm thumbnail | ≥ 1 trong 5 phút | Hàm thumbnail bị lỗi, quá thời gian hoặc hết bộ nhớ |
+| `snapthumb-api-5xx` | `AWS/ApiGateway` → `5xx` của HTTP API | ≥ 1 trong 5 phút | Lambda API gặp lỗi, người dùng thấy "Internal error" |
+| `snapthumb-failed-images` | `SnapThumb` → `FailedImages` (metric filter đếm dòng log `Failed to process`) | ≥ 3 trong 5 phút | Nhiều file hỏng hoặc giả ảnh cùng lúc (bị lạm dụng hoặc client lỗi) |
+
+Hàm thumbnail tự bắt file hỏng và đánh dấu `FAILED`, nên metric `Errors` có sẵn vẫn bằng 0 với các file này. **Metric filter** đếm các dòng log đó và biến chúng thành metric `FailedImages`.
+
+#### Khi dùng CloudFormation (5.9)
+
+Template đã có sẵn SNS topic, metric filter và ba alarm. Truyền email khi deploy, rồi bấm **Confirm subscription** trong thư AWS gửi tới:
+
+```bash
+ALARM_EMAIL=ban@example.com bash deploy.sh
+```
+
+#### Khi làm tay trên console
+
+1. **Amazon SNS → Topics → Create topic**: loại **Standard**, tên `snapthumb-alarms`. Sau đó **Create subscription**: protocol **Email**, địa chỉ của bạn. Xác nhận email.
+2. **CloudWatch → Log groups → `/aws/lambda/snapthumb-thumbnail` → Metric filters → Create metric filter**: pattern `"Failed to process"`, namespace `SnapThumb`, metric name `FailedImages`, metric value `1`, default value `0`.
+3. **CloudWatch → Alarms → Create alarm** ba lần theo bảng trên: statistic **Sum**, period **5 minutes**, điều kiện **Greater/Equal**, gửi tới `snapthumb-alarms` ở cả trạng thái **In alarm** và **OK**. Ở *Missing data treatment* chọn **Treat missing data as good (not breaching threshold)**.
+
+#### Kiểm thử cảnh báo
+
+Upload ba file ảnh giả (file text đổi đuôi `.png`) trên trang web. Sau vài phút, `snapthumb-failed-images` chuyển sang **In alarm** và email được gửi tới; khi không còn ảnh lỗi mới, alarm trở về **OK** và có thêm một email xác nhận.
+
+Kết quả trên AWS (ap-southeast-1, 22/11/2026): upload ba ảnh giả; `snapthumb-failed-images` chuyển từ **OK** sang **In alarm** sau **71 giây**, CloudWatch ghi nhận *Successfully executed action* tới SNS topic và email được gửi tới hộp thư. Không còn ảnh lỗi mới, alarm trở về **OK** sau 15 phút và gửi email thứ hai.
+
+![CloudWatch alarm: snapthumb-failed-images In alarm](/images/5-Workshop/5.8/02-alarm.png?width=90pc)
+
 ## Lỗi thường gặp
 
 | Hiện tượng | Nguyên nhân | Cách sửa |
@@ -62,6 +96,17 @@ Hãy đo lại bảng này với ảnh chụp điện thoại của bạn: mỗi
 | S3 trả `403` khi upload | Link upload đã hết hạn (5 phút) | Upload lại: trang sẽ xin link mới |
 | Thẻ ảnh đứng ở "Đang xử lý" sau khi upload lỗi | Trang bản cũ để lại bản ghi `PENDING` | Dùng `index.html` mới: trang xoá bản ghi khi upload lỗi và ngừng hỏi lại sau 2 phút |
 
+## Khó khăn và cách giải quyết
+
+| Khó khăn | Chuyện gì xảy ra | Cách giải quyết | Bài học |
+| --- | --- | --- | --- |
+| Đề tài bị chặn vì quota | Ý tưởng đầu tiên (chatbot trên Amazon Bedrock) không chạy được vì tài khoản mới có quota quá thấp | Chuyển sang SnapThumb, chỉ dùng các dịch vụ cốt lõi có hạn mức rộng | Kiểm tra quota dịch vụ trước khi chọn kiến trúc |
+| Nguy cơ vòng lặp vô hạn | Hàm thumbnail ghi vào chính bucket kích hoạt nó | Trigger chỉ nghe tiền tố `uploads/`, thumbnail ghi vào `thumbnails/` | Tách tiền tố (hoặc bucket) đầu vào và đầu ra cho Lambda kích hoạt bởi S3 |
+| Phụ thuộc vòng trong CloudFormation | Bucket cần quyền gọi Lambda, còn quyền đó lại cần ARN của bucket | Đặt tên bucket từ tên stack và account ID, cho bucket phụ thuộc vào quyền | Dùng tên đoán trước được để phá vòng phụ thuộc |
+| Pillow cài trên máy cá nhân không chạy trên Lambda | Bản build cho Windows hoặc macOS không nạp được trên Amazon Linux | `pip install --platform manylinux… --python-version 3.12 --only-binary=:all:` trong CloudShell | Đóng gói thư viện native đúng runtime và kiến trúc của Lambda |
+| Lỗi chỉ lộ ra trên AWS thật | Ảnh upload từ console S3 không có bản ghi từ API, nên `GET /images` lỗi 500 | Điền trường còn thiếu bằng `if_not_exists`, đọc trường tuỳ chọn bằng `.get()`, thêm 2 test hồi quy | Test giả lập chỉ kiểm tra những gì mình đã nghĩ tới; phải test đầu-cuối trên dịch vụ thật |
+| Người dùng khai gian dung lượng file | Trình duyệt tự khai dung lượng; client có thể gửi file lớn hơn | Điều kiện `content-length-range` trong presigned POST: chính S3 từ chối file trên 10 MB (`400 EntityTooLarge`) | Kiểm tra giới hạn ở phía server, không chỉ trên giao diện |
+
 ## Hạn chế và hướng phát triển
 
 SnapThumb là bản demo. Dưới đây là các hạn chế đã biết và dịch vụ AWS có thể dùng để khắc phục:
@@ -71,5 +116,4 @@ SnapThumb là bản demo. Dưới đây là các hạn chế đã biết và d�
 | API chưa có đăng nhập | Ai biết địa chỉ API cũng xem được và **xoá được mọi ảnh** | Thêm **Amazon Cognito** user pool và JWT authorizer cho HTTP API; lưu `userId` cùng mỗi ảnh |
 | Trang web là S3 website endpoint public (chỉ HTTP) | Không có HTTPS; tài khoản phải cho phép bucket policy public | Bucket private đặt sau **Amazon CloudFront** với Origin Access Control, HTTPS và **AWS WAF** |
 | `GET /images` quét toàn bộ bảng | Chậm và tốn hơn khi số ảnh tăng | Thêm GSI theo `createdAt` (hoặc theo người dùng) và dùng `Query` có phân trang |
-| Giám sát còn thủ công (tab Monitor, log) | Phát hiện lỗi muộn | **CloudWatch alarm** cho `Errors` của Lambda và lỗi `5xx` của API, gửi email qua **Amazon SNS** |
 | Thumbnail lỗi không được thử lại | Lỗi tạm thời khiến ảnh bị `FAILED` | Cấu hình on-failure destination / **SQS dead-letter queue** và thử lại |
