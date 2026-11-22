@@ -40,7 +40,7 @@ The table uses the 8 criteria from the FCAJ project rules. Ratings and comments 
 
 - Ask the mentor earlier instead of struggling alone with one error for too long.
 - Go deeper into Infrastructure as Code (AWS CDK or Terraform) after using AWS CloudFormation for SnapThumb.
-- Add user sign-in (Amazon Cognito) and a CDN (Amazon CloudFront) to make the app production-ready.
+- Add user sign-in (Amazon Cognito) and a firewall (AWS WAF on the CloudFront distribution) to make the app production-ready.
 - Improve technical presentation skills.
 
 ---

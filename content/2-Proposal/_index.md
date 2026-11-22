@@ -50,7 +50,7 @@ SnapThumb is a web app where users upload images and get thumbnails back within 
 | Thumbnail size versus a phone photo | At least 90% smaller | 99.8% smaller (6.1 MB → 12.7 KB) |
 | Handling bad input | No hang, clear error | Fake image → `FAILED`; GIF or declared 11 MB → `400`; sending 10.5 MB → S3 returns `400 EntityTooLarge` |
 | Alerts | Administrator emailed within 5 minutes | Alarm fired after 71 seconds, email delivered |
-| Rebuilding the infrastructure | One command | `deploy.sh` creates 24 resources; `destroy.sh` removes everything |
+| Rebuilding the infrastructure | One command | `deploy.sh` creates 26 resources; `destroy.sh` removes everything |
 | Cost | Under 1 USD/month for 1,000 images | Estimated under 0.20 USD/month (section 6) |
 
 ## Fit with the FCAJ program
@@ -81,7 +81,7 @@ SnapThumb uses the program's core services (Amazon S3, AWS Lambda, Amazon API Ga
 
 | Service | Layer | Role |
 | --- | --- | --- |
-| Amazon S3 (web bucket) | Frontend | Hosts the static web UI |
+| Amazon CloudFront + Amazon S3 (web bucket, private) | Frontend | Serves the static web UI over HTTPS; Origin Access Control keeps the bucket private |
 | Amazon API Gateway | API | HTTPS endpoints `POST /uploads`, `GET /images`, `DELETE /images/{id}`; CORS; throttling |
 | AWS Lambda (API) | Backend | Validates files, signs time-limited upload/view links, lists and deletes images |
 | Amazon S3 (image bucket) | Backend | Stores originals (`uploads/`) and thumbnails (`thumbnails/`); emits events on new images |
@@ -121,6 +121,7 @@ SnapThumb uses the program's core services (Amazon S3, AWS Lambda, Amazon API Ga
 
 ### Security
 - The image bucket blocks all public access; images are viewable only through time-limited links.
+- The web bucket is also private: only the CloudFront distribution can read it (Origin Access Control), and visitors always get HTTPS.
 - Upload links expire after 5 minutes and are limited to 10 MB and allowed types.
 - API Gateway is throttled to 10 requests per second.
 
@@ -172,6 +173,7 @@ Assumptions: ap-southeast-1; 1,000 images/month of about 3 MB each; each image v
 | AWS Lambda (1,000 thumbnails × ~1 s × 1 GB, plus API calls) | ~0.00 (Free Tier) |
 | Amazon DynamoDB on-demand (tens of thousands of reads/writes) | ~0.01 |
 | Amazon API Gateway HTTP API (about 25,000 requests) | ~0.03 |
+| Amazon CloudFront (web page, well under 1 TB / 10 million requests) | ~0.00 (Free Tier) |
 | Amazon CloudWatch Logs | ~0.00 (Free Tier) |
 | Amazon CloudWatch alarms (3) + metric filter, Amazon SNS email | ~0.00 (Free Tier) |
 | **Total** | **< 0.20** |

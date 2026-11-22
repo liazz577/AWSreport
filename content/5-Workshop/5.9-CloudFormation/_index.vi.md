@@ -9,7 +9,7 @@ pre: " <b> 5.9. </b> "
 Toàn bộ những gì làm ở mục 5.3–5.7 có thể tạo bằng một template. Đây là **Infrastructure as Code**: hệ thống được mô tả trong file, nên dựng lại giống hệt được, xem lại được và quản lý phiên bản được.
 
 ## Template gồm những gì
-`infra/template.yaml` trong gói mã nguồn tạo ra: bucket ảnh (CORS, trigger S3), bảng DynamoDB, hai hàm Lambda cùng IAM role và log group, HTTP API với ba route và giới hạn tần suất, bucket website, và phần cảnh báo (SNS topic kèm đăng ký email tuỳ chọn, metric filter và ba CloudWatch alarm). Các tham số:
+`infra/template.yaml` trong gói mã nguồn tạo ra: bucket ảnh (CORS, trigger S3), bảng DynamoDB, hai hàm Lambda cùng IAM role và log group, HTTP API với ba route và giới hạn tần suất, bucket website riêng tư đặt sau CloudFront distribution với Origin Access Control, và phần cảnh báo (SNS topic kèm đăng ký email tuỳ chọn, metric filter và ba CloudWatch alarm). Các tham số:
 
 | Tham số | Mặc định | Ý nghĩa |
 | --- | --- | --- |
@@ -33,10 +33,10 @@ bash deploy.sh
 ```
 
 {{% notice tip %}}
-Đã kiểm chứng trên tài khoản thật (ap-southeast-1, 18/11/2026): template tạo đủ **18 tài nguyên** ngay lần đầu (bảng, 2 bucket + policy, 2 hàm, 2 role, 2 log group, 2 quyền gọi hàm, HTTP API, integration, 3 route, stage) trong khoảng 1–2 phút. Khi bổ sung cảnh báo ngày 22/11/2026 (SNS topic, đăng ký email, metric filter và 3 alarm), stack có tổng cộng **24 tài nguyên**.
+Đã kiểm chứng trên tài khoản thật (ap-southeast-1, 18/11/2026): template tạo đủ **18 tài nguyên** ngay lần đầu (bảng, 2 bucket + policy, 2 hàm, 2 role, 2 log group, 2 quyền gọi hàm, HTTP API, integration, 3 route, stage) trong khoảng 1–2 phút. Khi bổ sung cảnh báo ngày 22/11/2026 (SNS topic, đăng ký email, metric filter và 3 alarm), stack có tổng cộng **24 tài nguyên**. Bổ sung CloudFront cùng ngày (Origin Access Control và distribution) nâng lên **26**; lần deploy đầu tiên giờ mất khoảng 5–8 phút vì distribution cần được triển khai tới mọi edge location.
 {{% /notice %}}
 
-`deploy.sh` chạy bốn bước: tạo hoặc cập nhật stack; đóng gói hàm Thumbnail kèm Pillow; upload code cho cả hai hàm; upload trang web với `config.js` đã điền sẵn. Cuối cùng script in ra địa chỉ trang web.
+`deploy.sh` chạy bốn bước: tạo hoặc cập nhật stack; đóng gói hàm Thumbnail kèm Pillow; upload code cho cả hai hàm; upload trang web với `config.js` đã điền sẵn và xoá cache CloudFront (invalidation `/*`). Cuối cùng script in ra địa chỉ HTTPS của CloudFront.
 
 ![tab Resources của stack CloudFormation](/images/5-Workshop/5.9/01-stack.png?width=90pc)
 

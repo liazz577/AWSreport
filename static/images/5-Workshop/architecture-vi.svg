@@ -16,7 +16,7 @@
 <circle cx="14" cy="-26" r="10" fill="none" stroke="#232F3E" stroke-width="2.5"/><path d="M10,-6 q26,-4 28,18" fill="none" stroke="#232F3E" stroke-width="2.5"/>
 <text y="40" text-anchor="middle" class="n">Người dùng</text><text y="57" text-anchor="middle" class="s">trình duyệt web</text></g>
 <g transform="translate(360,170)"><rect x="-36" y="-36" width="72" height="72" fill="#7AA116"/><path class="glyph" d="M-18,-14 h36 l-5,32 h-26 z M-18,-14 q18,9 36,0"/>
-<text y="56" text-anchor="middle" class="n">Amazon S3</text><text y="73" text-anchor="middle" class="s">website tĩnh (index.html)</text></g>
+<text y="56" text-anchor="middle" class="n">CloudFront + S3</text><text y="73" text-anchor="middle" class="s">HTTPS · bucket riêng tư (OAC)</text></g>
 <g transform="translate(650,170)"><rect x="-36" y="-36" width="72" height="72" fill="#DD344C"/><rect class="glyph" x="-20" y="-14" width="40" height="28" rx="3"/><circle class="glyph" cx="-8" cy="0" r="5"/><path class="glyph" d="M4,-4 h10 M4,5 h10"/>
 <text y="56" text-anchor="middle" class="n">IAM Role</text><text y="73" text-anchor="middle" class="s">quyền tối thiểu cho 2 Lambda</text></g>
 <g transform="translate(360,400)"><rect x="-36" y="-36" width="72" height="72" fill="#8C4FFF"/><path class="glyph" d="M-10,-14 l-12,14 12,14 M10,-14 l12,14 -12,14 M4,-18 l-8,36"/>

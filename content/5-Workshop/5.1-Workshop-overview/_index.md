@@ -12,7 +12,7 @@ The system has two Lambda functions with different jobs:
 
 | Component | AWS service | What it does |
 | --- | --- | --- |
-| Web page | **Amazon S3** (static website) | Drag-and-drop upload and a gallery of thumbnails |
+| Web page | **Amazon CloudFront** + **Amazon S3** (private bucket, Origin Access Control) | Serves the page over HTTPS: drag-and-drop upload and a gallery of thumbnails |
 | Front door | **Amazon API Gateway** | HTTPS endpoints the page calls |
 | API Lambda | **AWS Lambda** | Validates files, signs time-limited upload and view links, lists and deletes images |
 | Image storage | **Amazon S3** (private bucket) | Originals under `uploads/`, thumbnails under `thumbnails/` |
@@ -34,6 +34,7 @@ The numbers in the diagram follow the data flow: (1) open the web page, (2) `POS
 | HTTPS endpoints for the web page | **Amazon API Gateway – HTTP API** | Managed HTTPS, CORS and throttling with no server; cheaper and lower latency than REST API, and SnapThumb needs none of the REST-only features (API keys, request validation) | REST API (more features, higher price); ALB + EC2 (always-on cost) |
 | Store each image's status and details | **Amazon DynamoDB (on-demand)** | Simple key–value access by `id`, millisecond latency, no server or connection pool to manage from Lambda, pay per request | Amazon RDS: always-on instance cost, schema and database connections from Lambda to manage |
 | Logs, metrics and alerts | **Amazon CloudWatch** | Lambda and API Gateway send logs and metrics automatically; metric filters turn log lines into metrics; alarms watch them | Third-party monitoring: extra cost and agents |
+| Serve the web page securely | **Amazon CloudFront** + Origin Access Control | HTTPS with an AWS certificate, edge caching, and the web bucket stays private: only this distribution can read it | S3 static website endpoint: HTTP only and the bucket must be public |
 | Send alert emails | **Amazon SNS** | An alarm can publish to an SNS topic with no code; email subscription needs only a confirmation click | Amazon SES: requires verifying a sender identity and writing code |
 | Permissions | **AWS IAM** | One role per function with only the actions and resources it needs; no access keys in code | Shared admin role (violates least privilege) |
 | Build and delete everything | **AWS CloudFormation** | Whole system as one template; same result every time; one command deletes everything so nothing keeps costing money; runs in CloudShell with no extra tools | AWS CDK / Terraform: need extra tooling and a build step |
@@ -50,7 +51,7 @@ The numbers in the diagram follow the data flow: (1) open the web page, (2) `POS
 | Data at rest | S3 encrypts objects (SSE-S3, AES-256) and DynamoDB encrypts the table by default |
 | Problems go unnoticed | CloudWatch alarms email the administrator through SNS (5.8) |
 
-Known gaps for a demo: the API has no sign-in and the website bucket is public over HTTP. 5.8 lists how to close them (Cognito, CloudFront with Origin Access Control).
+Known gap for a demo: the API has no sign-in, so anyone with the link can upload and delete. 5.8 lists how to close it (Amazon Cognito). The web page itself is served over HTTPS by CloudFront, and both buckets block all public access.
 
 ## Scalability
 

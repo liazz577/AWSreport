@@ -22,7 +22,7 @@ You build it by hand in the AWS Management Console first, so you see what each s
 | **Level** | Beginner (you need an AWS account and an IAM user) |
 | **Cost** | A few cents; close to zero if you clean up afterwards |
 | **Region** | Asia Pacific (Singapore) `ap-southeast-1` |
-| **AWS services** | S3, Lambda, API Gateway, DynamoDB, CloudWatch, SNS, IAM, CloudFormation, CloudShell, Budgets |
+| **AWS services** | S3, CloudFront, Lambda, API Gateway, DynamoDB, CloudWatch, SNS, IAM, CloudFormation, CloudShell, Budgets |
 
 #### Content
 

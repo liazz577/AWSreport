@@ -12,7 +12,7 @@ Hệ thống có hai hàm Lambda với hai nhiệm vụ khác nhau:
 
 | Thành phần | Dịch vụ AWS | Nhiệm vụ |
 | --- | --- | --- |
-| Trang web | **Amazon S3** (website tĩnh) | Kéo thả ảnh để upload và hiển thị thư viện ảnh thu nhỏ |
+| Trang web | **Amazon CloudFront** + **Amazon S3** (bucket riêng tư, Origin Access Control) | Phục vụ trang qua HTTPS: kéo thả ảnh để upload và hiển thị thư viện ảnh thu nhỏ |
 | Cửa vào | **Amazon API Gateway** | Các endpoint HTTPS mà trang web gọi tới |
 | Lambda API | **AWS Lambda** | Kiểm tra file, ký link upload và link xem có thời hạn, liệt kê và xoá ảnh |
 | Kho ảnh | **Amazon S3** (bucket riêng tư) | Ảnh gốc ở `uploads/`, ảnh thu nhỏ ở `thumbnails/` |
@@ -34,6 +34,7 @@ Các số trong sơ đồ đi theo luồng dữ liệu: (1) mở trang web, (2) 
 | Endpoint HTTPS cho trang web | **Amazon API Gateway – HTTP API** | HTTPS, CORS và giới hạn tần suất có sẵn, không cần máy chủ; rẻ và nhanh hơn REST API, mà SnapThumb không cần các tính năng chỉ REST API mới có (API key, kiểm tra request) | REST API (nhiều tính năng hơn, giá cao hơn); ALB + EC2 (tốn phí thường trực) |
 | Lưu trạng thái và thông số từng ảnh | **Amazon DynamoDB (on-demand)** | Truy cập đơn giản theo `id`, độ trễ vài mili giây, không phải quản lý máy chủ hay kết nối database từ Lambda, trả tiền theo request | Amazon RDS: tốn phí instance thường trực, phải quản lý schema và kết nối từ Lambda |
 | Log, số liệu và cảnh báo | **Amazon CloudWatch** | Lambda và API Gateway tự gửi log và metric; metric filter biến dòng log thành số liệu; alarm theo dõi số liệu đó | Công cụ giám sát bên thứ ba: tốn thêm phí và phải cài agent |
+| Phục vụ trang web an toàn | **Amazon CloudFront** + Origin Access Control | HTTPS với chứng chỉ của AWS, cache ở edge, bucket web vẫn riêng tư: chỉ distribution này đọc được | S3 static website endpoint: chỉ chạy HTTP và bucket phải public |
 | Gửi email cảnh báo | **Amazon SNS** | Alarm gửi thẳng vào SNS topic, không cần viết code; đăng ký email chỉ cần bấm xác nhận | Amazon SES: phải xác minh địa chỉ gửi và viết code |
 | Phân quyền | **AWS IAM** | Mỗi hàm một role, chỉ có đúng quyền và tài nguyên cần dùng; không có access key trong code | Dùng chung role quản trị (vi phạm nguyên tắc quyền tối thiểu) |
 | Dựng và xoá toàn bộ hệ thống | **AWS CloudFormation** | Cả hệ thống trong một template, dựng lần nào cũng giống nhau; một lệnh xoá sạch để không phát sinh phí; chạy được ngay trong CloudShell | AWS CDK / Terraform: phải cài thêm công cụ và bước build |
@@ -50,7 +51,7 @@ Các số trong sơ đồ đi theo luồng dữ liệu: (1) mở trang web, (2) 
 | Dữ liệu lưu trữ | S3 mã hoá object (SSE-S3, AES-256) và DynamoDB mã hoá bảng theo mặc định |
 | Sự cố không ai biết | CloudWatch alarm gửi email cho người quản trị qua SNS (5.8) |
 
-Các điểm còn hở của bản demo: API chưa có đăng nhập và bucket website là public, chạy HTTP. Mục 5.8 nêu cách khắc phục (Cognito, CloudFront với Origin Access Control).
+Điểm còn hở của bản demo: API chưa có đăng nhập, nên ai có link đều upload và xoá được. Mục 5.8 nêu cách khắc phục (Amazon Cognito). Bản thân trang web được CloudFront phục vụ qua HTTPS, và cả hai bucket đều chặn toàn bộ truy cập public.
 
 ## Khả năng mở rộng
 

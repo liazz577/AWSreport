@@ -9,7 +9,7 @@ pre: " <b> 5.9. </b> "
 Everything in 5.3–5.7 can be created by one template. This is **Infrastructure as Code**: the system is described in a file, so it can be rebuilt identically, reviewed and versioned.
 
 ## What the template contains
-`infra/template.yaml` in the source package creates: the image bucket (CORS, S3 trigger), the DynamoDB table, both Lambda functions with their IAM roles and log groups, the HTTP API with three routes and throttling, the website bucket, and the alerts (an SNS topic with an optional email subscription, a metric filter and three CloudWatch alarms). Its parameters:
+`infra/template.yaml` in the source package creates: the image bucket (CORS, S3 trigger), the DynamoDB table, both Lambda functions with their IAM roles and log groups, the HTTP API with three routes and throttling, the private website bucket behind a CloudFront distribution with Origin Access Control, and the alerts (an SNS topic with an optional email subscription, a metric filter and three CloudWatch alarms). Its parameters:
 
 | Parameter | Default | Meaning |
 | --- | --- | --- |
@@ -33,10 +33,10 @@ bash deploy.sh
 ```
 
 {{% notice tip %}}
-Verified on a real account (ap-southeast-1, 18/11/2026): the template created all **18 resources** on the first attempt (table, 2 buckets + policy, 2 functions, 2 roles, 2 log groups, 2 permissions, HTTP API, integration, 3 routes, stage) in about 1–2 minutes. Adding the alerts on 22/11/2026 (SNS topic, email subscription, metric filter and 3 alarms) brought the stack to **24 resources**.
+Verified on a real account (ap-southeast-1, 18/11/2026): the template created all **18 resources** on the first attempt (table, 2 buckets + policy, 2 functions, 2 roles, 2 log groups, 2 permissions, HTTP API, integration, 3 routes, stage) in about 1–2 minutes. Adding the alerts on 22/11/2026 (SNS topic, email subscription, metric filter and 3 alarms) brought the stack to **24 resources**. Adding CloudFront the same day (Origin Access Control and distribution) brought it to **26**; the first deployment now takes about 5–8 minutes because the distribution has to reach every edge location.
 {{% /notice %}}
 
-`deploy.sh` runs four steps: create or update the stack; package the Thumbnail function with Pillow; upload both functions' code; upload the web page with `config.js` filled in. It prints the website address at the end.
+`deploy.sh` runs four steps: create or update the stack; package the Thumbnail function with Pillow; upload both functions' code; upload the web page with `config.js` filled in and clear the CloudFront cache (invalidation `/*`). It prints the HTTPS CloudFront address at the end.
 
 ![CloudFormation stack Resources tab](/images/5-Workshop/5.9/01-stack.png?width=90pc)
 
