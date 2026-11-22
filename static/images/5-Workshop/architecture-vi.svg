@@ -30,7 +30,7 @@
 <g transform="translate(1000,665)"><rect x="-36" y="-36" width="72" height="72" fill="#ED7100"/><path class="glyph" d="M-16,20 l14,-26 M-12,-20 h8 l20,40 h6"/>
 <text y="56" text-anchor="middle" class="n">Lambda Thumbnail</text><text y="73" text-anchor="middle" class="s">thumbnail.py + Pillow</text></g>
 <g transform="translate(1240,665)"><rect x="-36" y="-36" width="72" height="72" fill="#E7157B"/><path class="glyph" d="M-20,14 l10,-12 8,8 12,-16 10,8"/><circle class="glyph" cx="0" cy="0" r="22"/>
-<text y="56" text-anchor="middle" class="n">Amazon CloudWatch</text><text y="73" text-anchor="middle" class="s">log của 2 hàm Lambda</text></g>
+<text y="56" text-anchor="middle" class="n">Amazon CloudWatch</text><text y="73" text-anchor="middle" class="s">log · metric · alarm → email SNS</text></g>
 <polyline class="q" points="140,385 240,385 240,170 322,170"/><rect class="lb" x="244" y="276" width="111" height="19"/><text x="248" y="290" class="l">1. Mở trang web</text>
 <line class="q" x1="140" y1="400" x2="322" y2="400"/>
 <polyline class="q" points="140,418 225,418 225,665 612,665"/><rect class="lb" x="296" y="642" width="249" height="19"/><text x="300" y="656" class="l">5. Upload ảnh bằng link có thời hạn</text>

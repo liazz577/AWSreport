@@ -18,7 +18,9 @@ Trigger của bucket cần hàm Lambda, quyền gọi hàm cần ARN của bucke
 Tải [snapthumb.zip](/files/snapthumb.zip) về máy. Trong CloudShell chọn **Actions → Upload file** để upload, rồi chạy:
 
 ```bash
-unzip -oq snapthumb.zip && cd snapthumb && bash deploy.sh
+unzip -oq snapthumb.zip && cd snapthumb
+export ALARM_EMAIL=you@example.com   # tuỳ chọn: nhận email cảnh báo
+bash deploy.sh
 ```
 
 {{% notice tip %}}

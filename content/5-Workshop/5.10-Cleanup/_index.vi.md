@@ -13,6 +13,7 @@ pre: " <b> 5.10. </b> "
 4. **DynamoDB:** xoá `snapthumb-images`.
 5. **S3:** **Empty** rồi **Delete** `snapthumb-images-…` và `snapthumb-web-…`.
 6. **IAM → Roles:** xoá các role bắt đầu bằng `snapthumb-api-role` và `snapthumb-thumbnail-role`.
+7. **CloudWatch → Alarms:** xoá ba alarm `snapthumb-…`; **Amazon SNS:** xoá topic `snapthumb-alarms` và subscription của nó. (Metric filter bị xoá cùng log group.)
 
 ## Nếu bạn dùng CloudFormation (5.9)
 

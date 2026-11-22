@@ -52,7 +52,7 @@ SnapThumb là một ứng dụng web cho phép người dùng tải ảnh lên v
 8. Lambda Thumbnail cập nhật bản ghi trong DynamoDB thành `DONE` kèm kích thước, dung lượng và thời gian xử lý.
 9. Trang web hỏi `GET /images` mỗi 1,5 giây; khi ảnh xong, Lambda API trả về link xem ảnh có thời hạn 1 giờ và ảnh thu nhỏ hiện lên.
 
-**Giám sát và bảo mật:** hai hàm Lambda ghi log vào Amazon CloudWatch. Mỗi hàm có IAM role riêng chỉ với quyền cần dùng. Bucket ảnh không public.
+**Giám sát và bảo mật:** hai hàm Lambda ghi log vào Amazon CloudWatch, và ba CloudWatch alarm gửi email qua Amazon SNS khi hàm thumbnail bị lỗi, API trả lỗi máy chủ, hoặc có nhiều ảnh xử lý thất bại. Mỗi hàm có IAM role riêng chỉ với quyền cần dùng. Bucket ảnh không public.
 
 ## Các dịch vụ AWS sử dụng
 
@@ -64,9 +64,23 @@ SnapThumb là một ứng dụng web cho phép người dùng tải ảnh lên v
 | Amazon S3 (bucket ảnh) | Backend | Lưu ảnh gốc (`uploads/`) và ảnh thu nhỏ (`thumbnails/`), phát sự kiện khi có ảnh mới |
 | AWS Lambda (Thumbnail) | Backend | Tạo ảnh thu nhỏ bằng Pillow |
 | Amazon DynamoDB | Backend | Lưu trạng thái và thông số của từng ảnh |
-| Amazon CloudWatch | Giám sát | Log và số liệu của hai hàm Lambda |
+| Amazon CloudWatch | Giám sát | Log, số liệu, metric filter và 3 alarm |
+| Amazon SNS | Giám sát | Gửi email khi alarm báo động |
 | AWS IAM | Bảo mật | Quyền tối thiểu cho từng hàm |
 | AWS CloudFormation | Triển khai | Tạo và xoá toàn bộ hạ tầng bằng code |
+
+## Vì sao chọn các dịch vụ này
+
+| Nhu cầu | Dịch vụ chọn | Lý do | Phương án đã cân nhắc |
+| --- | --- | --- | --- |
+| Lưu ảnh gốc và ảnh thu nhỏ, báo khi có file mới | **Amazon S3** | Dung lượng không giới hạn, giá rẻ; Event Notifications có sẵn để kích hoạt xử lý; presigned POST cho trình duyệt upload thẳng, có giới hạn dung lượng và loại file | Ổ đĩa trên EC2 / EFS: phải chạy máy chủ và không có sẵn sự kiện "có file mới" |
+| Xử lý từng ảnh | **AWS Lambda** | Chỉ chạy khi có ảnh, tính tiền theo mili giây, tự chạy song song khi nhiều ảnh đến cùng lúc | Worker trên EC2 hoặc ECS: trả tiền 24/7 kể cả lúc rảnh, phải tự scale và vá lỗi hệ điều hành |
+| Endpoint HTTPS cho trang web | **Amazon API Gateway – HTTP API** | HTTPS, CORS và giới hạn tần suất có sẵn, không cần máy chủ; rẻ và nhanh hơn REST API, mà SnapThumb không cần các tính năng chỉ REST API mới có (API key, kiểm tra request) | REST API (nhiều tính năng hơn, giá cao hơn); ALB + EC2 (tốn phí thường trực) |
+| Lưu trạng thái và thông số từng ảnh | **Amazon DynamoDB (on-demand)** | Truy cập đơn giản theo `id`, độ trễ vài mili giây, không phải quản lý máy chủ hay kết nối database từ Lambda, trả tiền theo request | Amazon RDS: tốn phí instance thường trực, phải quản lý schema và kết nối từ Lambda |
+| Log, số liệu và cảnh báo | **Amazon CloudWatch** | Lambda và API Gateway tự gửi log và metric; metric filter biến dòng log thành số liệu; alarm theo dõi số liệu đó | Công cụ giám sát bên thứ ba: tốn thêm phí và phải cài agent |
+| Gửi email cảnh báo | **Amazon SNS** | Alarm gửi thẳng vào SNS topic, không cần viết code; đăng ký email chỉ cần bấm xác nhận | Amazon SES: phải xác minh địa chỉ gửi và viết code |
+| Phân quyền | **AWS IAM** | Mỗi hàm một role, chỉ có đúng quyền và tài nguyên cần dùng; không có access key trong code | Dùng chung role quản trị (vi phạm nguyên tắc quyền tối thiểu) |
+| Dựng và xoá toàn bộ hệ thống | **AWS CloudFormation** | Cả hệ thống trong một template, dựng lần nào cũng giống nhau; một lệnh xoá sạch để không phát sinh phí; chạy được ngay trong CloudShell | AWS CDK / Terraform: phải cài thêm công cụ và bước build |
 
 ## Thiết kế thành phần
 

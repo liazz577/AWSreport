@@ -18,7 +18,9 @@ The bucket's trigger needs the function, the function's permission needs the buc
 Download [snapthumb.zip](/files/snapthumb.zip). In CloudShell choose **Actions → Upload file**, upload it, then run:
 
 ```bash
-unzip -oq snapthumb.zip && cd snapthumb && bash deploy.sh
+unzip -oq snapthumb.zip && cd snapthumb
+export ALARM_EMAIL=you@example.com   # optional: receive alarm emails
+bash deploy.sh
 ```
 
 {{% notice tip %}}

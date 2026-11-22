@@ -11,25 +11,22 @@ Trong quá trình tham gia chương trình **First Cloud AI Journey (FCAJ)**, t�
 Bên cạnh kiến thức kỹ thuật, tôi rèn luyện được thói quen đọc tài liệu AWS bằng tiếng Anh, đọc log để tìm lỗi, và luôn dọn dẹp tài nguyên để kiểm soát chi phí.
 
 {{% notice info %}}
-Các mức đánh giá dưới đây chỉ là ví dụ. Hãy tự chọn lại cho đúng với bản thân bạn.
+Bảng dùng đúng 8 tiêu chí trong quy định project của FCAJ. Mức đánh giá và nhận xét là bản nháp dựa trên quá trình làm SnapThumb; hãy tự chọn lại cho đúng với bản thân bạn.
 {{% /notice %}}
 
 ## Tự đánh giá
 
-| STT | Tiêu chí | Tốt | Khá | Trung bình |
-| --- | --- | :---: | :---: | :---: |
-| 1 | Kiến thức kỹ thuật AWS |  | ✅ |  |
-| 2 | Khả năng học hỏi | ✅ |  |  |
-| 3 | Kỹ năng thực hành |  | ✅ |  |
-| 4 | Tinh thần trách nhiệm | ✅ |  |  |
-| 5 | Quản lý thời gian |  | ✅ |  |
-| 6 | Tinh thần cầu tiến | ✅ |  |  |
-| 7 | Kỹ năng giao tiếp |  |  | ✅ |
-| 8 | Làm việc nhóm |  | ✅ |  |
-| 9 | Tác phong chuyên nghiệp | ✅ |  |  |
-| 10 | Khả năng giải quyết vấn đề |  | ✅ |  |
-| 11 | Tham gia các hoạt động học tập | ✅ |  |  |
-| 12 | Đánh giá tổng thể |  | ✅ |  |
+| STT | Tiêu chí | Tốt | Khá | Trung bình | Nhận xét |
+| --- | --- | :---: | :---: | :---: | --- |
+| 1 | **Kiến thức** |  | ✅ |  | Tự xây dựng và deploy ứng dụng serverless với 10 dịch vụ AWS; cần học sâu hơn về mạng và bảo mật |
+| 2 | **Khả năng học hỏi** | ✅ |  |  | Từ chỗ mới tạo tài khoản đến CloudFormation và kiến trúc hướng sự kiện trong 12 tuần, chủ yếu tự đọc tài liệu AWS |
+| 3 | **Tính chủ động** | ✅ |  |  | Tự đổi đề tài khi bị chặn quota Bedrock; chủ động test trên AWS thật và phát hiện lỗi mà test giả lập bỏ sót |
+| 4 | **Kỷ luật** |  | ✅ |  | Viết worklog hằng tuần và luôn dọn tài nguyên; đôi lúc viết worklog muộn |
+| 5 | **Giao tiếp** |  |  | ✅ | Giải thích được kiến trúc nhưng cần trình bày ngắn gọn hơn và hỏi mentor sớm hơn |
+| 6 | **Làm việc nhóm** |  | ✅ |  | Chia sẻ cách sửa lỗi và mẹo AWS với các bạn thực tập; bản thân project chủ yếu làm cá nhân |
+| 7 | **Giải quyết vấn đề** |  | ✅ |  | Tự xử lý vòng lặp S3–Lambda, phụ thuộc vòng trong CloudFormation và đóng gói Pillow nhờ đọc log và tài liệu |
+| 8 | **Đóng góp cho project** | ✅ |  |  | Tự thiết kế, xây dựng, kiểm thử và viết tài liệu SnapThumb từ đầu đến cuối (code, template, workshop song ngữ) |
+| 9 | **Tổng thể** |  | ✅ |  | Tiến bộ rõ về kỹ năng thực hành AWS; giao tiếp là điểm cần cải thiện nhất |
 
 ---
 
@@ -42,7 +39,7 @@ Các mức đánh giá dưới đây chỉ là ví dụ. Hãy tự chọn lại 
 # Điểm cần cải thiện
 
 - Chủ động hỏi mentor sớm hơn thay vì tự loay hoay quá lâu với một lỗi.
-- Học Infrastructure as Code (AWS CloudFormation hoặc Terraform) để dựng hệ thống bằng code thay vì bấm console.
+- Học sâu hơn về Infrastructure as Code (AWS CDK hoặc Terraform) sau khi đã dùng AWS CloudFormation cho SnapThumb.
 - Bổ sung đăng nhập (Amazon Cognito) và CDN (Amazon CloudFront) để ứng dụng sẵn sàng chạy thật.
 - Nâng cao kỹ năng thuyết trình kỹ thuật.
 
