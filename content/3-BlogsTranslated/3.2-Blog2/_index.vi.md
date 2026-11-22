@@ -13,7 +13,6 @@ pre: " <b> 3.2. </b> "
 | **Bài gốc** | [Resize Images on the Fly with Amazon S3, AWS Lambda, and Amazon API Gateway](https://aws.amazon.com/blogs/compute/resize-images-on-the-fly-with-amazon-s3-aws-lambda-and-amazon-api-gateway/) |
 | **Nguồn** | AWS Compute Blog · John Pignata · 2017 |
 | **Chủ đề** | Serverless · Xử lý ảnh |
-| **Ngày dịch** | <span style="background:#fff3c4">[dd/mm/2026]</span> |
 
 {{% notice info %}}
 Chương trình yêu cầu dịch bài gốc sang tiếng Việt. Dán bản dịch của bạn vào phần "Bản dịch" bên dưới; phần tóm tắt và liên hệ dự án là phần phân tích riêng của bạn.

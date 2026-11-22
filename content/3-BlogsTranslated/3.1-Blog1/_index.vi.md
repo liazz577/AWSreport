@@ -13,7 +13,6 @@ pre: " <b> 3.1. </b> "
 | **Bài gốc** | [Uploading to Amazon S3 directly from a web or mobile application](https://aws.amazon.com/blogs/compute/uploading-to-amazon-s3-directly-from-a-web-or-mobile-application/) |
 | **Nguồn** | AWS Compute Blog · James Beswick · 2020 |
 | **Chủ đề** | Serverless · Lưu trữ |
-| **Ngày dịch** | <span style="background:#fff3c4">[dd/mm/2026]</span> |
 
 {{% notice info %}}
 Chương trình yêu cầu dịch bài gốc sang tiếng Việt. Dán bản dịch của bạn vào phần "Bản dịch" bên dưới; phần tóm tắt và liên hệ dự án là phần phân tích riêng của bạn.

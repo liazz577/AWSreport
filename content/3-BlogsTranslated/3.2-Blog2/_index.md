@@ -13,7 +13,6 @@ pre: " <b> 3.2. </b> "
 | **Original post** | [Resize Images on the Fly with Amazon S3, AWS Lambda, and Amazon API Gateway](https://aws.amazon.com/blogs/compute/resize-images-on-the-fly-with-amazon-s3-aws-lambda-and-amazon-api-gateway/) |
 | **Source** | AWS Compute Blog · John Pignata · 2017 |
 | **Topic** | Serverless · Image processing |
-| **Translated on** | <span style="background:#fff3c4">[dd/mm/2026]</span> |
 
 ## Summary
 

@@ -18,7 +18,7 @@ pre: " <b> 1.10. </b> "
 | 3 | - Resolve the circular dependency between S3 notification and Lambda permission. | 06/10/2026 | 06/10/2026 | <https://docs.aws.amazon.com/cloudformation/> |
 | 4 | - Write deploy.sh and destroy.sh. | 07/10/2026 | 07/10/2026 | - |
 | 5 | - Write end-to-end tests with moto (mocked AWS). | 08/10/2026 | 08/10/2026 | <https://docs.getmoto.org/> |
-| 6 | - Translate blog 3.<br>- Write week 10 worklog. | 09/10/2026 | 09/10/2026 | <https://aws.amazon.com/blogs/> |
+| 6 | - Write week 10 worklog. | 09/10/2026 | 09/10/2026 | - |
 
 ### Week 10 Achievements:
 
