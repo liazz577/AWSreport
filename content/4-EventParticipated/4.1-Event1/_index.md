@@ -6,41 +6,38 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-# <span style="background:#fff3c4">[Event 1 name]</span>
+# Building a Personal Brand on LinkedIn
 
 ## Event Information
 
 | Item | Detail |
 | --- | --- |
-| **Event name** | <span style="background:#fff3c4">[...]</span> |
-| **Date** | <span style="background:#fff3c4">[dd/mm/2026]</span> |
-| **Time** | <span style="background:#fff3c4">[hh:mm – hh:mm]</span> |
-| **Venue** | <span style="background:#fff3c4">[...]</span> |
+| **Event name** | Building a Personal Brand on LinkedIn |
+| **Date** | 15/08/2026 |
+| **Topic** | Personal branding, job search |
 | **Role** | Attendee |
 
 # Event Report
 
 ## Event Objectives
 
-<span style="background:#fff3c4">[1–2 sentences on the purpose of the event]</span>
+Help students and interns understand why a personal brand matters and how to use LinkedIn to stand out to recruiters.
 
-## Speakers
+## Highlights
 
-- <span style="background:#fff3c4">[Speaker name]</span>
+- **Personal branding on LinkedIn:** LinkedIn is where recruiters look candidates up. A clear, active profile gets noticed far more than an empty one.
+- **Post what is genuinely yours:** content should come from real experience: projects you built, skills you used, what you learned and the problems you overcame. Genuine content builds trust; exaggeration is easy to expose in an interview.
 
-## Key Highlights
+## What I Learned
 
-- **<span style="background:#fff3c4">[Session 1]</span>:** <span style="background:#fff3c4">[main points in 1–2 sentences]</span>
-- **<span style="background:#fff3c4">[Session 2]</span>:** <span style="background:#fff3c4">[...]</span>
+- A personal brand is not self-advertising; it is showing clearly what you have done and can do.
+- One project with concrete results (numbers, a live link) is more convincing than a list of skills.
+- Sharing your learning regularly matters more than waiting for a big achievement before posting.
 
-## Key Takeaways
+## Application to Work
 
-- <span style="background:#fff3c4">[What you learned]</span>
-
-## Applying to Work
-
-- <span style="background:#fff3c4">[What applies to SnapThumb or your internship work]</span>
-
-## Event Photos
-
-<span style="background:#fff3c4">[Insert photos: put files in static/images/4-Event/ and use `![description](/images/4-Event/photo.jpg)`]</span>
+- **Update my LinkedIn profile:** add the First Cloud AI Journey internship at AWS and the skills I actually used: Amazon S3, AWS Lambda, Amazon DynamoDB, API Gateway, CloudFront, CloudFormation, Python.
+- **Post about SnapThumb:** introduce the serverless architecture, real measurements (a 6.1 MB photo reduced to 12.7 KB in about 2.7 seconds), one bug found on AWS and how I fixed it, with links to the app and the report.
+- **Share weekly lessons:** turn worklog notes into short posts, for example how to avoid an S3–Lambda infinite loop or how to package Pillow for Lambda.
+- **Keep it honest:** list only real skills and real numbers, so I can answer when a recruiter digs deeper.
+- **Grow my network:** connect with mentors and peers from the AWS Study Group and engage with cloud posts to keep learning.
