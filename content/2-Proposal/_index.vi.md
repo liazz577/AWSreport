@@ -178,10 +178,6 @@ Giả định: region ap-southeast-1; 1.000 ảnh/tháng, mỗi ảnh khoảng 3
 | Amazon CloudWatch alarm (3) + metric filter, Amazon SNS email | ~0.00 (Free Tier) |
 | **Tổng** | **< 0.20** |
 
-{{% notice warning %}}
-Giá trên là ước tính theo giá niêm yết và có thể thay đổi. <span style="background:#fff3c4">[Chèn link AWS Pricing Calculator của bạn tại đây]</span>
-{{% /notice %}}
-
 ### Hướng dẫn kiểm soát chi phí
 
 - Tạo AWS Budgets 5 USD ngay từ đầu.

@@ -178,10 +178,6 @@ Assumptions: ap-southeast-1; 1,000 images/month of about 3 MB each; each image v
 | Amazon CloudWatch alarms (3) + metric filter, Amazon SNS email | ~0.00 (Free Tier) |
 | **Total** | **< 0.20** |
 
-{{% notice warning %}}
-These are estimates based on list prices, which can change. <span style="background:#fff3c4">[Insert your AWS Pricing Calculator link here]</span>
-{{% /notice %}}
-
 ### Cost Control Guidelines
 
 - Create a 5 USD AWS Budget from day one.
