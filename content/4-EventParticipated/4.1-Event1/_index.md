@@ -14,7 +14,7 @@ pre: " <b> 4.1. </b> "
 | --- | --- |
 | **Event name** | Building a Personal Brand on LinkedIn |
 | **Date** | 15/08/2026 |
-| **Topic** | Personal branding, job search |
+| **Topic** | The importance of building a personal brand |
 | **Role** | Attendee |
 
 # Event Report

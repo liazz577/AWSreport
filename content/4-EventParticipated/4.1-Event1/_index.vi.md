@@ -14,7 +14,7 @@ pre: " <b> 4.1. </b> "
 | --- | --- |
 | **Tên sự kiện** | Xây dựng thương hiệu cá nhân trên LinkedIn |
 | **Ngày** | 15/08/2026 |
-| **Chủ đề** | Thương hiệu cá nhân, tìm việc |
+| **Chủ đề** | Tầm quan trọng của việc xây dựng thương hiệu cá nhân |
 | **Vai trò** | Người tham dự |
 
 # Báo cáo tổng kết
