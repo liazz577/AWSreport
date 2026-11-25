@@ -34,7 +34,6 @@ Bảng dùng đúng 8 tiêu chí trong quy định project của FCAJ. Mức đ�
 
 - Tiếp thu nhanh các dịch vụ mới, từ nền tảng gần như bằng 0 đến dựng được ứng dụng hoàn chỉnh.
 - Tự gỡ được các lỗi IAM, timeout và CORS bằng cách đọc log CloudWatch.
-- <span style="background:#fff3c4">[Thêm điểm mạnh của riêng bạn, kèm ví dụ cụ thể]</span>
 
 # Điểm cần cải thiện
 

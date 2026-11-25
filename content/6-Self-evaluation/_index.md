@@ -34,7 +34,6 @@ The table uses the 8 criteria from the FCAJ project rules. Ratings and comments 
 
 - Picked up new services quickly, going from almost zero to a complete application.
 - Fixed IAM, timeout and CORS errors independently by reading CloudWatch logs.
-- <span style="background:#fff3c4">[Add your own strengths with concrete examples]</span>
 
 # Areas for Improvement
 
