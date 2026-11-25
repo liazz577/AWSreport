@@ -18,15 +18,15 @@ The table uses the 8 criteria from the FCAJ project rules. Ratings and comments 
 
 | No. | Criterion | Good | Fair | Average | Comment |
 | --- | --- | :---: | :---: | :---: | --- |
-| 1 | **Knowledge** |  | ✅ |  | Built and deployed a serverless app with 10 AWS services; still need deeper networking and security knowledge |
+| 1 | **Knowledge** |  | ✅ |  | Built and deployed a serverless app with 11 AWS services; still need deeper networking and security knowledge |
 | 2 | **Ability to learn** | ✅ |  |  | Went from creating an account to CloudFormation and event-driven design in 12 weeks, mostly from the AWS docs |
 | 3 | **Initiative** | ✅ |  |  | Changed the project myself when Bedrock quota blocked it; tested on real AWS and found a bug the mocks missed |
 | 4 | **Discipline** |  | ✅ |  | Kept a weekly worklog and cleaned up resources; sometimes wrote the worklog late |
-| 5 | **Communication** |  |  | ✅ | Can explain the architecture, but need to present more concisely and ask the mentor earlier |
+| 5 | **Communication** |  | ✅ |  | Explained the architecture clearly in the bilingual report and workshop; can still present more concisely and ask the mentor earlier |
 | 6 | **Teamwork** |  | ✅ |  | Shared fixes and AWS tips with other interns; the project itself was mostly individual work |
 | 7 | **Problem solving** |  | ✅ |  | Solved the S3–Lambda loop, the CloudFormation cycle and Pillow packaging by reading logs and docs |
 | 8 | **Contribution to the project** | ✅ |  |  | Designed, built, tested and documented SnapThumb end to end (code, template, bilingual workshop) |
-| 9 | **Overall** |  | ✅ |  | Solid progress in hands-on AWS skills; communication is the main area to improve |
+| 9 | **Overall** |  | ✅ |  | Solid progress in hands-on AWS skills; next steps are deeper networking and security knowledge and more concise presentations |
 
 ---
 

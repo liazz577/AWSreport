@@ -18,15 +18,15 @@ Bảng dùng đúng 8 tiêu chí trong quy định project của FCAJ. Mức đ�
 
 | STT | Tiêu chí | Tốt | Khá | Trung bình | Nhận xét |
 | --- | --- | :---: | :---: | :---: | --- |
-| 1 | **Kiến thức** |  | ✅ |  | Tự xây dựng và deploy ứng dụng serverless với 10 dịch vụ AWS; cần học sâu hơn về mạng và bảo mật |
+| 1 | **Kiến thức** |  | ✅ |  | Tự xây dựng và deploy ứng dụng serverless với 11 dịch vụ AWS; cần học sâu hơn về mạng và bảo mật |
 | 2 | **Khả năng học hỏi** | ✅ |  |  | Từ chỗ mới tạo tài khoản đến CloudFormation và kiến trúc hướng sự kiện trong 12 tuần, chủ yếu tự đọc tài liệu AWS |
 | 3 | **Tính chủ động** | ✅ |  |  | Tự đổi đề tài khi bị chặn quota Bedrock; chủ động test trên AWS thật và phát hiện lỗi mà test giả lập bỏ sót |
 | 4 | **Kỷ luật** |  | ✅ |  | Viết worklog hằng tuần và luôn dọn tài nguyên; đôi lúc viết worklog muộn |
-| 5 | **Giao tiếp** |  |  | ✅ | Giải thích được kiến trúc nhưng cần trình bày ngắn gọn hơn và hỏi mentor sớm hơn |
+| 5 | **Giao tiếp** |  | ✅ |  | Trình bày rõ kiến trúc qua báo cáo và workshop song ngữ; có thể nói ngắn gọn hơn và hỏi mentor sớm hơn |
 | 6 | **Làm việc nhóm** |  | ✅ |  | Chia sẻ cách sửa lỗi và mẹo AWS với các bạn thực tập; bản thân project chủ yếu làm cá nhân |
 | 7 | **Giải quyết vấn đề** |  | ✅ |  | Tự xử lý vòng lặp S3–Lambda, phụ thuộc vòng trong CloudFormation và đóng gói Pillow nhờ đọc log và tài liệu |
 | 8 | **Đóng góp cho project** | ✅ |  |  | Tự thiết kế, xây dựng, kiểm thử và viết tài liệu SnapThumb từ đầu đến cuối (code, template, workshop song ngữ) |
-| 9 | **Tổng thể** |  | ✅ |  | Tiến bộ rõ về kỹ năng thực hành AWS; giao tiếp là điểm cần cải thiện nhất |
+| 9 | **Tổng thể** |  | ✅ |  | Tiến bộ rõ về kỹ năng thực hành AWS; tiếp theo cần học sâu mạng, bảo mật và trình bày ngắn gọn hơn |
 
 ---
 
