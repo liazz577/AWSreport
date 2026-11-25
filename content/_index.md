@@ -11,15 +11,15 @@ chapter: false
 
 &emsp; **Full Name:** Nguyen Duc Lan
 
-&emsp; **Phone Number:** <span style="background:#fff3c4">[Phone number]</span>
+&emsp; **Phone Number:** 0383665029
 
-&emsp; **Email:** <span style="background:#fff3c4">[Email]</span>
+&emsp; **Email:** liamcritlance@gmail.com
 
 &emsp; **University:** Hanoi University of Civil Engineering
 
 &emsp; **Major:** Computer Science
 
-&emsp; **Class:** <span style="background:#fff3c4">[Class]</span>
+&emsp; **Class:** 64CS2
 
 &emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
 

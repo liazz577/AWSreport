@@ -11,15 +11,15 @@ chapter: false
 
 &emsp; **Họ và tên:** Nguyễn Đức Lân
 
-&emsp; **Số điện thoại:** <span style="background:#fff3c4">[Số điện thoại]</span>
+&emsp; **Số điện thoại:** 0383665029
 
-&emsp; **Email:** <span style="background:#fff3c4">[Email]</span>
+&emsp; **Email:** liamcritlance@gmail.com
 
 &emsp; **Trường:** Đại học Xây dựng Hà Nội
 
 &emsp; **Ngành:** Khoa học máy tính
 
-&emsp; **Lớp:** <span style="background:#fff3c4">[Lớp]</span>
+&emsp; **Lớp:** 64CS2
 
 &emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Việt Nam
 
