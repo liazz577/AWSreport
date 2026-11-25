@@ -14,10 +14,6 @@ pre: " <b> 3.2. </b> "
 | **Nguồn** | AWS Compute Blog · John Pignata · 2017 |
 | **Chủ đề** | Serverless · Xử lý ảnh |
 
-{{% notice info %}}
-Chương trình yêu cầu dịch bài gốc sang tiếng Việt. Dán bản dịch của bạn vào phần "Bản dịch" bên dưới; phần tóm tắt và liên hệ dự án là phần phân tích riêng của bạn.
-{{% /notice %}}
-
 ## Tóm tắt
 
 Bài viết trình bày cách tạo ảnh đổi kích thước theo yêu cầu. Ảnh gốc lưu trên S3; khi người dùng yêu cầu một kích thước chưa có, quy tắc chuyển hướng của S3 đưa request tới API Gateway, Lambda tải ảnh gốc, đổi kích thước, lưu lại vào S3 và chuyển hướng người dùng tới file mới. Những lần sau, ảnh được phục vụ thẳng từ S3.
