@@ -37,7 +37,7 @@ Giúp sinh viên và thực tập sinh hiểu vì sao cần xây dựng thương
 ## Áp dụng vào công việc
 
 - **Cập nhật hồ sơ LinkedIn:** thêm kinh nghiệm thực tập First Cloud AI Journey tại AWS và các kỹ năng đã thực sự dùng: Amazon S3, AWS Lambda, Amazon DynamoDB, API Gateway, CloudFront, CloudFormation, Python.
-- **Đăng bài về dự án SnapThumb:** giới thiệu kiến trúc serverless, kết quả đo thật (ảnh 6,1 MB giảm còn 12,7 KB, xử lý khoảng 2,7 giây), một lỗi gặp trên AWS và cách sửa, kèm link ứng dụng và link báo cáo.
-- **Chia sẻ bài học hằng tuần:** chuyển các ghi chép trong worklog thành bài ngắn, ví dụ cách tránh vòng lặp vô hạn giữa S3 và Lambda, hoặc cách đóng gói Pillow cho Lambda.
+- **Đăng bài về những việc đã làm:** khi hoàn thành một dự án hoặc một bài lab, viết bài ngắn nêu mục tiêu, cách làm, kết quả cụ thể và khó khăn đã gặp, kèm link sản phẩm nếu có.
+- **Chia sẻ bài học hằng tuần:** chuyển những ghi chép trong quá trình thực tập thành bài chia sẻ ngắn về kiến thức mới học, lỗi đã gặp và cách xử lý.
 - **Giữ nội dung trung thực:** chỉ ghi kỹ năng và số liệu có thật, để khi nhà tuyển dụng hỏi sâu vẫn trả lời được.
 - **Mở rộng kết nối:** kết nối với mentor và các bạn trong AWS Study Group, tương tác với bài viết về cloud để học hỏi thêm.

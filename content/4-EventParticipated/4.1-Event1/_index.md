@@ -37,7 +37,7 @@ Help students and interns understand why a personal brand matters and how to use
 ## Application to Work
 
 - **Update my LinkedIn profile:** add the First Cloud AI Journey internship at AWS and the skills I actually used: Amazon S3, AWS Lambda, Amazon DynamoDB, API Gateway, CloudFront, CloudFormation, Python.
-- **Post about SnapThumb:** introduce the serverless architecture, real measurements (a 6.1 MB photo reduced to 12.7 KB in about 2.7 seconds), one bug found on AWS and how I fixed it, with links to the app and the report.
-- **Share weekly lessons:** turn worklog notes into short posts, for example how to avoid an S3–Lambda infinite loop or how to package Pillow for Lambda.
+- **Post about my work:** after finishing a project or a lab, write a short post on the goal, the approach, the concrete result and the difficulties met, with a link to the result when there is one.
+- **Share weekly lessons:** turn notes from the internship into short posts about what I learned, the errors I hit and how I solved them.
 - **Keep it honest:** list only real skills and real numbers, so I can answer when a recruiter digs deeper.
 - **Grow my network:** connect with mentors and peers from the AWS Study Group and engage with cloud posts to keep learning.
